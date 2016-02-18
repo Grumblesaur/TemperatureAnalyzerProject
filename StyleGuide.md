@@ -79,10 +79,12 @@ in other words, using an `import` statement, each module should be
 `import`ed separately. Don't use wildcard imports. Examples as follows:  
 
 GOOD:  
+
     import java.util.Scanner;
     import java.io.IOException;
 
 BAD:  
+
     import java.util.*;
 
 Group resources together by category. `util` modules should be next to  
