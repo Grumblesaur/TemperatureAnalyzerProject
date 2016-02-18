@@ -127,12 +127,14 @@ header, padded by a space. Closing brace occurs on its own line. Example:
 
 
 GOOD:  
+
     public class StyleExample {  
         // code goes here  
     }  
 
-BAD:  
-    public class StyleExample{  
+BAD:
+  
+    public class StyleExample{
         // code goes here  
     }  
 
@@ -142,6 +144,7 @@ BAD:
     }  
 
 VERY BAD:  
+
     public class StyleExample{  
         // code goes here }  
 
@@ -161,6 +164,7 @@ up with a better name. Function and method names should be written in
 should be braced like classes. Examples:  
 
 GOOD:  
+
     public String toString() {
         // follows Java API style
     }
@@ -171,6 +175,7 @@ GOOD:
     }
 
 BAD:  
+
     public String to_string{
         // don't use snake_case
         // pad your braces with spaces, yo
@@ -191,10 +196,12 @@ name, you will be visited by the moderator of reddit.com/r/badcode in your
 sleep. You have been warned. Examples:  
 
 GOOD:  
+
     float cashOnHand = wallet.cash + pockets.cash;
     String filename = defaultFilename;
 
 BAD:  
+
     float my_cash = wallet.cash + pockets.cash; // NO NO NO
     String fileName = defaultFileName; // this is a compound word!
 
