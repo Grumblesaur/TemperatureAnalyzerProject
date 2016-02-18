@@ -125,24 +125,25 @@ Bracing for classes will be akin to what's called "the one true brace
 style" in the C community. Open brace occurs on the same line as the class  
 header, padded by a space. Closing brace occurs on its own line. Example:  
 
+
 GOOD:  
-    public class StyleExample {
-        // code goes here
-    }
+    public class StyleExample {  
+        // code goes here  
+    }  
 
 BAD:  
-    public class StyleExample{
-        // code goes here
-    }
+    public class StyleExample{  
+        // code goes here  
+    }  
 
-    public class StyleExample2
-    {
-        // code goes here
-    }
+    public class StyleExample2  
+    {  
+        // code goes here  
+    }  
 
 VERY BAD:  
-    public class StyleExample{
-        // code goes here }
+    public class StyleExample{  
+        // code goes here }  
 
 In other words, the closing brace of the class declaration should line up  
 with the first character of its declaration.  
