@@ -78,11 +78,11 @@ When declaring part of the API as being in a source file's namespace, or
 in other words, using an `import` statement, each module should be  
 `import`ed separately. Don't use wildcard imports. Examples as follows:  
 
-GOOD:
+GOOD:  
     import java.util.Scanner;
     import java.io.IOException;
 
-BAD:
+BAD:  
     import java.util.*;
 
 Group resources together by category. `util` modules should be next to  
@@ -125,12 +125,12 @@ Bracing for classes will be akin to what's called "the one true brace
 style" in the C community. Open brace occurs on the same line as the class  
 header, padded by a space. Closing brace occurs on its own line. Example:  
 
-GOOD:
+GOOD:  
     public class StyleExample {
         // code goes here
     }
 
-BAD:
+BAD:  
     public class StyleExample{
         // code goes here
     }
@@ -140,7 +140,7 @@ BAD:
         // code goes here
     }
 
-VERY BAD:
+VERY BAD:  
     public class StyleExample{
         // code goes here }
 
@@ -159,7 +159,7 @@ up with a better name. Function and method names should be written in
 `camelCase` if it is longer than one word. Additionally, functions/methods  
 should be braced like classes. Examples:  
 
-GOOD:
+GOOD:  
     public String toString() {
         // follows Java API style
     }
@@ -169,7 +169,7 @@ GOOD:
         // own lexical units
     }
 
-BAD:
+BAD:  
     public String to_string{
         // don't use snake_case
         // pad your braces with spaces, yo
@@ -189,11 +189,11 @@ you include the word "my" or the type of the variable in the variable's
 name, you will be visited by the moderator of reddit.com/r/badcode in your  
 sleep. You have been warned. Examples:  
 
-GOOD:
+GOOD:  
     float cashOnHand = wallet.cash + pockets.cash;
     String filename = defaultFilename;
 
-BAD:
+BAD:  
     float my_cash = wallet.cash + pockets.cash; // NO NO NO
     String fileName = defaultFileName; // this is a compound word!
 
