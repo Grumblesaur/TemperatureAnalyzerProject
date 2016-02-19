@@ -10,16 +10,21 @@ Table of Contents
   * 0700 : Merging  
   
 1000 : Programming Style  
+  * 1050 : Tabulation
   * 1100 : API Resources  
   * 1300 : Classes  
   * 1500 : Functions & Methods  
   * 1700 : Variables  
   * 1800 : Flow Control  
-  *      1820 : for, while, and if
-  *      1840 : do-while and switch
-  *      1860 : switch
+  *   %   1820 : for, while, and if
+  *   %   1840 : do-while and switch
+  *   %   1860 : switch
   * 1900 : Comments and Docstrings  
-  
+  *   % 1930 : Javadoc Comments
+  *   % 1960 : Internal Comments
+  *   % 1980 : Variable Comments
+  *   % 1990 : Final Note
+   
 0000 : Repository Guidelines
 ----------------------------
 While I initially thought we should work with a system where we have a 
@@ -76,7 +81,11 @@ own ad-hoc set of rules. Since we'll be working in Java, our practices are
 going to, in some respects, mirror the styles evident in Java's API and  
 many example programs.
 
-### 1100 : API Resources
+## 1050 : Tabulation
+Use tabs when indenting code. If you're formatting comments or Javadoc  
+strings, then you can use spaces to line things up.
+
+## 1100 : API Resources
 When declaring part of the API as being in a source file's namespace, or  
 in other words, using an `import` statement, each module should be  
 `import`ed separately. Don't use wildcard imports. Examples as follows:  
@@ -110,7 +119,7 @@ from other classes. Example:
 And so on. If using external resources (i.e. libraries found elsewhere),  
 `import` modules and exceptions in their own comment-marked block.  
 
-### 1300 : Classes
+## 1300 : Classes
 Before you write a class, find out if someone else has already made one we  
 could be using instead. Like Dr. Polack suggests, if it takes you more  
 than a day or two to find it, you're better off writing it yourself.  
@@ -193,7 +202,7 @@ BAD:
         // don't use this brace style
     }
 
-### 1700 : Variables
+## 1700 : Variables
 Variables should use `mixedCamelCase`, as with methods and functions.  
 Single words (including compound words), of course, can be lowercase. If  
 you include the word "my" or the type of the variable in the variable's  
@@ -210,9 +219,9 @@ BAD:
     float my_cash = wallet.cash + pockets.cash; // NO NO NO
     String fileName = defaultFileName; // this is a compound word!
 
-### 1800 : Flow Control
+## 1800 : Flow Control
 
-## 1820 : for, while, and if
+### 1820 : for, while, and if
 
 `for`, `while`, and unaccompanied `if` blocks should use the same bracing  
 style as functions, methods, and classes. However, the conditional keyword  
@@ -260,7 +269,7 @@ BAD:
        // none of this uncuddled conditional nonsense!
     }
 
-## 1840 : do-while
+### 1840 : do-while
 The `do` of a `do-while` loop should be on its own line, and should have  
 a space between it an the opening brace. At the end of a `do-while` loop,  
 the condition should follow the closing brace (with an intervening space)  
@@ -280,7 +289,7 @@ BAD:
         // you probably get it by now
     }while(condition);
 
-## 1860 : switch
+### 1860 : switch
 Switch statements should share bracing style with all other control flow  
 structures and should indent for each case, and the code for each case.  
 This causes some deep indentation for a `switch` block, but I think it  
@@ -320,7 +329,9 @@ BAD:
 
 
 
-### 1900 : Comments & Docstrings
+## 1900 : Comments & Docstrings
+
+### 1930 : Javadoc
 If you are creating a class, comments should be in Javadoc style. A header  
 comment with some information about the overall responsibilities of the  
 class and appropriate `@author` tags. Add your name in such a tag if you  
@@ -361,6 +372,7 @@ each parameter, `@throws` tags for each potential exception thrown, and an
         }
     }
 
+### 1960 : Internal Comments
 Within methods, you can use non-Javadoc comments. `//` or `/* */` styles  
 are acceptable. The same applies for non-member functions in the main  
 program, including `main()` itself.  
@@ -373,6 +385,7 @@ explain its general purpose. Example:
         System.out.print(message);
     }
 
+### 1980 : Variable Comments
 You need not comment variables in the same way unless you believe their  
 use to be non-obvious or unintuitive. If some code using that variable was  
 a challenge to write / required some deep thinking, it probably needs a  
@@ -384,4 +397,5 @@ comment that explains their collective purpose. Example:
     char selection = 0;
     boolean validCommand = false;
 
+### 1990 : Final Note
 When in doubt, leave a comment. That's the main rule.
