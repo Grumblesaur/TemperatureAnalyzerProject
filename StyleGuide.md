@@ -16,14 +16,14 @@ Table of Contents
   * 1500 : Functions & Methods  
   * 1700 : Variables  
   * 1800 : Flow Control  
-  *   %   1820 : for, while, and if
-  *   %   1840 : do-while and switch
-  *   %   1860 : switch
+  * ---- 1820 : for, while, and if
+  * ---- 1840 : do-while and switch
+  * ---- 1860 : switch
   * 1900 : Comments and Docstrings  
-  *   % 1930 : Javadoc Comments
-  *   % 1960 : Internal Comments
-  *   % 1980 : Variable Comments
-  *   % 1990 : Final Note
+  * ---- 1930 : Javadoc Comments
+  * ---- 1960 : Internal Comments
+  * ---- 1980 : Variable Comments
+  * ---- 1990 : Final Note
    
 0000 : Repository Guidelines
 ----------------------------
