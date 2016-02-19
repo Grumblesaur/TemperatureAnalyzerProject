@@ -15,6 +15,9 @@ Table of Contents
   * 1500 : Functions & Methods  
   * 1700 : Variables  
   * 1800 : Flow Control  
+  *      1820 : for, while, and if
+  *      1840 : do-while and switch
+  *      1860 : switch
   * 1900 : Comments and Docstrings  
   
 0000 : Repository Guidelines
@@ -178,7 +181,7 @@ GOOD:
 
 BAD:  
 
-    public String to_string{
+    public String to_string(){
         // don't use snake_case
         // pad your braces with spaces, yo
     }
@@ -208,6 +211,113 @@ BAD:
     String fileName = defaultFileName; // this is a compound word!
 
 ### 1800 : Flow Control
+
+## 1820 : for, while, and if
+
+`for`, `while`, and unaccompanied `if` blocks should use the same bracing  
+style as functions, methods, and classes. However, the conditional keyword  
+should be separated from the condition by a space. `if-else` blocks should  
+use "cuddled" `else` statements. Examples:  
+
+GOOD:  
+
+    for (int i = 0; i < range; i++) {
+        // code goes here
+    }
+    
+    while (condition) {
+		// code goes here
+    }
+    
+    if (conditionOne) {
+        // first choice
+    } else if (conditionTwo) {
+        // second choice
+    } else {
+        // default choice
+    }
+
+BAD:
+
+    for(int i=0; i<range; i++){
+        // pad your operators and remember your spaces
+    }
+    
+    while(condition)
+    {
+        // don't do this!
+    }
+    
+    if (condition) doStuff(); // Always brace your conditionals!
+    
+    if (condition) {
+        // first check
+    }
+    else if (conditionTwo) {
+        // second check
+    }
+    else {
+       // none of this uncuddled conditional nonsense!
+    }
+
+## 1840 : do-while
+The `do` of a `do-while` loop should be on its own line, and should have  
+a space between it an the opening brace. At the end of a `do-while` loop,  
+the condition should follow the closing brace (with an intervening space)  
+and should have a space between the `while` keyword and the condition.  
+Examples:  
+
+GOOD: 
+ 
+    do {
+        // code goes here
+    } while (condition);
+
+BAD:  
+
+    do
+    {
+        // you probably get it by now
+    }while(condition);
+
+## 1860 : switch
+Switch statements should share bracing style with all other control flow  
+structures and should indent for each case, and the code for each case.  
+This causes some deep indentation for a `switch` block, but I think it  
+prevents too much code from being piled up inside. `switch` statements  
+have limited applications and shouldn't be used to house entire blocks of  
+program logic -- each case should just be calling a few functions and then  
+`break`ing if appropriate. Examples:  
+
+GOOD:  
+
+    switch (option) {
+        case 1:
+            optionOneFunctionCall();
+            break;
+    
+        case 2:
+        case 3:
+            optionTwoOrThreeFunctionCall();
+            break;
+    
+        default:
+            defaultOption();
+            break;
+    }
+
+BAD:  
+
+    switch(option)
+    {
+        case 1:
+        optionOneFunctionCall();
+        break; // poor indentation
+    case 2:
+    optionTwoFunctionCall();
+    break; // VERY poor indentation
+    } // bad bracing
+
 
 
 ### 1900 : Comments & Docstrings
