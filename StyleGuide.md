@@ -321,3 +321,67 @@ BAD:
 
 
 ### 1900 : Comments & Docstrings
+If you are creating a class, comments should be in Javadoc style. A header  
+comment with some information about the overall responsibilities of the  
+class and appropriate `@author` tags. Add your name in such a tag if you  
+edit the file in some way. Member variables (instance or static) should  
+each have one or two lines explaining the purpose of the variable. Methods  
+(static or instance) should have Javadoc comments with `@param` tags for  
+each parameter, `@throws` tags for each potential exception thrown, and an  
+`@return` tag if it `return`s non-void. Example:  
+
+    /** Example class for TAP Style Guide
+     * @author James Murphy
+     */
+    public class ScrumTeam {
+        /** Number of developers */
+        private int teamMembers;
+        
+        /** Name of project */
+        private String projectName;
+        
+        /** Constructs a ScrumTeam object
+         * @param developers An int describing the size of the team.
+         * @param name A String representing the name of the project.
+         * @throws IllegalArgumentException if team has 0 or negative devs.
+         */
+        public ScrumTeam(int developers, String name) {
+            if (developers < 1) {
+                throw new IllegalArgumentException("No empty teams!");
+            }
+            this.teamMembers = developers;
+            this.projectName = name;
+        }
+        
+        /** Obtains the name of the ScrumTeam's project.
+         * @return a String -- the project name.
+         */
+        public String getProjectName() {
+            return this.projectName;
+        }
+    }
+
+Within methods, you can use non-Javadoc comments. `//` or `/* */` styles  
+are acceptable. The same applies for non-member functions in the main  
+program, including `main()` itself.  
+
+Additionally, non-member functions should be headed with a comment to  
+explain its general purpose. Example:  
+
+    /* Shortcut for calling System.out.print() */
+    static void print(String message) {
+        System.out.print(message);
+    }
+
+You need not comment variables in the same way unless you believe their  
+use to be non-obvious or unintuitive. If some code using that variable was  
+a challenge to write / required some deep thinking, it probably needs a  
+comment. Otherwise, you can group variables together under a single  
+comment that explains their collective purpose. Example:  
+
+    /* Initialize variables for do-while + switch menu. */
+    Scanner input = new Scanner(System.in);
+    char selection = 0;
+    boolean validCommand = false;
+
+When in doubt, leave a comment. That's the main rule.
