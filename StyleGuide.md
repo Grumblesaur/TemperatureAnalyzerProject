@@ -10,7 +10,7 @@ Table of Contents
   * 0700 : Merging  
   
 1000 : Programming Style  
-  * 1050 : Tabulation
+  * 1050 : Tabulation & Spacing
   * 1100 : API Resources  
   * 1300 : Classes  
   * 1500 : Functions & Methods  
@@ -81,9 +81,14 @@ own ad-hoc set of rules. Since we'll be working in Java, our practices are
 going to, in some respects, mirror the styles evident in Java's API and  
 many example programs.
 
-## 1050 : Tabulation
+## 1050 : Tabulation & Spacing
 Use tabs when indenting code. If you're formatting comments or Javadoc  
-strings, then you can use spaces to line things up.
+strings, then you can use spaces to line things up.  
+
+Operators should be separated from their operands by a space. Butting plus  
+signs and the like up against literals and variables makes things difficult  
+to read. If you want part of an expression to be grouped together, use  
+parentheses.  
 
 ## 1100 : API Resources
 When declaring part of the API as being in a source file's namespace, or  
