@@ -1,0 +1,21 @@
+// James Murphy
+// CPSC 430 / Software Engineering
+// Sprint 1: Import procedure (pseudocode)
+
+DEFINE import(ARG filename):
+	IF filename NOT ENDS WITH ".xls" OR ".xlsx" THEN
+		ERROR "Invalid file type."
+	
+	IF filename IN importedFiles THEN
+		ERROR "Duplicate upload."
+	ELSE
+		ADD filename TO importedFiles
+	
+	OPEN file FROM filename
+	
+	STRIP headers FROM file
+	
+	MAKE SQLTABLE sessionTable
+	populate(sessionTable, file)
+	
+	RETURN sessionTable
