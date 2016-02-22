@@ -10,7 +10,7 @@ Table of Contents
   * 0700 : Merging  
   
 1000 : Programming Style  
-  * 1050 : Tabulation & Spacing
+  * 1050 : Tabulation, Spacing, & Line Wrapping
   * 1100 : API Resources  
   * 1300 : Classes  
   * 1500 : Functions & Methods  
@@ -19,6 +19,7 @@ Table of Contents
   * ---- 1820 : for, while, and if
   * ---- 1840 : do-while and switch
   * ---- 1860 : switch
+  * ---- 1880 : try-catch
   * 1900 : Comments and Docstrings  
   * ---- 1930 : Javadoc Comments
   * ---- 1960 : Internal Comments
@@ -38,7 +39,7 @@ However, because of this, we must adhere to these rules:
 ### 0100 : Commits
 Commit often and ALWAYS provide a useful commit message that denotes the  
 changes you made. Swear words in commit messages will be frowned upon, and  
-commit messages that consist entirely of swears will bring *ten myriad*
+commit messages that consist entirely of swears will bring *ten myriad*  
 *years of suffering upon your family.*  
 
 ### 0300 : Pushing
@@ -81,14 +82,49 @@ own ad-hoc set of rules. Since we'll be working in Java, our practices are
 going to, in some respects, mirror the styles evident in Java's API and  
 many example programs.
 
-## 1050 : Tabulation & Spacing
+## 1050 : Tabulation, Spacing, and Line Wrapping
 Use tabs when indenting code. If you're formatting comments or Javadoc  
 strings, then you can use spaces to line things up.  
 
 Operators should be separated from their operands by a space. Butting plus  
-signs and the like up against literals and variables makes things difficult  
+signs and the like up against literals and variables makes things hard    
 to read. If you want part of an expression to be grouped together, use  
 parentheses.  
+
+We are using Eclipse to code this and not a terminal interface, though  
+avoiding line wrapping makes code more readable. If you have a line of  
+code that would run off the side of your editor window or wrap back around  
+to the next line down, cut it off with a proper newline. If you have a  
+conditional or method/function call that runs off the side of the editor  
+or wraps, please note the following examples:  
+
+GOOD:
+
+    // indent second line over by one space
+    SomeBigDataType sbdt = new SomeBigDataType(argumentOne, argumentTwo,  
+        argumentThree, argumentFour);
+    
+    // for code blocks, start the bracing at the end of the conditional:
+    if (thePresident.isDead() && theVicePresident.isDead() &&  
+        && theSpeakerOfTheHouse.isDead()) {
+        thePresidentProTemporeOfTheSenate.becomesPresident();
+    }
+    // This is bad code for other reasons, but it's just an example.  
+    // Open brace where the condition ends, close brace lines up with  
+    // keyword that started the conditional.
+
+BAD:  
+
+    // Every time you commit a line of code that looks like this, a  
+    // programmer from forty years ago comes alive to hunt you down for  
+    // bad style.
+    SomeBigDataType sbdt = new SomeBigDataType(argumentOne, argumentTwo, argumentThree, argumentFour);
+    
+    // NO NO NO NO
+    // if (condition /* more nonsense about the presidential line of succession I mean seriously this is a terrible example because we'd rather have an array of important figures rather than having a separate named variable for each of them. */ ) {
+        someCode();
+    }
+
 
 ## 1100 : API Resources
 When declaring part of the API as being in a source file's namespace, or  
@@ -332,7 +368,35 @@ BAD:
     break; // VERY poor indentation
     } // bad bracing
 
+### 1880 : try-catch
+Exception-handling blocks should follow the bracing and spacing guidelines  
+specified for other types of code blocks. Each type of exception that can  
+be caught by a `try` block should have its own `catch` statement.  
+Examples:  
 
+GOOD:  
+
+    try {
+        someDangerousFunctionCall();
+	} catch (TypeOfException e) {
+        // handler
+    } catch (DifferentTypeOfException e) {
+        // another handler
+    } finally {
+        // finally block if necessary
+    }
+
+BAD:
+
+    try
+    {
+        someAwfulBracingGoingOn();
+    }catch(LackOfSpacingException | BadBracingException e){
+        // please don't do this
+    }
+    finally {
+        // uncuddled blocking is a SIN
+    }
 
 ## 1900 : Comments & Docstrings
 
