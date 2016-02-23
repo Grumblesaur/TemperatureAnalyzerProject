@@ -11,11 +11,18 @@ DEFINE import(ARG filename):
 	ELSE
 		ADD filename TO importedFiles
 	
+	DECLARE file
 	OPEN file FROM filename
 	
 	STRIP headers FROM file
 	
-	MAKE SQLTABLE sessionTable
-	populate(sessionTable, file)
+	DECLARE dataPoints[] // use whatever container is appropriate
+	
+	FOR line IN file
+		dataPoint = parseDataPoint(line)
+		dataPoints.append(dataPoint)
+	
+	DECLARE sessionTable // an SQLTable
+	populate(sessionTable, dataPoints)
 	
 	RETURN sessionTable
