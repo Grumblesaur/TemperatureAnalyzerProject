@@ -35,6 +35,7 @@ public class Interface {
 	}
 	
 	public static void main(String[] args) {
+		Object database = null;
 		Scanner input = new Scanner(System.in);
 		String option;
 		
