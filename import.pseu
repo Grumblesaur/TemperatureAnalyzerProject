@@ -14,7 +14,7 @@ DEFINE import(ARG filename):
 	DECLARE file
 	OPEN file FROM filename
 	
-	STRIP headers FROM file
+	stripHeaders(file) // private static method
 	
 	DECLARE dataPoints[] // use whatever container is appropriate
 	
