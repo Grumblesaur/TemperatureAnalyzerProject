@@ -21,9 +21,21 @@ public class CSVParser {
 			throw new Exception("Error! Not a .csv file!");
 		} 
 		
+		FileReader fr = null;
+		BufferedReader bufr = null;
+		
 		/* Initialize file I/O resources. */
-		FileReader fr = new FileReader(filename);
-		BufferedReader bufr = new BufferedReader(fr);
+		try {
+			fr = new FileReader(filename);
+		} catch (Exception e) {
+			throw new Exception("FileReader failed!");
+		}
+		
+		try {
+			bufr = new BufferedReader(fr);
+		} catch (Exception e) {
+			throw new Exception("BufferedReader failed!");
+		}
 		
 		/* Grab the header for the location code. */
 		String line = bufr.readLine();
@@ -59,6 +71,11 @@ public class CSVParser {
 		
 		//TODO:
 		// create SQL statement with: degrees, year, month, day, clockTime
-		
+		TESTOUT(Float.toString(degrees) + "°F\t" + year + "\t" + month +
+			"\t" + day + "\t" + clockTime);
+	}
+	
+	private static void TESTOUT(String message) {
+		System.out.println(message);
 	}
 }
