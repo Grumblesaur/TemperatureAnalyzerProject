@@ -17,6 +17,10 @@ public class CSVParser {
 	*/
 	public static void importFile(Object database, String filename)
 		throws Exception {
+		
+		/* Inform client about input requirements, demonstrate how gnarly
+			an xls file is under the hood to support this point.
+		*/
 		if (!filename.contains(".csv")) {
 			throw new Exception("Error! Not a .csv file!");
 		} 
@@ -27,54 +31,80 @@ public class CSVParser {
 		/* Initialize file I/O resources. */
 		try {
 			fr = new FileReader(filename);
-		} catch (Exception e) {
+		} catch (Exception e) { // TODO: use more specific exceptions later
 			throw new Exception("FileReader failed!");
 		}
-		
 		try {
 			bufr = new BufferedReader(fr);
-		} catch (Exception e) {
+		} catch (Exception e) { // TODO: use more specific exceptions later
 			throw new Exception("BufferedReader failed!");
 		}
 		
 		/* Grab the header for the location code. */
-		String line = bufr.readLine();
-		String location = line.split(",")[1];
-		
-		String date, temp;
+		String line, location, date, temp;
+		try { // XXX: this try-block might not be necessary
+			line = bufr.readLine();
+			location = line.split(",")[1];
+		} catch (Exception e) { // TODO: use more specific exceptions later
+			throw new Exception("Issue with header capture!");
+		}
 		
 		/* Obtain one line at a time and write the temperature data to DB.*/
 		line = bufr.readLine();
 		String[] point = null;
 		while (line != null) {
+			line = bufr.readLine();
 			point = line.split(",");
 			date = point[0];
-			temp = point[1];
+			
+			/* Assign NaN if no measurement was recorded at this time. */
+			if (point.length == 2) {
+				temp = point[1];
+			} else {
+				temp = "NaN";
+			}
+			
 			writeToDB(location, date, temp);
 		}
 	}
 	
+	/* Actual database communication pending. Write output to console. */
 	private static void writeToDB(String loc, String date, String temp) {
 		/* Semi-redundant variables for parsing to ease reading. */
-		float degrees = Float.parseFloat(temp);
-		int year, month, day;
+		float degrees = 0.0f;
+		if (temp.equals("NaN")) {
+			degrees = Float.NaN;
+		} else {
+			degrees = Float.parseFloat(temp);
+		}
+		
+		/* Named variables for data capture */
+		String year, month, day = "";
 		String fullDate, clockTime;
-		String[] dateParts = date.split("");
+		String[] dateParts = date.split(" ");
 		fullDate = dateParts[0];
 		clockTime = dateParts[1];
 		
 		/* Break down the date into integers. */
 		String[] fullDateParts = fullDate.split("/");
-		year = Integer.parseInt(fullDateParts[2]);
-		month = Integer.parseInt(fullDateParts[0]);
-		day = Integer.parseInt(fullDateParts[1]);
+		year = "20" + fullDateParts[2];
+		month = fullDateParts[0];
 		
+		/* Prepend a zero to date if it's a single-digit date. */
+		if (fullDateParts[1].length() < 2) {
+			day = "0" + fullDateParts[1];
+		} else {
+			day = fullDateParts[1];
+		}
 		//TODO:
 		// create SQL statement with: degrees, year, month, day, clockTime
-		TESTOUT(Float.toString(degrees) + "°F\t" + year + "\t" + month +
+		
+		/* Print a test output table to console */
+		TESTOUT(Float.toString(degrees) + "°C\t" + year + "\t" + month +
 			"\t" + day + "\t" + clockTime);
 	}
 	
+	// debug print, basically
 	private static void TESTOUT(String message) {
 		System.out.println(message);
 	}

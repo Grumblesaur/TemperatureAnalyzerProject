@@ -52,17 +52,9 @@ public class Interface {
 			option = input.nextLine();
 			switch (option.toLowerCase().charAt(0)) {
 				case 'i':
-					boolean failed = false;
 					print("File to parse: ");
 					filename = input.nextLine();
-					try {
-						CSVParser.importFile(database, filename);
-					} catch (Exception e) {
-						System.err.println(e.getMessage());
-						failed = true;
-					} finally {
-						validCommand = failed;
-					}
+					validCommand = importHelper(database, filename);
 					break;
 				case 'q':
 					System.exit(0);
@@ -70,8 +62,21 @@ public class Interface {
 					validCommand = false;
 					break;
 			}
-			println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			println("\n");
 		} while (!validCommand);
 		
+	}
+	
+	static boolean importHelper(Object database, String filename) {
+
+		boolean failed = false;
+		try {
+			CSVParser.importFile(database, filename);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			failed = true;
+		} finally {
+			return failed;
+		}
 	}
 }                                    
