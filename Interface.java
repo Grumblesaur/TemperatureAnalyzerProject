@@ -17,11 +17,11 @@ public class Interface {
 	
 	/* Show off a bit. */
 	static void splashScreen() {
+		println("\n\n\n\n");
 		println("========| ******************************** |========");
 		println("========| Temperature Analysis Application |========");
 		println("========| ******************************** |========");
-		println("");
-		println("");
+		println("\n\n");
 	}
 	
 	/* Main menu text */
@@ -35,18 +35,26 @@ public class Interface {
 	}
 	
 	public static void main(String[] args) {
+		/* Dummy object for compilation's sake. Will need to replace with an
+			object that represents a connection to a database later.
+		*/
+		Object database = null;
+		
+		/* User input resources. */
 		Scanner input = new Scanner(System.in);
-		String option;
+		String option, filename;
 		
 		splashScreen();
 		
 		boolean validCommand = false;
 		do {
 			mainMenu();
+			option = input.nextLine();
 			switch (option.toLowerCase().charAt(0)) {
 				case 'i':
-					//importFile();
-					validCommand = true;
+					print("File to parse: ");
+					filename = input.nextLine();
+					validCommand = importHelper(database, filename);
 					break;
 				case 'q':
 					System.exit(0);
@@ -54,8 +62,21 @@ public class Interface {
 					validCommand = false;
 					break;
 			}
-			println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+			println("\n");
 		} while (!validCommand);
 		
+	}
+	
+	static boolean importHelper(Object database, String filename) {
+
+		boolean failed = false;
+		try {
+			CSVParser.importFile(database, filename);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			failed = true;
+		} finally {
+			return failed;
+		}
 	}
 }                                    

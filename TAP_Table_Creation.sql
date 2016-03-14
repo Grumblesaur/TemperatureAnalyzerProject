@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `mydb`.`Measurement` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Measurement` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `Temperature` INT NOT NULL,
+  `Temperature` FLOAT,
   `Time_ID` INT NOT NULL,
   `Sensor_Symbol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`),
