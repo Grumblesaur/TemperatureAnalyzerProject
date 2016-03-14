@@ -1,0 +1,33 @@
+REATE TABLE APP.TIME (
+  "Time_ID" INT NOT NULL primary key GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  "Year" INT NOT NULL,
+  "Month" INT NOT NULL,
+  "Date" INT NOT NULL,
+  "Clock_Time" TIME NOT NULL);
+
+
+CREATE TABLE APP.LOCATION (
+  "Symbol" VARCHAR(45) NOT NULL primary key,
+  "Location" VARCHAR(45) NOT NULL,
+  "GPS.Coordinates" VARCHAR(45) NOT NULL,
+  "Elevation" DECIMAL(5) NOT NULL,
+  "Aspect" VARCHAR(45) NOT NULL,
+  "Topographical_Description" VARCHAR(45) NOT NULL);
+
+
+CREATE TABLE APP.SENSOR (
+  "Serial_Number" INT NOT NULL primary key,
+  "Location_Symbol" VARCHAR(45) unique
+        NOT NULL REFERENCES APP.LOCATION ("Symbol"));
+
+
+CREATE TABLE APP.MEASUREMENT (
+  "ID" INT NOT NULL primary key GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+  "Temperature" INT NOT NULL,
+  "Time_ID" INT NOT NULL REFERENCES APP.TIME ("Time_ID"),
+  "Sensor_Symbol" VARCHAR(45) NOT NULL 
+        REFERENCES APP.SENSOR ("Location_Symbol"));
+  
+ 

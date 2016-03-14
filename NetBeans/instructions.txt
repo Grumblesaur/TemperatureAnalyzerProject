@@ -1,0 +1,9 @@
+In NetBeans, there is a tab on the right hand pannel labeled "Services".
+Under the "Databases" tab you should see a "Java DB" button.
+If you right click it you should see an option labled "Create Database".
+You can give it any name (mytap, for example) and set the admin as "root".
+I left the password blank.
+After creation you should see the option "jbdc:derby://localhost:1527/<databse name> in the "Databases" section.
+When you click on it, you can "Execute Command" and load the code found in this folder ("databse_load.txt") into the window and then click the "Run SQL" button found at the top of the execute window.
+Derby is not as nice as SQL about checking for existing tables, but if you start with a blank database this will work.
+I also need to double check that all relationships we need are preserved.
