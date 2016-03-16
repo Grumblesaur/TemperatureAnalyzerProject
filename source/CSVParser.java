@@ -101,7 +101,7 @@ public class CSVParser {
 		
 		/* Print a test output table to console */
 		TESTOUT(Float.toString(degrees) + "°C\t" + year + "\t" + month +
-			"\t" + day + "\t" + clockTime);
+			"\t" + day + "\t" + clockTime + "\t" + loc);
 	}
 	
 	// debug print, basically
