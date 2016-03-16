@@ -5,18 +5,42 @@
 // NOTE: member assignment used for clearer notation than set-get methods
 // We will use accessor functions in the final code
 
+// Primary algorithm, calls subordinate functions to build SQL query,
+// executes query, and returns the result of the query's execution.
 DEFINE constructSessionTable(ARG database):
 	DECLARE SQLquery
 	DECLARE range
 	range = timeRangeFilter()
-	CONCATENATE SQLquery, " FROM ", range[START], " TO ", range[END]
-	CONCATENATE SQLquery, elevationFiler()
-	
+
+	CONCATENATE SQLquery WITH " FROM ", range[START], " TO ", range[END]
+	CONCATENATE SQLquery WITH elevationFilter()
+	CONCATENATE SQLquery WITH locationFilter(database)
 	
 	DECLARE sessionTable
-	sessionTable = executeQuery(SQLquery)
+	sessionTable = database.executeQuery(SQLquery)
 	return sessionTable
+
+// Mid-level query-building logic, broken up into functions to keep the
+// high-level logic clean and uncluttered
+
+DEFINE locationFilter(ARG database):
+	DECLARE locations
+	locations = database.executeQuery(/* for locations table */)
+
+	DECLARE switches WITH length OF locations
+	FOR switch IN switches
+		switch = FALSE
 	
+	PRESENT switches AS locations // user can toggle switches on/off
+	
+	DECLARE locationsRule
+	IF EACH switch IN switches IS FALSE THEN
+		locationsRule = EMPTY
+	ELSE
+		CONCATENATE locationsRule WITH locations WHERE switches NOT FALSE
+	
+	RETURN locationsRule
+
 
 DEFINE elevationFilter( ):
 	DECLARE elevation
@@ -25,16 +49,16 @@ DEFINE elevationFilter( ):
 	operators = [GREATER_THAN, LESS_THAN, EQUAL_TO]
 	switches  = [FALSE,        FALSE,     FALSE]
 	
-	PRESENT operators AS switches // user can toggle switches on/off
+	PRESENT switches AS locations // user can toggle switches on/off
 	
 	OUTPUT "Elevation threshold (in meters): "
 	elevation = INPUT
 	
 	DECLARE elevationRule
-	IF EACH switch IN switches IS FALSE THEN:
+	IF EACH switch IN switches IS FALSE THEN
 		elevationRule = EMPTY
-	ELSE:
-		CONCATENATE elevationRule,
+	ELSE
+		CONCATENATE elevationRule WITH
 			elevation, operators WHERE switches NOT FALSE
 	
 	RETURN elevationRule
