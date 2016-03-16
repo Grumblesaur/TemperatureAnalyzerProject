@@ -1,0 +1,82 @@
+// James Murphy
+// CPSC 430 / Software Engineering
+// Sprint 1: Search Procedure
+
+// NOTE: member assignment used for clearer notation than set-get methods
+// We will use accessor functions in the final code
+
+DEFINE constructSessionTable(ARG database):
+	DECLARE SQLquery
+	DECLARE range
+	range = timeRangeFilter()
+	CONCATENATE SQLquery, " FROM ", range[START], " TO ", range[END]
+	CONCATENATE SQLquery, elevationFiler()
+	
+	
+	DECLARE sessionTable
+	sessionTable = executeQuery(SQLquery)
+	return sessionTable
+	
+
+DEFINE elevationFilter( ):
+	DECLARE elevation
+	DECLARE operators
+	DECLARE switches
+	operators = [GREATER_THAN, LESS_THAN, EQUAL_TO]
+	switches  = [FALSE,        FALSE,     FALSE]
+	
+	PRESENT operators AS switches // user can toggle switches on/off
+	
+	OUTPUT "Elevation threshold (in meters): "
+	elevation = INPUT
+	
+	DECLARE elevationRule
+	IF EACH switch IN switches IS FALSE THEN:
+		elevationRule = EMPTY
+	ELSE:
+		CONCATENATE elevationRule,
+			elevation, operators WHERE switches NOT FALSE
+	
+	RETURN elevationRule
+
+DEFINE timeRangeFilter( ):
+	DECLARE startDate, endDate
+	DECLARE presetOption
+	
+	OUTPUT "Use preset date range (Yes/No)?"
+	presetOption = INPUT
+	
+	// presets are only "from (month, day) to (month, day), so year must
+	// always be provided
+	OUTPUT "Enter starting year: " 
+	startDate.year = INPUT
+	OUTPUT "Enter ending year: "
+	endDate.year = INPUT
+	
+	IF presetOption IS yes THEN
+		selectPreset(startDate, endDate) // static method mutates arguments
+		
+	ELSE
+		OUTPUT "Enter start month: "
+		startDate.month = INPUT
+		
+		OUTPUT "Enter start day: "
+		startDate.day = INPUT
+		
+		OUTPUT "Enter end month: " 
+		endDate.month = INPUT
+		
+		OUTPUT ("Enter end day: " 
+		endDate.day = INPUT
+	
+	IF startDate.day NOT IN startDate.month:
+		ERROR "Invalid date."
+	
+	IF endDate.day NOT IN endDate.month:
+		ERROR "Invalid date."
+	
+	// remember to catch leap year day edge case
+	
+	RETURN container(startDate, endDate)
+	
+	
