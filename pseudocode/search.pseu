@@ -129,7 +129,7 @@ DEFINE timeRangeFilter( ):
 		OUTPUT "Enter end month: " 
 		endDate.month = INPUT
 		
-		OUTPUT ("Enter end day: " 
+		OUTPUT "Enter end day: " 
 		endDate.day = INPUT
 	
 	IF startDate.day NOT IN startDate.month:
