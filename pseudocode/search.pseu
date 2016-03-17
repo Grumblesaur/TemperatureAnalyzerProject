@@ -1,6 +1,6 @@
 // James Murphy
 // CPSC 430 / Software Engineering
-// Sprint 1: Search Procedure
+// Sprint 2: Search Procedure
 
 // NOTE: member assignment used for clearer notation than set-get methods
 // We will use accessor functions in the final code
@@ -15,25 +15,63 @@ DEFINE constructSessionTable(ARG database):
 	CONCATENATE SQLquery WITH " FROM ", range[START], " TO ", range[END]
 	CONCATENATE SQLquery WITH elevationFilter()
 	CONCATENATE SQLquery WITH locationFilter(database)
+	CONCATENATE SQLquery WITH sensorFilter(database, range)
 	
 	DECLARE sessionTable
 	sessionTable = database.executeQuery(SQLquery)
 	return sessionTable
 
+
 // Mid-level query-building logic, broken up into functions to keep the
 // high-level logic clean and uncluttered
 
-DEFINE locationFilter(ARG database):
-	DECLARE locations
-	locations = database.executeQuery(/* for locations table */)
+DEFINE sensorFilter(ARG database, ARG dateRange):
+	DECLARE hourThreshold
+	DECLARE sensorRule AS EMPTY
+	DECLARE sensors[] // sensors identified by S/N
+	
+	OUTPUT "Enter minimum sensor operating hours: "
+	hourThreshold = INPUT
+	
+	IF hourThreshold IS 0 THEN  // no minimum set
+		RETURN sensorRule
+	ELSE IF hourThreshold > hoursIn(dateRange)  // minimum > maximum
+		ERROR "Too many hours required for length of date range!"
+	
+	sensors = database.executeQuery(SENSOR_RETRIEVAL_RULE)
+	DECLARE switches[] WITH length OF sensors
+	
+	FOR switch IN switches
+		switch = FALSE
+	
+	PRESENT switches AS sensors
+	
+	IF EACH switch IN switches IS FALSE THEN
+		return sensorRule
+	
+	// Add only sensors which have enough data in the specified timeframe
+	// to the rule
+	FOR (switch, sensor) IN (switches, sensors)
+		DECLARE currentSensorData
+		IF switch IS TRUE THEN
+			currentSensorData = database.retrievePoints(daterange, sensor)
+			IF pointsIn(currentSensorData) >= hourThreshold THEN
+				CONCATENATE sensorRule WITH sensor
+	
+	RETURN sensorRule
+	
 
-	DECLARE switches WITH length OF locations
+DEFINE locationFilter(ARG database):
+	DECLARE locations[]
+	DECLARE locationsRule
+	locations = database.executeQuery(LOCATION_RETRIEVAL_RULE)
+
+	DECLARE switches[] WITH length OF locations
 	FOR switch IN switches
 		switch = FALSE
 	
 	PRESENT switches AS locations // user can toggle switches on/off
 	
-	DECLARE locationsRule
 	IF EACH switch IN switches IS FALSE THEN
 		locationsRule = EMPTY
 	ELSE
@@ -44,10 +82,10 @@ DEFINE locationFilter(ARG database):
 
 DEFINE elevationFilter( ):
 	DECLARE elevation
-	DECLARE operators
-	DECLARE switches
-	operators = [GREATER_THAN, LESS_THAN, EQUAL_TO]
-	switches  = [FALSE,        FALSE,     FALSE]
+	DECLARE operators[]
+	DECLARE switches[]
+	operators = {GREATER_THAN, LESS_THAN, EQUAL_TO}
+	switches  = {FALSE,        FALSE,     FALSE}
 	
 	PRESENT switches AS locations // user can toggle switches on/off
 	
@@ -62,6 +100,7 @@ DEFINE elevationFilter( ):
 			elevation, operators WHERE switches NOT FALSE
 	
 	RETURN elevationRule
+
 
 DEFINE timeRangeFilter( ):
 	DECLARE startDate, endDate
