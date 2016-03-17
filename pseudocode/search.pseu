@@ -51,7 +51,7 @@ DEFINE sensorFilter(ARG database, ARG dateRange):
 	
 	// Add only sensors which have enough data in the specified timeframe
 	// to the rule
-	FOR (switch, sensor) IN (switches, sensors)
+	FOR {switch, sensor} IN {switches, sensors}
 		DECLARE currentSensorData
 		IF switch IS TRUE THEN
 			currentSensorData = database.retrievePoints(daterange, sensor)
