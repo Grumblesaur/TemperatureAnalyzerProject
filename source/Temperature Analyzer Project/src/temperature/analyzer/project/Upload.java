@@ -6,10 +6,11 @@
 package temperature.analyzer.project;
 
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Quinntero
+ * @author Quinntero and rcatlett
  */
 public class Upload extends javax.swing.JFrame {
 
@@ -38,7 +39,7 @@ public class Upload extends javax.swing.JFrame {
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         chooseTxt = new java.awt.Label();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        fileToUpload = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,11 +141,11 @@ public class Upload extends javax.swing.JFrame {
         chooseTxt.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         chooseTxt.setText("Select a Comma Separated File to upload into the database.");
 
-        jFileChooser1.setApproveButtonText("Upload this file!");
-        jFileChooser1.setFileFilter(new MyCustomFilter());
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+        fileToUpload.setApproveButtonText("Upload this file!");
+        fileToUpload.setFileFilter(new MyCustomFilter());
+        fileToUpload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
+                fileToUploadActionPerformed(evt);
             }
         });
 
@@ -165,7 +166,7 @@ public class Upload extends javax.swing.JFrame {
                                 .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(278, 278, 278))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(157, 157, 157))))))
         );
         layout.setVerticalGroup(
@@ -176,7 +177,7 @@ public class Upload extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(215, Short.MAX_VALUE))
         );
 
@@ -229,12 +230,16 @@ public class Upload extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+    private void fileToUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileToUploadActionPerformed
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        String filePath = fileToUpload.getSelectedFile().getAbsolutePath();
+        infoBox(filePath, "File to Upload");
+    }//GEN-LAST:event_fileToUploadActionPerformed
 
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
     /**
      * @param args the command line arguments
      */
@@ -274,8 +279,8 @@ public class Upload extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
     private java.awt.Label chooseTxt;
+    private javax.swing.JFileChooser fileToUpload;
     private javax.swing.JButton homeButton;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JLabel taplogoLabel;

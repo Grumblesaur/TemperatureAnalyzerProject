@@ -38,7 +38,7 @@
                               <EmptySpace min="-2" pref="278" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jFileChooser1" min="-2" pref="752" max="-2" attributes="0"/>
+                              <Component id="fileToUpload" min="-2" pref="752" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -55,7 +55,7 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="chooseTxt" min="-2" pref="63" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jFileChooser1" min="-2" pref="388" max="-2" attributes="0"/>
+              <Component id="fileToUpload" min="-2" pref="388" max="-2" attributes="0"/>
               <EmptySpace pref="215" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -197,7 +197,7 @@
         <Property name="text" type="java.lang.String" value="Select a Comma Separated File to upload into the database."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFileChooser" name="jFileChooser1">
+    <Component class="javax.swing.JFileChooser" name="fileToUpload">
       <Properties>
         <Property name="approveButtonText" type="java.lang.String" value="Upload this file!"/>
         <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -205,7 +205,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFileChooser1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileToUploadActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

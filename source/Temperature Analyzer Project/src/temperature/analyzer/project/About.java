@@ -7,7 +7,7 @@ package temperature.analyzer.project;
 
 /**
  *
- * @author Quinntero
+ * @author rcatlett
  */
 public class About extends javax.swing.JFrame {
 
