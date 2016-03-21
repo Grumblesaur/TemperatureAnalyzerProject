@@ -6,7 +6,6 @@
 package temperature.analyzer.project;
 
 import java.io.File;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -232,14 +231,12 @@ public class Upload extends javax.swing.JFrame {
 
     private void fileToUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileToUploadActionPerformed
         // TODO add your handling code here:
-        String filePath = fileToUpload.getSelectedFile().getAbsolutePath();
-        infoBox(filePath, "File to Upload");
+        String fileName = fileToUpload.getSelectedFile().getName();
+        
+        MessageDialogs.uploadBox(fileName, "File to Upload");
+        
     }//GEN-LAST:event_fileToUploadActionPerformed
 
-    public static void infoBox(String infoMessage, String titleBar)
-    {
-        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
-    }
     /**
      * @param args the command line arguments
      */

@@ -5,9 +5,10 @@
  */
 package temperature.analyzer.project;
 
+
 /**
  *
- * @author Quinntero
+ * @author Quinntero and rcatlett
  */
 public class TemperatureAnalyzerProject {
 
