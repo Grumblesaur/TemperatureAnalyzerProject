@@ -8,21 +8,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema Temperature
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema Temperature
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `Temperature` DEFAULT CHARACTER SET utf8 ;
+USE `Temperature` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Time`
+-- Table `Temperature`.`Time`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Time` ;
+DROP TABLE IF EXISTS `Temperature`.`Time` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Time` (
+CREATE TABLE IF NOT EXISTS `Temperature`.`Time` (
   `Time_ID` INT NOT NULL AUTO_INCREMENT,
   `Year` INT NOT NULL,
   `Month` INT NOT NULL,
@@ -33,11 +33,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Location`
+-- Table `Temperature`.`Location`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Location` ;
+DROP TABLE IF EXISTS `Temperature`.`Location` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Location` (
+CREATE TABLE IF NOT EXISTS `Temperature`.`Location` (
   `Symbol` VARCHAR(45) NOT NULL,
   `Location` VARCHAR(45) NOT NULL,
   `GPS.Coordinates` VARCHAR(45) NOT NULL,
@@ -49,29 +49,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Sensor`
+-- Table `Temperature`.`Sensor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Sensor` ;
+DROP TABLE IF EXISTS `Temperature`.`Sensor` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Sensor` (
+CREATE TABLE IF NOT EXISTS `Temperature`.`Sensor` (
   `Serial_Number` INT NOT NULL,
   `Location_Symbol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Serial_Number`),
   INDEX `Location_Symbol_idx` (`Location_Symbol` ASC),
   CONSTRAINT `Location_Symbol`
     FOREIGN KEY (`Location_Symbol`)
-    REFERENCES `mydb`.`Location` (`Symbol`)
+    REFERENCES `Temperature`.`Location` (`Symbol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Measurement`
+-- Table `Temperature`.`Measurement`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Measurement` ;
+DROP TABLE IF EXISTS `Temperature`.`Measurement` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Measurement` (
+CREATE TABLE IF NOT EXISTS `Temperature`.`Measurement` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Temperature` FLOAT,
   `Time_ID` INT NOT NULL,
@@ -81,12 +81,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Measurement` (
   INDEX `Sensor_Symbol_idx` (`Sensor_Symbol` ASC),
   CONSTRAINT `Time_ID`
     FOREIGN KEY (`Time_ID`)
-    REFERENCES `mydb`.`Time` (`Time_ID`)
+    REFERENCES `Temperature`.`Time` (`Time_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Sensor_Symbol`
     FOREIGN KEY (`Sensor_Symbol`)
-    REFERENCES `mydb`.`Sensor` (`Location_Symbol`)
+    REFERENCES `Temperature`.`Sensor` (`Location_Symbol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
