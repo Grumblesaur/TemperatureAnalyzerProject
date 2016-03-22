@@ -23,13 +23,13 @@ public class CSVParser {
      * obnoxious to actually invest time in.
     */
     public static void importFile(Object database, String filename)
-            throws Exception {
+        throws Exception {
 
             /* Inform client about input requirements, demonstrate how gnarly
                     an xls file is under the hood to support this point.
             */
             if (!filename.contains(".csv")) {
-                    throw new Exception("Error! Not a .csv file!");
+                    MessageDialogs.ImportError("Error! Not a .csv file!");
             } 
 
             FileReader fr = null;
@@ -39,11 +39,13 @@ public class CSVParser {
             try {
                     fr = new FileReader(filename);
             } catch (Exception e) { // TODO: use more specific exceptions later
-                    throw new Exception("FileReader failed!");
+                    MessageDialogs.ImportError("FileReader failed!");
+                    throw new Exception("FileReader failed!");   
             }
             try {
                     bufr = new BufferedReader(fr);
             } catch (Exception e) { // TODO: use more specific exceptions later
+                    MessageDialogs.ImportError("BufferedReader failed!");
                     throw new Exception("BufferedReader failed!");
             }
 
@@ -53,7 +55,8 @@ public class CSVParser {
                     line = bufr.readLine();
                     location = line.split(",")[1];
             } catch (Exception e) { // TODO: use more specific exceptions later
-                    throw new Exception("Issue with header capture!");
+                   MessageDialogs.ImportError("Issue with header capture!");
+                   throw new Exception("Issue with header capture!");
             }
 
             /* Obtain one line at a time and write the temperature data to DB.*/
@@ -70,8 +73,9 @@ public class CSVParser {
                     } else {
                             temp = "NaN";
                     }
-
-                    writeToDB(location, date, temp);
+                    
+                    MessageDialogs.showData(location, date, temp);
+                    //writeToDB(location, date, temp);
             }
     }
 

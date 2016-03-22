@@ -6,6 +6,9 @@
 package temperature.analyzer.project;
 
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -233,8 +236,18 @@ public class Upload extends javax.swing.JFrame {
         // TODO add your handling code here:
         String fileName = fileToUpload.getSelectedFile().getName();
         
-        MessageDialogs.uploadBox(fileName, "File to Upload");
+        // Debug Message
+        //MessageDialogs.uploadBox(fileName, "File to Upload");
         
+        DatabaseConnection databaseCon = new DatabaseConnection();
+         
+        try {
+            CSVParser.importFile(databaseCon.con, fileName);
+        } catch (SQLException err){
+            MessageDialogs.noConnectionError(err.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_fileToUploadActionPerformed
 
     /**

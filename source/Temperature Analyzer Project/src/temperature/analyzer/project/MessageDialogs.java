@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author ruth
+ * @author rcatlett
  */
 public class MessageDialogs {
     public static void uploadBox(String fileName, String titleBar)
@@ -17,4 +17,23 @@ public class MessageDialogs {
         String message = "Uploading " + fileName;
         JOptionPane.showMessageDialog(null, message, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public static void noConnectionError(String error)
+    {
+        String message =  error;
+        JOptionPane.showMessageDialog(null, message, "Database Error", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public static void showData(String location, String date, String temp) {
+        String message = "Location: " + location + "\n String: " + date;
+        message = message + "\n Temp: " + temp;
+        
+        JOptionPane.showMessageDialog(null, message, "Data to Import", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public static void ImportError(String error) {
+        String message =  error;
+        JOptionPane.showMessageDialog(null, message, "Import Error", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

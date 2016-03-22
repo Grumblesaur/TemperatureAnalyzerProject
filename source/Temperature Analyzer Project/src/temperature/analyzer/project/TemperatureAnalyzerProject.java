@@ -5,8 +5,7 @@
  */
 package temperature.analyzer.project;
 
-
-/**
+/*
  *
  * @author Quinntero and rcatlett
  */
