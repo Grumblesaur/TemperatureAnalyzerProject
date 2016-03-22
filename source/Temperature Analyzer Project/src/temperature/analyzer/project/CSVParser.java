@@ -15,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.JOptionPane;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 public class CSVParser {
     /** Parser algorithm to move data points to database.
@@ -23,6 +25,8 @@ public class CSVParser {
      * @throws Exception Because non-generic exceptions are too
      * obnoxious to actually invest time in.
     */
+   
+    
     public static void uploadFile(DatabaseConnection database, String filename)
         throws Exception {
 
@@ -64,6 +68,8 @@ public class CSVParser {
             /* Obtain one line at a time and write the temperature data to DB.*/
             line = bufr.readLine();
             String[] point = null;
+            
+            MessageDialogs.DEBUG("Reading File", debug);
             while (line != null) {
                     line = bufr.readLine();
                     point = line.split(",");
@@ -84,6 +90,7 @@ public class CSVParser {
                     writeToDB(database, location, date, temp);
             }
             MessageDialogs.UploadSuccess();
+            
     }
 
     /* Actual database communication pending. Write output to console. */
@@ -122,6 +129,8 @@ public class CSVParser {
     //                "\t" + day + "\t" + clockTime + "\t" + loc);
     
     // Test Database
+        
+        MessageDialogs.DEBUG("Going to Add", debug);
         database.addData(loc, date, temp);
     }
 
