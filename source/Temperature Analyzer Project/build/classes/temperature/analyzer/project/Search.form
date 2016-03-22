@@ -29,46 +29,37 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="topBanner" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
-                      <Component id="chooseTxt" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="startDateTxt" min="-2" max="-2" attributes="0"/>
-                          <Component id="endDateTxt" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                          <Component id="chooseTxt" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="chooseSensorTxt" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="startDateSpin" pref="52" max="32767" attributes="0"/>
-                          <Component id="endDateSpin" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="startMonthTxt" min="-2" max="-2" attributes="0"/>
-                          <Component id="endMonthTxt" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="endMonthSpin" min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="startMonthSpin" min="-2" pref="53" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="startYearTxt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="startYearSpin" min="-2" pref="81" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="endYearTxt" min="-2" max="-2" attributes="0"/>
-                          <Component id="sensorTxt" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="inputSensorHours" min="-2" max="-2" attributes="0"/>
-                          <Component id="endYearSpin" min="-2" pref="81" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="startDateTxt" min="-2" max="-2" attributes="0"/>
+                                      <Component id="endDateTxt" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="startDateSpin" max="32767" attributes="0"/>
+                                      <Component id="endDateSpin" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Component id="sensorTxt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="inputSensorHours" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="63" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -82,49 +73,33 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topBanner" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              <Component id="chooseTxt" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="chooseTxt" min="-2" max="-2" attributes="0"/>
+                  <Component id="chooseSensorTxt" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="startDateSpin" min="-2" max="-2" attributes="0"/>
-                          <Component id="startMonthSpin" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="endMonthTxt" min="-2" max="-2" attributes="0"/>
-                                  <Component id="endMonthSpin" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="startDateSpin" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="endDateTxt" min="-2" max="-2" attributes="0"/>
                                   <Component id="endDateSpin" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="startDateTxt" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Component id="startDateTxt" min="-2" max="-2" attributes="0"/>
-                  <Component id="startMonthTxt" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="startYearSpin" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="endYearTxt" min="-2" max="-2" attributes="0"/>
-                          <Component id="endYearSpin" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputSensorHours" min="-2" max="-2" attributes="0"/>
+                          <Component id="sensorTxt" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="startYearTxt" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="inputSensorHours" min="-2" max="-2" attributes="0"/>
-                  <Component id="sensorTxt" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="467" max="32767" attributes="0"/>
+              <EmptySpace pref="430" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -258,16 +233,18 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JSpinner" name="startDateSpin">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="startMonthSpin">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="startYearSpin">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1009940400000" maximum="now" stepSize="10" type="date"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="endDateSpin">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="endMonthSpin">
-    </Component>
-    <Component class="javax.swing.JSpinner" name="endYearSpin">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="now" stepSize="5" type="date"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="java.awt.Label" name="sensorTxt">
       <Properties>
@@ -276,32 +253,12 @@
     </Component>
     <Component class="java.awt.Label" name="startDateTxt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Start Date: "/>
-      </Properties>
-    </Component>
-    <Component class="java.awt.Label" name="startMonthTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Month: "/>
-      </Properties>
-    </Component>
-    <Component class="java.awt.Label" name="startYearTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Year: "/>
+        <Property name="text" type="java.lang.String" value="Start Date and TIme: "/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="endDateTxt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="End Date: "/>
-      </Properties>
-    </Component>
-    <Component class="java.awt.Label" name="endMonthTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Month: "/>
-      </Properties>
-    </Component>
-    <Component class="java.awt.Label" name="endYearTxt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Year: "/>
+        <Property name="text" type="java.lang.String" value="End Date and Time: "/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="chooseTxt">
@@ -312,6 +269,36 @@
     <Component class="javax.swing.JFormattedTextField" name="inputSensorHours">
       <Properties>
         <Property name="text" type="java.lang.String" value="4000"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JList" name="sensorList">
+          <Properties>
+            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+                <StringItem index="4" value="Item 5"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="java.awt.Label" name="chooseSensorTxt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Sensor(s): "/>
       </Properties>
     </Component>
   </SubComponents>
