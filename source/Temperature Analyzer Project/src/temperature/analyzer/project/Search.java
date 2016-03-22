@@ -10,7 +10,9 @@ package temperature.analyzer.project;
  * @author Quinntero
  */
 public class Search extends javax.swing.JFrame {
-
+    boolean debugp = true;
+    String threshold = "";
+    
     /**
      * Creates new form to build SQL search queries
      */
@@ -156,7 +158,12 @@ public class Search extends javax.swing.JFrame {
 
         chooseTxt.setText("Choose a range of dates to select information from the database: ");
 
-        inputSensorHours.setText("4000");
+        inputSensorHours.setText("2000");
+        inputSensorHours.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSensorHoursActionPerformed(evt);
+            }
+        });
 
         sensorList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "BMS Bald Mesa", "BBR Beaver Ba Rd Camp", "BOR Boren Mesa", "BRR Brumley Ridge", "BPA Burro Pass", "BPT Burro Pass Trail", "CCR Chicken Creek", "CKL Clark Lake", "DIN Dinosaur Tracks", "DFM Dry Fork Mill Cr", "EDC E. Dark Canyon", "EMP E. Mt. Peale", "GEP Geyser Pass", "GOB Gold Basin", "GBR Gold Basin Road", "GRV  Grandview", "HRC Horse Creek", "HWY Hwy 46 La Sal", "LSP La Sal Pass", "LPJ L SAl Pass Jct", "LSS La Sal SNOTEL site", "LBB Lower Beaver Basin", "LGP Lower Geyser Pa Rd", "MER Mellenthin E Ridge", "MEM Mellenthin Meadows", "MOM Moonlight Meadows", "MEL Mt. Mellenthin", "NPE N. Peale RG", "SBM South Beaver Mesa", "UBB Upper Beaver Basin", "UD1 Upper Dark Canyon", "UDC Upper Dark Canyon 2", "WME Warner Meadows", "WFM Wet Fork Mill Cr" };
@@ -180,7 +187,7 @@ public class Search extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 4, Short.MAX_VALUE)
+                .addGap(0, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(167, 167, 167)
@@ -274,6 +281,11 @@ public class Search extends javax.swing.JFrame {
     private void submitSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitSearchActionPerformed
+
+    private void inputSensorHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSensorHoursActionPerformed
+        threshold = (String) inputSensorHours.getText();
+        MessageDialogs.DEBUG("Threshold = " + threshold, debugp);
+    }//GEN-LAST:event_inputSensorHoursActionPerformed
 
     /**
      * @param args the command line arguments

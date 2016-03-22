@@ -36,5 +36,10 @@ public class MessageDialogs {
         String message =  error;
         JOptionPane.showMessageDialog(null, message, "Upload Error", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public static void DEBUG(String msg, boolean debug) {
+        if (!debug) return;
+        JOptionPane.showMessageDialog(null, msg, "DEBUG MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

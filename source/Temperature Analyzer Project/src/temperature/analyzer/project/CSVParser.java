@@ -39,9 +39,10 @@ public class CSVParser {
             /* Initialize file I/O resources. */
             try {
                     fr = new FileReader(filename);
-            } catch (Exception e) { // TODO: use more specific exceptions later
+            } catch (Exception e) {
+                    // This shouldn't happen unless the user manages to type in a bogus filename.
                     MessageDialogs.UploadError(e.getMessage());
-                    throw new Exception("Bad filepath!");   
+                    throw new Exception("Bad filepath!");
             }
             try {
                     bufr = new BufferedReader(fr);
