@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+
+import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
+
 /**
  *
  * @author ruth
@@ -37,15 +40,18 @@ public class DatabaseConnection {
     public void addData(String loc, String date, String temp){
         try {
             String id;
-            if (curRow == 0){
+            if (!rs.last()){
                 id = "1";
             }
             else {
                rs.last();
-               curRow= rs.getInt("#") + 1; 
-               id = Integer.toString(curRow);
+               id = rs.getString("ID"); 
+               curRow = Integer.parseInt(id) + 1;
+               id = String.valueOf(curRow);
             }
        
+            
+            MessageDialogs.DEBUG("Inserting", debug);
             String SQL = "INSERT INTO APP.Tester VALUES("+ id + ", "+ loc + ", " + date + ", " + temp +")";
             stmt = this.con.createStatement();
             stmt.executeUpdate(SQL);

@@ -124,7 +124,7 @@ public class About extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -134,7 +134,7 @@ public class About extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        jLabel1.setText("<html>\n <p align=\"center\">This software was developed by the legendary TAP Team: </p>\n <div align=\"center\">\n   \n     <p>Ruth Catlett</p>\n     <p>Kris Hooks</p>\n     <p>Yireda Jilili</p>\n     <p>James Murphy </p>\n </div>\n <p align=\"center\">   This project was the TAP Team's final assignment for </p>\n <p align=\"center\">Dr. Polack's\n   CPSC 430 class in Spring 2016 at the </p>\n <p align=\"center\">University of Mary Washington. </p>\n</html>\n\n</html>");
+        jLabel1.setText("<html>  <p align=\"center\">This software was developed by the legendary TAP Team: </p>  <div align=\"center\">          <p>Ruth Catlett</p>      <p>Kris Hooks</p>      <p>Yireda Jilili</p>      <p>James Murphy </p>  </div>  <p align=\"center\">   This project was the TAP Team's final assignment for </p>  <p align=\"center\">Dr. Polack's    CPSC 430 class in Spring 2016 at the </p>  <p align=\"center\">University of Mary Washington. </p> </html>  </html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

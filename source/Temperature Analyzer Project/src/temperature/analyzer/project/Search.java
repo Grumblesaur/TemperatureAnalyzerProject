@@ -10,6 +10,7 @@ package temperature.analyzer.project;
  * @author Quinntero
  */
 public class Search extends javax.swing.JFrame {
+    static bool debug;
     String threshold = "";
     String elevation = "";
     String startDate = "";
@@ -281,8 +282,12 @@ public class Search extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void submitSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitSearchActionPerformed
+
         // Here, call static methods to parse filter input and combine into
         // SQL statement.
+        // TODO add your handling code here:
+        new SearchOutput().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed
 
     private void inputSensorHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSensorHoursActionPerformed
