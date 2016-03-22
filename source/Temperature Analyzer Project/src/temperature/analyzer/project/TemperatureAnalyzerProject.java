@@ -11,7 +11,8 @@ package temperature.analyzer.project;
  * @author rcatlett
  */
 public class TemperatureAnalyzerProject {
-
+    // debug bool
+    public static boolean debug = true;
     /**
      * @param args the command line arguments
      */

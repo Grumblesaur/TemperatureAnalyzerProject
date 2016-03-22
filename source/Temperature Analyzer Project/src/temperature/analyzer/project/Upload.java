@@ -243,6 +243,8 @@ public class Upload extends javax.swing.JFrame {
          
         try {
             CSVParser.uploadFile(databaseCon, filePath);
+            new About().setVisible(true);
+            this.setVisible(false);
         } catch (SQLException err){
             MessageDialogs.noConnectionError(err.getMessage());
         } catch (Exception ex) {
