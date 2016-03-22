@@ -234,7 +234,7 @@ public class Upload extends javax.swing.JFrame {
 
     private void fileToUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileToUploadActionPerformed
         // TODO add your handling code here:
-        String fileName = fileToUpload.getSelectedFile().getName();
+        String fileName = fileToUpload.getSelectedFile().getPath(); // use path instead of filename
         
         // Debug Message
         //MessageDialogs.uploadBox(fileName, "File to Upload");

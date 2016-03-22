@@ -7,7 +7,8 @@ package temperature.analyzer.project;
 
 /*
  *
- * @author Quinntero and rcatlett
+ * @author Quinntero
+ * @author rcatlett
  */
 public class TemperatureAnalyzerProject {
 

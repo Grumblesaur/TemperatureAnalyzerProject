@@ -7,7 +7,8 @@ package temperature.analyzer.project;
 
 /**
  *
- * @author james and rcatlett
+ * @author james
+ * @author rcatlett
  */
 
 import java.io.BufferedReader;
@@ -39,8 +40,8 @@ public class CSVParser {
             try {
                     fr = new FileReader(filename);
             } catch (Exception e) { // TODO: use more specific exceptions later
-                    MessageDialogs.UploadError("FileReader failed!");
-                    throw new Exception("FileReader failed!");   
+                    MessageDialogs.UploadError(e.getMessage());
+                    throw new Exception("Bad filepath!");   
             }
             try {
                     bufr = new BufferedReader(fr);
@@ -74,8 +75,12 @@ public class CSVParser {
                             temp = "NaN";
                     }
                     
-                    MessageDialogs.showData(location, date, temp);
-                    //writeToDB(location, date, temp);
+                    /* we have proven that the parser can loop through the file,
+                        so we'll hide this dialogue box pop-up to avoid prompting the
+                        user 50,000+ times
+                    */
+                    // MessageDialogs.showData(location, date, temp);
+                    // writeToDB(location, date, temp);
             }
     }
 
