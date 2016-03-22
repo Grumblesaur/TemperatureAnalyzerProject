@@ -280,6 +280,8 @@ public class Search extends javax.swing.JFrame {
 
     private void submitSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitSearchActionPerformed
         // TODO add your handling code here:
+        new SearchOutput().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed
 
     private void inputSensorHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSensorHoursActionPerformed
