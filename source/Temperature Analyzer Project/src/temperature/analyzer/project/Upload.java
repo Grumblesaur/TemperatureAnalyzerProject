@@ -242,7 +242,7 @@ public class Upload extends javax.swing.JFrame {
         DatabaseConnection databaseCon = new DatabaseConnection();
          
         try {
-            CSVParser.importFile(databaseCon.con, fileName);
+            CSVParser.uploadFile(databaseCon.con, fileName);
         } catch (SQLException err){
             MessageDialogs.noConnectionError(err.getMessage());
         } catch (Exception ex) {

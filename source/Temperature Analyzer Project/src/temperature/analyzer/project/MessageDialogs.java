@@ -24,16 +24,17 @@ public class MessageDialogs {
         JOptionPane.showMessageDialog(null, message, "Database Error", JOptionPane.INFORMATION_MESSAGE);
     }
     
+    //Debug Dialog
     public static void showData(String location, String date, String temp) {
         String message = "Location: " + location + "\n String: " + date;
         message = message + "\n Temp: " + temp;
         
-        JOptionPane.showMessageDialog(null, message, "Data to Import", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Data to Upload", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public static void ImportError(String error) {
+    public static void UploadError(String error) {
         String message =  error;
-        JOptionPane.showMessageDialog(null, message, "Import Error", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Upload Error", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

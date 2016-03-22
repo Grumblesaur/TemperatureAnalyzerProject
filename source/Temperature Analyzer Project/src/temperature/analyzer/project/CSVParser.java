@@ -22,14 +22,14 @@ public class CSVParser {
      * @throws Exception Because non-generic exceptions are too
      * obnoxious to actually invest time in.
     */
-    public static void importFile(Object database, String filename)
+    public static void uploadFile(Object database, String filename)
         throws Exception {
 
             /* Inform client about input requirements, demonstrate how gnarly
                     an xls file is under the hood to support this point.
             */
             if (!filename.contains(".csv")) {
-                    MessageDialogs.ImportError("Error! Not a .csv file!");
+                    MessageDialogs.UploadError("Error! Not a .csv file!");
             } 
 
             FileReader fr = null;
@@ -39,13 +39,13 @@ public class CSVParser {
             try {
                     fr = new FileReader(filename);
             } catch (Exception e) { // TODO: use more specific exceptions later
-                    MessageDialogs.ImportError("FileReader failed!");
+                    MessageDialogs.UploadError("FileReader failed!");
                     throw new Exception("FileReader failed!");   
             }
             try {
                     bufr = new BufferedReader(fr);
             } catch (Exception e) { // TODO: use more specific exceptions later
-                    MessageDialogs.ImportError("BufferedReader failed!");
+                    MessageDialogs.UploadError("BufferedReader failed!");
                     throw new Exception("BufferedReader failed!");
             }
 
@@ -55,7 +55,7 @@ public class CSVParser {
                     line = bufr.readLine();
                     location = line.split(",")[1];
             } catch (Exception e) { // TODO: use more specific exceptions later
-                   MessageDialogs.ImportError("Issue with header capture!");
+                   MessageDialogs.UploadError("Issue with header capture!");
                    throw new Exception("Issue with header capture!");
             }
 
