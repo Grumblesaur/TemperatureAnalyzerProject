@@ -23,7 +23,7 @@ public class CSVParser {
      * @throws Exception Because non-generic exceptions are too
      * obnoxious to actually invest time in.
     */
-    public static void uploadFile(Object database, String filename)
+    public static void uploadFile(DatabaseConnection database, String filename)
         throws Exception {
 
             /* Inform client about input requirements, demonstrate how gnarly
@@ -81,44 +81,48 @@ public class CSVParser {
                         user 50,000+ times
                     */
                     // MessageDialogs.showData(location, date, temp);
-                    // writeToDB(location, date, temp);
+                    writeToDB(database, location, date, temp);
             }
+            MessageDialogs.UploadSuccess();
     }
 
     /* Actual database communication pending. Write output to console. */
-    private static void writeToDB(String loc, String date, String temp) {
+    private static void writeToDB(DatabaseConnection database, String loc, String date, String temp) {
             /* Semi-redundant variables for parsing to ease reading. */
-            float degrees = 0.0f;
-            if (temp.equals("NaN")) {
-                    degrees = Float.NaN;
-            } else {
-                    degrees = Float.parseFloat(temp);
-            }
+    //        float degrees = 0.0f;
+    //        if (temp.equals("NaN")) {
+    //               degrees = Float.NaN;
+    //       } else {
+    //                degrees = Float.parseFloat(temp);
+    //        }
 
             /* Named variables for data capture */
-            String year, month, day = "";
-            String fullDate, clockTime;
-            String[] dateParts = date.split(" ");
-            fullDate = dateParts[0];
-            clockTime = dateParts[1];
+    //       String year, month, day = "";
+    //        String fullDate, clockTime;
+    //        String[] dateParts = date.split(" ");
+    //        fullDate = dateParts[0];
+    //        clockTime = dateParts[1];
 
             /* Break down the date into integers. */
-            String[] fullDateParts = fullDate.split("/");
-            year = "20" + fullDateParts[2];
-            month = fullDateParts[0];
+    //        String[] fullDateParts = fullDate.split("/");
+    //        year = "20" + fullDateParts[2];
+    //        month = fullDateParts[0];
 
             /* Prepend a zero to date if it's a single-digit date. */
-            if (fullDateParts[1].length() < 2) {
-                    day = "0" + fullDateParts[1];
-            } else {
-                    day = fullDateParts[1];
-            }
+    //        if (fullDateParts[1].length() < 2) {
+    //                day = "0" + fullDateParts[1];
+    //        } else {
+    //                day = fullDateParts[1];
+    //        }
             //TODO:
             // create SQL statement with: degrees, year, month, day, clockTime
 
             /* Print a test output table to console */
-            TESTOUT(Float.toString(degrees) + "°C\t" + year + "\t" + month +
-                    "\t" + day + "\t" + clockTime + "\t" + loc);
+    //        TESTOUT(Float.toString(degrees) + "°C\t" + year + "\t" + month +
+    //                "\t" + day + "\t" + clockTime + "\t" + loc);
+    
+    // Test Database
+        database.addData(loc, date, temp);
     }
 
     // debug print, basically
