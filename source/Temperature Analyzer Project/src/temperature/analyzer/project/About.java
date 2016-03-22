@@ -35,8 +35,7 @@ public class About extends javax.swing.JFrame {
         searchdbButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,10 +134,7 @@ public class About extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("This program was developed and implmented by Dr. Polack's CPSC\n430 class in Spring 2016. \n\nIt was implemented by:\nRuth Catlett\nKris Hooks\nYireda Jilili\nJames Murphy");
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel1.setText("<html>\n <p align=\"center\">This software was developed by the legendary TAP Team: </p>\n <div align=\"center\">\n   \n     <p>Ruth Catlett</p>\n     <p>Kris Hooks</p>\n     <p>Yireda Jilili</p>\n     <p>James Murphy </p>\n </div>\n <p align=\"center\">   This project was the TAP Team's final assignment for </p>\n <p align=\"center\">Dr. Polack's\n   CPSC 430 class in Spring 2016 at the </p>\n <p align=\"center\">University of Mary Washington. </p>\n</html>\n\n</html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,17 +146,17 @@ public class About extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(349, 349, 349))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(374, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,8 +231,7 @@ public class About extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
     private javax.swing.JButton homeButton;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JLabel taplogoLabel;

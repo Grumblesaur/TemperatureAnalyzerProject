@@ -30,8 +30,8 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="430" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="349" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="539" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,9 +40,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topBanner" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="274" max="-2" attributes="0"/>
-              <EmptySpace pref="374" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="263" max="-2" attributes="0"/>
+              <EmptySpace pref="397" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -175,21 +175,10 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="This program was developed and implmented by Dr. Polack&apos;s CPSC&#xa;430 class in Spring 2016. &#xa;&#xa;It was implemented by:&#xa;Ruth Catlett&#xa;Kris Hooks&#xa;Yireda Jilili&#xa;James Murphy"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa; &lt;p align=&quot;center&quot;&gt;This software was developed by the legendary TAP Team: &lt;/p&gt;&#xa; &lt;div align=&quot;center&quot;&gt;&#xa;   &#xa;     &lt;p&gt;Ruth Catlett&lt;/p&gt;&#xa;     &lt;p&gt;Kris Hooks&lt;/p&gt;&#xa;     &lt;p&gt;Yireda Jilili&lt;/p&gt;&#xa;     &lt;p&gt;James Murphy &lt;/p&gt;&#xa; &lt;/div&gt;&#xa; &lt;p align=&quot;center&quot;&gt;   This project was the TAP Team&apos;s final assignment for &lt;/p&gt;&#xa; &lt;p align=&quot;center&quot;&gt;Dr. Polack&apos;s&#xa;   CPSC 430 class in Spring 2016 at the &lt;/p&gt;&#xa; &lt;p align=&quot;center&quot;&gt;University of Mary Washington. &lt;/p&gt;&#xa;&lt;/html&gt;&#xa;&#xa;&lt;/html&gt;"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
