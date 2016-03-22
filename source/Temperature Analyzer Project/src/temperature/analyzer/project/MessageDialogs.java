@@ -41,5 +41,9 @@ public class MessageDialogs {
         if (!debug) return;
         JOptionPane.showMessageDialog(null, msg, "DEBUG MESSAGE", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public static void UploadSuccess() {
+        JOptionPane.showMessageDialog(null, "Upload Successful");
+    }
 
 }

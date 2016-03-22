@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class DatabaseConnection {
     Connection con;
-    //Statement stmt;
-    //ResultSet rs;
-    //int curRow = 0;
+    Statement stmt;
+    ResultSet rs;
+    int curRow = 0;
         
     public DatabaseConnection() {
         try {
@@ -32,5 +32,27 @@ public class DatabaseConnection {
            } catch (SQLException err) {
                MessageDialogs.noConnectionError(err.getMessage());
            }
+    }
+    
+    public void addData(String loc, String date, String temp){
+        try {
+            String id;
+            if (curRow == 0){
+                id = "1";
+            }
+            else {
+               rs.last();
+               curRow= rs.getInt("#") + 1; 
+               id = Integer.toString(curRow);
+            }
+       
+            String SQL = "INSERT INTO APP.Tester VALUES("+ id + ", "+ loc + ", " + date + ", " + temp +")";
+            stmt = this.con.createStatement();
+            stmt.executeUpdate(SQL);
+         
+        }
+        catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
     }
 }
