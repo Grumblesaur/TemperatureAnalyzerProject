@@ -10,7 +10,7 @@ package temperature.analyzer.project;
  * @author Quinntero
  */
 public class Search extends javax.swing.JFrame {
-    static bool debug;
+    static boolean debug;
     String threshold = "";
     String elevation = "";
     String startDate = "";
