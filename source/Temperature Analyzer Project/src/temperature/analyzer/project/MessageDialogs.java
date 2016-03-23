@@ -5,6 +5,7 @@
  */
 package temperature.analyzer.project;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,5 +46,5 @@ public class MessageDialogs {
     public static void UploadSuccess() {
         JOptionPane.showMessageDialog(null, "Upload Successful");
     }
-
+   
 }

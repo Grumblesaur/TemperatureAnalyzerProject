@@ -5,23 +5,20 @@
  */
 package temperature.analyzer.project;
 
-import java.io.File;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 
 /**
  *
- * @author Quinntero and rcatlett
+ * @author ruth
  */
-public class Upload extends javax.swing.JFrame {
+public class Plot extends javax.swing.JFrame {
 
     /**
-     * Creates new form to upload files
+     * Creates new form Plot
      */
-    public Upload () {
+    public Plot() {
         initComponents();
+        graphedCalc.setVisible(false);
     }
 
     /**
@@ -33,6 +30,8 @@ public class Upload extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        calculationType = new javax.swing.ButtonGroup();
+        timeType = new javax.swing.ButtonGroup();
         topBanner = new javax.swing.JLayeredPane();
         menuPanel = new javax.swing.JPanel();
         homeButton = new javax.swing.JButton();
@@ -41,8 +40,17 @@ public class Upload extends javax.swing.JFrame {
         searchdbButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
-        chooseTxt = new java.awt.Label();
-        fileToUpload = new javax.swing.JFileChooser();
+        backButton = new javax.swing.JButton();
+        graphedCalc = new javax.swing.JLabel();
+        highCalc = new javax.swing.JRadioButton();
+        avgCalc = new javax.swing.JRadioButton();
+        lowCalc = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        yrlyTime = new javax.swing.JRadioButton();
+        monthTime = new javax.swing.JRadioButton();
+        dailyTime = new javax.swing.JRadioButton();
+        graphButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,14 +149,56 @@ public class Upload extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        chooseTxt.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        chooseTxt.setText("Select a Comma Separated File to upload into the database.");
-
-        fileToUpload.setApproveButtonText("Upload this file!");
-        fileToUpload.setFileFilter(new MyCustomFilter());
-        fileToUpload.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back to Data");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileToUploadActionPerformed(evt);
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        graphedCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/tap_plot.png"))); // NOI18N
+
+        calculationType.add(highCalc);
+        highCalc.setText("High");
+
+        calculationType.add(avgCalc);
+        avgCalc.setText("Average");
+
+        calculationType.add(lowCalc);
+        lowCalc.setText("Low");
+
+        jLabel2.setText("Select a Calculation Type:");
+
+        jLabel3.setText("Select a Time Frame:");
+
+        timeType.add(yrlyTime);
+        yrlyTime.setText("Yearly");
+        yrlyTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yrlyTimeActionPerformed(evt);
+            }
+        });
+
+        timeType.add(monthTime);
+        monthTime.setText("Monthly");
+        monthTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthTimeActionPerformed(evt);
+            }
+        });
+
+        timeType.add(dailyTime);
+        dailyTime.setText("Daily");
+        dailyTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dailyTimeActionPerformed(evt);
+            }
+        });
+
+        graphButton.setText("Plot");
+        graphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graphButtonActionPerformed(evt);
             }
         });
 
@@ -159,55 +209,62 @@ public class Upload extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(278, 278, 278))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(157, 157, 157))))))
+                            .addComponent(lowCalc)
+                            .addComponent(avgCalc)
+                            .addComponent(highCalc)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(yrlyTime)
+                            .addComponent(monthTime)
+                            .addComponent(dailyTime)
+                            .addComponent(graphButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(graphedCalc))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(backButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(graphedCalc)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(highCalc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(avgCalc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lowCalc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(yrlyTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(monthTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dailyTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(graphButton)
+                        .addGap(66, 66, 66))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    class MyCustomFilter extends javax.swing.filechooser.FileFilter {
-
-        @Override
-        public boolean accept(File file) {
-            // Allow just directories and files with ".txt" extension...
-            return file.isDirectory() || file.getAbsolutePath().endsWith(".csv");
-        }
-
-        @Override
-        public String getDescription() {
-            // This description will be displayed in the dialog,
-            // hard-coded = ugly, should be done via I18N
-            return "Comma-separated documents (*.csv)";
-        }
-
-//        @Override
-//        public boolean accept(File file) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-
-    }
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
@@ -221,89 +278,99 @@ public class Upload extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_uploadfileButtonActionPerformed
 
-    private void searchdbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdbButtonActionPerformed
-        // TODO add your handling code here:
-        new Search().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_searchdbButtonActionPerformed
-
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
         // TODO add your handling code here:
         new About().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
-    private void fileToUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileToUploadActionPerformed
+    private void searchdbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdbButtonActionPerformed
         // TODO add your handling code here:
-        if(!presentation){
-            String filePath = fileToUpload.getSelectedFile().getPath();
-             // use path instead of filename
+        new Search().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_searchdbButtonActionPerformed
 
-            DatabaseConnection databaseCon = new DatabaseConnection();
-
-            try {
-                CSVParser.uploadFile(databaseCon, filePath);
-                new About().setVisible(true);
-                this.setVisible(false);
-            } catch (SQLException err){
-                MessageDialogs.noConnectionError(err.getMessage());
-            } catch (Exception ex) {
-                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            MessageDialogs.UploadSuccess();
-            this.setVisible(false);
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        if (presentation) {
             new SearchOutput().setVisible(true);
+            this.setVisible(false);
         }
-    }//GEN-LAST:event_fileToUploadActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void yrlyTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yrlyTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yrlyTimeActionPerformed
+
+    private void monthTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monthTimeActionPerformed
+
+    private void dailyTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dailyTimeActionPerformed
+
+    private void graphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graphButtonActionPerformed
+        // TODO add your handling code here:
+        graphedCalc.setVisible(true);
+    }//GEN-LAST:event_graphButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */                                                                               // Find out why this is grabbing Nimbus theme???
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {                                                                   //  Find out why this is grabbing Nimbus theme???
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Plot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Plot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Plot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Plot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Upload().setVisible(true);
+                new Plot().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
-    private java.awt.Label chooseTxt;
-    private javax.swing.JFileChooser fileToUpload;
+    private javax.swing.JRadioButton avgCalc;
+    private javax.swing.JButton backButton;
+    private javax.swing.ButtonGroup calculationType;
+    private javax.swing.JRadioButton dailyTime;
+    private javax.swing.JButton graphButton;
+    private javax.swing.JLabel graphedCalc;
+    private javax.swing.JRadioButton highCalc;
     private javax.swing.JButton homeButton;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JRadioButton lowCalc;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JRadioButton monthTime;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JLabel taplogoLabel;
+    private javax.swing.ButtonGroup timeType;
     private javax.swing.JLayeredPane topBanner;
     private javax.swing.JButton uploadfileButton;
     private javax.swing.JLabel worldmapLabel;
+    private javax.swing.JRadioButton yrlyTime;
     // End of variables declaration//GEN-END:variables
 }
