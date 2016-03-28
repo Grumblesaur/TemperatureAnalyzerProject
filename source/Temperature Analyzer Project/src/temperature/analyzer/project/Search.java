@@ -55,7 +55,6 @@ public class Search extends javax.swing.JFrame {
         worldmapLabel = new javax.swing.JLabel();
         sensorTxt = new java.awt.Label();
         chooseTxt = new java.awt.Label();
-        inputSensorHours = new javax.swing.JFormattedTextField();
         sensorListPane = new javax.swing.JScrollPane();
         sensorList = new javax.swing.JList<>();
         submitSearch = new javax.swing.JButton();
@@ -85,6 +84,7 @@ public class Search extends javax.swing.JFrame {
         startMinuteSpinner = new javax.swing.JSpinner();
         stopMinuteSpinner = new javax.swing.JSpinner();
         orTxt = new javax.swing.JLabel();
+        sensorHoursSpinner = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,13 +207,6 @@ public class Search extends javax.swing.JFrame {
 
         chooseTxt.setText("Choose a range of dates and times to select information from the database: ");
 
-        inputSensorHours.setText("2000");
-        inputSensorHours.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSensorHoursActionPerformed(evt);
-            }
-        });
-
         sensorList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "BMS Bald Mesa", "BBR Beaver Ba Rd Camp", "BOR Boren Mesa", "BRR Brumley Ridge", "BPA Burro Pass", "BPT Burro Pass Trail", "CCR Chicken Creek", "CKL Clark Lake", "DIN Dinosaur Tracks", "DFM Dry Fork Mill Cr", "EDC E. Dark Canyon", "EMP E. Mt. Peale", "GEP Geyser Pass", "GOB Gold Basin", "GBR Gold Basin Road", "GRV  Grandview", "HRC Horse Creek", "HWY Hwy 46 La Sal", "LSP La Sal Pass", "LPJ L SAl Pass Jct", "LSS La Sal SNOTEL site", "LBB Lower Beaver Basin", "LGP Lower Geyser Pa Rd", "MER Mellenthin E Ridge", "MEM Mellenthin Meadows", "MOM Moonlight Meadows", "MEL Mt. Mellenthin", "NPE N. Peale RG", "SBM South Beaver Mesa", "UBB Upper Beaver Basin", "UD1 Upper Dark Canyon", "UDC Upper Dark Canyon 2", "WME Warner Meadows", "WFM Wet Fork Mill Cr" };
             public int getSize() { return strings.length; }
@@ -291,6 +284,8 @@ public class Search extends javax.swing.JFrame {
         orTxt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         orTxt.setText("OR");
 
+        sensorHoursSpinner.setModel(new javax.swing.SpinnerNumberModel(2000, 500, null, 500));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,10 +307,10 @@ public class Search extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(sensorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(inputSensorHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(278, 278, 278)
+                                .addComponent(submitSearch))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(startDayTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,10 +355,10 @@ public class Search extends javax.swing.JFrame {
                                         .addComponent(startMinuteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, 0)
                                         .addComponent(startMinuteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(278, 278, 278)
-                                .addComponent(submitSearch)))
+                                .addComponent(sensorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sensorHoursSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(48, 48, 48)
                         .addComponent(sensorListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(layout.createSequentialGroup()
@@ -427,11 +422,11 @@ public class Search extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(stopMinuteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(stopMinuteSpinner))))
-                        .addGap(40, 40, 40)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputSensorHours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sensorHoursSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sensorTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                        .addGap(51, 51, 51)
                         .addComponent(submitSearch))
                     .addComponent(sensorListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(122, Short.MAX_VALUE))
@@ -491,7 +486,7 @@ public class Search extends javax.swing.JFrame {
             }
 
             // Obtain threshold hours for sensor operation
-            sensorHours = (String) inputSensorHours.getValue();
+            //sensorHours = (String) inputSensorHours.getValue();    //James I commented this out - Kris
 
             // Obtain three-character location codes
             locations = (ArrayList<String>) sensorList.getSelectedValuesList();
@@ -507,10 +502,6 @@ public class Search extends javax.swing.JFrame {
         new SearchOutput().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed
-
-    private void inputSensorHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSensorHoursActionPerformed
-        // --
-    }//GEN-LAST:event_inputSensorHoursActionPerformed
 
     private void submitPrevSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPrevSearchActionPerformed
         // TODO: grab previously selected search and apply a year range to it.
@@ -573,13 +564,13 @@ public class Search extends javax.swing.JFrame {
     private java.awt.Label chooseSensorTxt;
     private java.awt.Label chooseTxt;
     private javax.swing.JButton homeButton;
-    private javax.swing.JFormattedTextField inputSensorHours;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel orTxt;
     private javax.swing.JList<String> prevSearchList;
     private javax.swing.JScrollPane prevSearchPanel;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;
+    private javax.swing.JSpinner sensorHoursSpinner;
     private javax.swing.JList<String> sensorList;
     private javax.swing.JScrollPane sensorListPane;
     private java.awt.Label sensorTxt;

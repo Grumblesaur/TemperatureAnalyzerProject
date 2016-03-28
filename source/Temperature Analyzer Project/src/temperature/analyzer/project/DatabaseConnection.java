@@ -39,7 +39,38 @@ public class DatabaseConnection {
     
     public void addData(String loc, String date, String temp){
         try {
-            /*String id;
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Tester";
+            rs = stmt.executeQuery(SQL);
+            
+            rs.last();
+            int id_num = rs.getRow() + 1;
+            
+                     
+            rs.moveToInsertRow();
+            
+            rs.updateInt("ID", id_num);
+            rs.updateString("Location", loc);
+            rs.updateString("Date", date);
+            rs.updateString("Temp", temp);
+            
+            rs.insertRow();
+            
+            stmt.close();
+            rs.close();
+            
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            SQL = "SELECT * FROM APP.Tester";
+            rs = stmt.executeQuery(SQL);
+                
+        } 
+        catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+        /*
+        
+        try {
+            String id;
             if (!rs.last()){
                 id = "1";
             }
@@ -50,7 +81,7 @@ public class DatabaseConnection {
                id = String.valueOf(curRow);
             }
        
-            */
+            
             MessageDialogs.DEBUG("Inserting", debug);
             String SQL = "INSERT INTO APP.Tester VALUES("+ loc + ", " + date + ", " + temp +")";
             stmt = this.con.createStatement();
@@ -59,6 +90,6 @@ public class DatabaseConnection {
         }
         catch (SQLException err) {
             JOptionPane.showMessageDialog(null, err.getMessage());
-        }
+        }*/
     }
 }

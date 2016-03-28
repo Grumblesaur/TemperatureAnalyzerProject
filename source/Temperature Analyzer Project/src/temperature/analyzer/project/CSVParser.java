@@ -130,7 +130,7 @@ public class CSVParser {
     
     // Test Database
         
-        MessageDialogs.DEBUG("Going to Add", debug);
+        //MessageDialogs.DEBUG("Going to Add", debug);
         database.addData(loc, date, temp);
     }
 
