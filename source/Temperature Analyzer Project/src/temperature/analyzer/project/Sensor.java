@@ -5,22 +5,16 @@
  */
 package temperature.analyzer.project;
 
-import java.io.File;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
-
 /**
  *
- * @author Quinntero and rcatlett
+ * @author Quinntero
  */
-public class Upload extends javax.swing.JFrame {
+public class Sensor extends javax.swing.JFrame {
 
     /**
-     * Creates new form to upload files
+     * Creates new form Home
      */
-    public Upload () {
+    public Sensor () {
         initComponents();
     }
 
@@ -42,8 +36,22 @@ public class Upload extends javax.swing.JFrame {
         sensorButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
-        chooseTxt = new java.awt.Label();
-        fileToUpload = new javax.swing.JFileChooser();
+        sensorListPane = new javax.swing.JScrollPane();
+        sensorList = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        newSerialButton = new javax.swing.JButton();
+        editLocButton = new javax.swing.JButton();
+        addLocButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        serialListPane = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        newSerial = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        newCode = new javax.swing.JTextField();
+        newLocation = new javax.swing.JTextField();
+        removeSerialButton = new javax.swing.JButton();
+        removeLocButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,73 +160,150 @@ public class Upload extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        chooseTxt.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        chooseTxt.setText("Select a Comma Separated File to upload into the database.");
+        sensorList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "BMS Bald Mesa", "BBR Beaver Ba Rd Camp", "BOR Boren Mesa", "BRR Brumley Ridge", "BPA Burro Pass", "BPT Burro Pass Trail", "CCR Chicken Creek", "CKL Clark Lake", "DIN Dinosaur Tracks", "DFM Dry Fork Mill Cr", "EDC E. Dark Canyon", "EMP E. Mt. Peale", "GEP Geyser Pass", "GOB Gold Basin", "GBR Gold Basin Road", "GRV  Grandview", "HRC Horse Creek", "HWY Hwy 46 La Sal", "LSP La Sal Pass", "LPJ L SAl Pass Jct", "LSS La Sal SNOTEL site", "LBB Lower Beaver Basin", "LGP Lower Geyser Pa Rd", "MER Mellenthin E Ridge", "MEM Mellenthin Meadows", "MOM Moonlight Meadows", "MEL Mt. Mellenthin", "NPE N. Peale RG", "SBM South Beaver Mesa", "UBB Upper Beaver Basin", "UD1 Upper Dark Canyon", "UDC Upper Dark Canyon 2", "WME Warner Meadows", "WFM Wet Fork Mill Cr" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
+        sensorListPane.setViewportView(sensorList);
 
-        fileToUpload.setApproveButtonText("Upload this file!");
-        fileToUpload.setFileFilter(new MyCustomFilter());
-        fileToUpload.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Sensor Locations");
+
+        newSerialButton.setText("Add Serial Number");
+        newSerialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileToUploadActionPerformed(evt);
+                newSerialButtonActionPerformed(evt);
             }
         });
+
+        editLocButton.setText("Edit Sensor Location");
+        editLocButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLocButtonActionPerformed(evt);
+            }
+        });
+
+        addLocButton.setText("Add Location");
+
+        jLabel2.setText("Sensor Serial:");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        serialListPane.setViewportView(jList1);
+
+        jLabel3.setText("Serial Numbers:");
+
+        newSerial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newSerialActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Sensor Location:");
+
+        newCode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCodeActionPerformed(evt);
+            }
+        });
+
+        newLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newLocationActionPerformed(evt);
+            }
+        });
+
+        removeSerialButton.setText("Remove Sensor");
+
+        removeLocButton.setText("Remove Location");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(335, 335, 335)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(278, 278, 278))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(157, 157, 157))))))
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(newCode, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(newLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(removeSerialButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(newSerialButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(newSerial, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(addLocButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeLocButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(serialListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(sensorListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addComponent(editLocButton)))))
+                .addContainerGap(652, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileToUpload, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(serialListPane, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(sensorListPane))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editLocButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newSerial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newSerialButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeSerialButton)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addLocButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeLocButton)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    class MyCustomFilter extends javax.swing.filechooser.FileFilter {
-
-        @Override
-        public boolean accept(File file) {
-            // Allow just directories and files with ".txt" extension...
-            return file.isDirectory() || file.getAbsolutePath().endsWith(".csv");
-        }
-
-        @Override
-        public String getDescription() {
-            // This description will be displayed in the dialog,
-            // hard-coded = ugly, should be done via I18N
-            return "Comma-separated documents (*.csv)";
-        }
-
-//        @Override
-//        public boolean accept(File file) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-
-    }
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
@@ -244,36 +329,31 @@ public class Upload extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
-    private void fileToUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileToUploadActionPerformed
-        // TODO add your handling code here:
-        if(!presentation){
-            String filePath = fileToUpload.getSelectedFile().getPath();
-             // use path instead of filename
-
-            DatabaseConnection databaseCon = new DatabaseConnection();
-
-            try {
-                CSVParser.uploadFile(databaseCon, filePath);
-                new About().setVisible(true);
-                this.setVisible(false);
-            } catch (SQLException err){
-                MessageDialogs.noConnectionError(err.getMessage());
-            } catch (Exception ex) {
-                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            MessageDialogs.UploadSuccess();
-            new SearchOutput().setVisible(true);
-            this.setVisible(false);
-        }
-    }//GEN-LAST:event_fileToUploadActionPerformed
-
     private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
         // TODO add your handling code here:
         new Sensor().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_sensorButtonActionPerformed
+
+    private void newSerialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSerialButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newSerialButtonActionPerformed
+
+    private void editLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLocButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editLocButtonActionPerformed
+
+    private void newSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSerialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newSerialActionPerformed
+
+    private void newCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newCodeActionPerformed
+
+    private void newLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newLocationActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,19 +386,33 @@ public class Upload extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Upload().setVisible(true);
+                new Home().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
-    private java.awt.Label chooseTxt;
-    private javax.swing.JFileChooser fileToUpload;
+    private javax.swing.JButton addLocButton;
+    private javax.swing.JButton editLocButton;
     private javax.swing.JButton homeButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField newCode;
+    private javax.swing.JTextField newLocation;
+    private javax.swing.JTextField newSerial;
+    private javax.swing.JButton newSerialButton;
+    private javax.swing.JButton removeLocButton;
+    private javax.swing.JButton removeSerialButton;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;
+    private javax.swing.JList<String> sensorList;
+    private javax.swing.JScrollPane sensorListPane;
+    private javax.swing.JScrollPane serialListPane;
     private javax.swing.JLabel taplogoLabel;
     private javax.swing.JLayeredPane topBanner;
     private javax.swing.JButton uploadfileButton;
