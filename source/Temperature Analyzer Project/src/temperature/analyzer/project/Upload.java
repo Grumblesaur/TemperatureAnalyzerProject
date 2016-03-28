@@ -9,6 +9,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ProgressMonitor;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
@@ -269,7 +270,9 @@ public class Upload extends javax.swing.JFrame {
             DatabaseConnection databaseCon = new DatabaseConnection();
 
             try {
+                
                 CSVParser.uploadFile(databaseCon, filePath);
+                
                 sessionData = true;
                 new About().setVisible(true);
                 this.setVisible(false);

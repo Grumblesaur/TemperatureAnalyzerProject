@@ -46,7 +46,6 @@ public class DatabaseConnection {
             rs.last();
             int id_num = rs.getRow() + 1;
             
-                     
             rs.moveToInsertRow();
             
             rs.updateInt("ID", id_num);
@@ -63,8 +62,7 @@ public class DatabaseConnection {
             SQL = "SELECT * FROM APP.Tester";
             rs = stmt.executeQuery(SQL);
                 
-        } 
-        catch (SQLException err) {
+        } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, err.getMessage());
         }
         /*
@@ -87,8 +85,7 @@ public class DatabaseConnection {
             stmt = this.con.createStatement();
             stmt.executeUpdate(SQL);
          
-        }
-        catch (SQLException err) {
+        } catch (SQLException err) {
             JOptionPane.showMessageDialog(null, err.getMessage());
         }*/
     }
