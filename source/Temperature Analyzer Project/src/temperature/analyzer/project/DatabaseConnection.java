@@ -39,7 +39,7 @@ public class DatabaseConnection {
     
     public void addData(String loc, String date, String temp){
         try {
-            String id;
+            /*String id;
             if (!rs.last()){
                 id = "1";
             }
@@ -50,9 +50,9 @@ public class DatabaseConnection {
                id = String.valueOf(curRow);
             }
        
-            
+            */
             MessageDialogs.DEBUG("Inserting", debug);
-            String SQL = "INSERT INTO APP.Tester VALUES("+ id + ", "+ loc + ", " + date + ", " + temp +")";
+            String SQL = "INSERT INTO APP.Tester VALUES("+ loc + ", " + date + ", " + temp +")";
             stmt = this.con.createStatement();
             stmt.executeUpdate(SQL);
          
