@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author rcatlett
+ * @author james
  */
 public class MessageDialogs {
     public static void uploadBox(String fileName, String titleBar)

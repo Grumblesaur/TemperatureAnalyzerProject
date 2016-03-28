@@ -4,17 +4,20 @@
  * and open the template in the editor.
  */
 package temperature.analyzer.project;
+import java.util.ArrayList;
 
 /**
  *
  * @author Quinntero
+ * @author rcatlett
+ * @author james
  */
 public class Search extends javax.swing.JFrame {
-    static boolean debug;
-    String threshold = "";
-    String elevation = "";
-    String startDate = "";
-    String endDate = "";
+    public static boolean debug = TemperatureAnalyzerProject.debug;
+    String startDay, startMonth, startYear, startMinute, startHour;
+    String endDay, endMonth, endYear, endMinute, endHour;
+    String sensorHours;
+    ArrayList<String> locations;
     
     /**
      * Creates new form to build SQL search queries
@@ -329,15 +332,15 @@ public class Search extends javax.swing.JFrame {
                                                 .addComponent(startMinuteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, 0)
                                                 .addComponent(startMinuteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(41, 41, 41)
+                                    .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(278, 278, 278)
+                                        .addComponent(submitSearch)))
+                                .addGap(48, 48, 48)
                                 .addComponent(sensorListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(374, 374, 374)
-                        .addComponent(submitSearch)))
+                        .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -355,10 +358,10 @@ public class Search extends javax.swing.JFrame {
                             .addComponent(submitPrevSearch))
                         .addComponent(prevSearchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(13, 13, 13)
+                .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(orTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(chooseTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -404,7 +407,7 @@ public class Search extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(submitSearch))
                     .addComponent(sensorListPane, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         pack();
@@ -439,17 +442,39 @@ public class Search extends javax.swing.JFrame {
         // Here, call static methods to parse filter input and combine into
         // SQL statement.
         // TODO add your handling code here:
+        
+        // Obtain values from spinner data fields as strings for concatenation
+        // in SQL statement
+        startDay = startDaySpinner.getValue().toString();
+        endDay = stopDaySpinner.getValue().toString();
+        startMonth = startMonthSpinner.getValue().toString();
+        endMonth = stopMonthSpinner.getValue().toString();
+        startYear = startYearSpinner.getValue().toString();
+        endYear = stopYearSpinner.getValue().toString();
+        startHour = startHourSpinner.getValue().toString();
+        endHour = stopHourSpinner.getValue().toString();
+        startMinute = startMinuteSpinner.getValue().toString();
+        endMinute = stopMinuteSpinner.getValue().toString();
+        
+        // Obtain threshold hours for sensor operation
+        sensorHours = (String) inputSensorHours.getValue();
+        
+        // Obtain three-character location codes
+        locations = (ArrayList<String>) sensorList.getSelectedValuesList();
+        locations = Filter.parseLocationCodes(locations);
+        
+        MessageDialogs.DEBUG(String.join(", ", locations), debug);
+        
         new SearchOutput().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed
 
     private void inputSensorHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSensorHoursActionPerformed
-        threshold = (String) inputSensorHours.getText();
-        MessageDialogs.DEBUG("Threshold = " + threshold, debug);
+        // --
     }//GEN-LAST:event_inputSensorHoursActionPerformed
 
     private void submitPrevSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPrevSearchActionPerformed
-        // TODO add your handling code here:
+        // TODO: grab previously selected search and apply a year range to it.
     }//GEN-LAST:event_submitPrevSearchActionPerformed
 
     /**
