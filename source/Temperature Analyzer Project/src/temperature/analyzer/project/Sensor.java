@@ -17,8 +17,8 @@ public class Sensor extends javax.swing.JFrame {
      */
     public Sensor () {
         initComponents();
-        if (sessionData) {
-            searchdbButton.setText("View Data");
+        if (!sessionData) {
+            viewDataButton.setVisible(false);
         }
     }
 
@@ -38,6 +38,7 @@ public class Sensor extends javax.swing.JFrame {
         aboutButton = new javax.swing.JButton();
         searchdbButton = new javax.swing.JButton();
         sensorButton = new javax.swing.JButton();
+        viewDataButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         sensorListPane = new javax.swing.JScrollPane();
@@ -94,6 +95,13 @@ public class Sensor extends javax.swing.JFrame {
             }
         });
 
+        viewDataButton.setText("View Data");
+        viewDataButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewDataButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -105,6 +113,8 @@ public class Sensor extends javax.swing.JFrame {
                 .addComponent(uploadfileButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchdbButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewDataButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sensorButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,7 +130,8 @@ public class Sensor extends javax.swing.JFrame {
                     .addComponent(uploadfileButton)
                     .addComponent(homeButton)
                     .addComponent(searchdbButton)
-                    .addComponent(sensorButton))
+                    .addComponent(sensorButton)
+                    .addComponent(viewDataButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -265,7 +276,7 @@ public class Sensor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(161, 161, 161)
                                 .addComponent(editLocButton)))))
-                .addContainerGap(652, Short.MAX_VALUE))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,6 +370,12 @@ public class Sensor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_newLocationActionPerformed
 
+    private void viewDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDataButtonActionPerformed
+        // TODO add your handling code here:
+        new SearchOutput().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_viewDataButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -420,6 +437,7 @@ public class Sensor extends javax.swing.JFrame {
     private javax.swing.JLabel taplogoLabel;
     private javax.swing.JLayeredPane topBanner;
     private javax.swing.JButton uploadfileButton;
+    private javax.swing.JButton viewDataButton;
     private javax.swing.JLabel worldmapLabel;
     // End of variables declaration//GEN-END:variables
 }

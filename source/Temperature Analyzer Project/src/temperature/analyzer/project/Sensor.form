@@ -72,7 +72,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="652" max="32767" attributes="0"/>
+              <EmptySpace pref="549" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -179,6 +179,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchdbButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="viewDataButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="sensorButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="aboutButton" min="-2" max="-2" attributes="0"/>
@@ -196,6 +198,7 @@
                           <Component id="homeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchdbButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="sensorButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="viewDataButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -241,6 +244,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sensorButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="viewDataButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View Data"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewDataButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
