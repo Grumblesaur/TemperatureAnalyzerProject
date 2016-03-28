@@ -5,6 +5,8 @@
  */
 package temperature.analyzer.project;
 
+import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+
 /**
  *
  * @author rcatlett
@@ -16,6 +18,9 @@ public class About extends javax.swing.JFrame {
      */
     public About() {
         initComponents();
+        if (sessionData){
+            searchdbButton.setText("View Data");
+        }
     }
 
     /**

@@ -5,6 +5,8 @@
  */
 package temperature.analyzer.project;
 
+import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+
 /**
  *
  * @author Quinntero
@@ -16,6 +18,9 @@ public class Home extends javax.swing.JFrame {
      */
     public Home () {
         initComponents();
+        if (sessionData) {
+            searchdbButton.setText("View Data");
+        }
     }
 
     /**

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
 /**
  *
@@ -22,6 +23,9 @@ public class Upload extends javax.swing.JFrame {
      */
     public Upload () {
         initComponents();
+        if (sessionData) {
+            searchdbButton.setText("View Data");
+        }
     }
 
     /**
@@ -254,6 +258,7 @@ public class Upload extends javax.swing.JFrame {
 
             try {
                 CSVParser.uploadFile(databaseCon, filePath);
+                sessionData = true;
                 new About().setVisible(true);
                 this.setVisible(false);
             } catch (SQLException err){
@@ -266,6 +271,7 @@ public class Upload extends javax.swing.JFrame {
             MessageDialogs.UploadSuccess();
             new SearchOutput().setVisible(true);
             this.setVisible(false);
+            sessionData = true;
         }
     }//GEN-LAST:event_fileToUploadActionPerformed
 

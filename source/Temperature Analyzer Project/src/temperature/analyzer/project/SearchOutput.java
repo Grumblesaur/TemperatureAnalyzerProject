@@ -17,6 +17,7 @@ public class SearchOutput extends javax.swing.JFrame {
      */
     public SearchOutput() {
         initComponents();
+        searchdbButton.setText("View Data");
     }
 
     /**

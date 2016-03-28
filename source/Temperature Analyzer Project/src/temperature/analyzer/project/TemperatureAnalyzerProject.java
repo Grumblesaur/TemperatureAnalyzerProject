@@ -14,6 +14,7 @@ public class TemperatureAnalyzerProject {
     // debug bool
     public static boolean debug = true;
     public static boolean presentation = false;
+    public static boolean sessionData = false;
     /**
      * @param args the command line arguments
      */
