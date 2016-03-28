@@ -20,6 +20,7 @@ public class Search extends javax.swing.JFrame {
     String startDay, startMonth, startYear, startMinute, startHour;
     String endDay, endMonth, endYear, endMinute, endHour;
     String sensorHours;
+    String query;
     ArrayList<String> locations;
     
     /**
@@ -272,9 +273,9 @@ public class Search extends javax.swing.JFrame {
 
         stopMinuteTxt.setText("Minute: ");
 
-        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         orTxt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         orTxt.setText("OR");
@@ -456,13 +457,10 @@ public class Search extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void submitSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitSearchActionPerformed
-
-        // Here, call static methods to parse filter input and combine into
-        // SQL statement.
-        // TODO add your handling code here:
+        
+        // Obtain values from spinner data fields as strings for concatenation
+        // in SQL statement
         if (!presentation) {
-            // Obtain values from spinner data fields as strings for concatenation
-            // in SQL statement
             startDay = startDaySpinner.getValue().toString();
             endDay = stopDaySpinner.getValue().toString();
             startMonth = startMonthSpinner.getValue().toString();
@@ -474,6 +472,16 @@ public class Search extends javax.swing.JFrame {
             startMinute = startMinuteSpinner.getValue().toString();
             endMinute = stopMinuteSpinner.getValue().toString();
 
+            SimpleDate startDate, endDate;
+            startDate = new SimpleDate(startDay, startMonth, startYear,
+                startHour, startMinute);
+            endDate = new SimpleDate(endDay, endMonth, endYear, endHour, endMinute);
+
+            if (startDate.compareTo(endDate) == 1) {
+                MessageDialogs.InputError("Starting date occurs after ending date!");
+                return;
+            }
+
             // Obtain threshold hours for sensor operation
             sensorHours = (String) inputSensorHours.getValue();
 
@@ -482,8 +490,11 @@ public class Search extends javax.swing.JFrame {
             locations = Filter.parseLocationCodes(locations);
 
             MessageDialogs.DEBUG(String.join(", ", locations), debug);
+
+            query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,
+                    startYear, endYear, startHour, endHour, startMinute, endMinute,
+                    locations, sensorHours);
         }
-        
         new SearchOutput().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed

@@ -14,14 +14,12 @@ import javax.swing.JOptionPane;
  * @author james
  */
 public class MessageDialogs {
-    public static void uploadBox(String fileName, String titleBar)
-    {
+    public static void uploadBox(String fileName, String titleBar) {
         String message = "Uploading " + fileName;
         JOptionPane.showMessageDialog(null, message, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public static void noConnectionError(String error)
-    {
+    public static void noConnectionError(String error) {
         String message =  error;
         JOptionPane.showMessageDialog(null, message, "Database Error", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -47,5 +45,8 @@ public class MessageDialogs {
     public static void UploadSuccess() {
         JOptionPane.showMessageDialog(null, "Upload Successful");
     }
-   
+    
+    public static void InputError(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Input Error", JOptionPane.INFORMATION_MESSAGE);
+    }
 }
