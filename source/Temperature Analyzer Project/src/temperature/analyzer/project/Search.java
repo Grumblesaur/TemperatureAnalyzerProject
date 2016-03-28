@@ -5,6 +5,9 @@
  */
 package temperature.analyzer.project;
 import java.util.ArrayList;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
+
+import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
 /**
  *
@@ -25,6 +28,10 @@ public class Search extends javax.swing.JFrame {
      */
     public Search() {
         initComponents();
+        if (sessionData) {
+            searchdbButton.setText("View Data");
+        }
+        
     }
 
     /**
@@ -453,40 +460,41 @@ public class Search extends javax.swing.JFrame {
         
         // Obtain values from spinner data fields as strings for concatenation
         // in SQL statement
-        startDay = startDaySpinner.getValue().toString();
-        endDay = stopDaySpinner.getValue().toString();
-        startMonth = startMonthSpinner.getValue().toString();
-        endMonth = stopMonthSpinner.getValue().toString();
-        startYear = startYearSpinner.getValue().toString();
-        endYear = stopYearSpinner.getValue().toString();
-        startHour = startHourSpinner.getValue().toString();
-        endHour = stopHourSpinner.getValue().toString();
-        startMinute = startMinuteSpinner.getValue().toString();
-        endMinute = stopMinuteSpinner.getValue().toString();
-        
-        SimpleDate startDate, endDate;
-        startDate = new SimpleDate(startDay, startMonth, startYear,
-            startHour, startMinute);
-        endDate = new SimpleDate(endDay, endMonth, endYear, endHour, endMinute);
-        
-        if (startDate.compareTo(endDate) == 1) {
-            MessageDialogs.InputError("Starting date occurs after ending date!");
-            return;
+        if (!presentation) {
+            startDay = startDaySpinner.getValue().toString();
+            endDay = stopDaySpinner.getValue().toString();
+            startMonth = startMonthSpinner.getValue().toString();
+            endMonth = stopMonthSpinner.getValue().toString();
+            startYear = startYearSpinner.getValue().toString();
+            endYear = stopYearSpinner.getValue().toString();
+            startHour = startHourSpinner.getValue().toString();
+            endHour = stopHourSpinner.getValue().toString();
+            startMinute = startMinuteSpinner.getValue().toString();
+            endMinute = stopMinuteSpinner.getValue().toString();
+
+            SimpleDate startDate, endDate;
+            startDate = new SimpleDate(startDay, startMonth, startYear,
+                startHour, startMinute);
+            endDate = new SimpleDate(endDay, endMonth, endYear, endHour, endMinute);
+
+            if (startDate.compareTo(endDate) == 1) {
+                MessageDialogs.InputError("Starting date occurs after ending date!");
+                return;
+            }
+
+            // Obtain threshold hours for sensor operation
+            sensorHours = (String) inputSensorHours.getValue();
+
+            // Obtain three-character location codes
+            locations = (ArrayList<String>) sensorList.getSelectedValuesList();
+            locations = Filter.parseLocationCodes(locations);
+
+            MessageDialogs.DEBUG(String.join(", ", locations), debug);
+
+            query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,
+                    startYear, endYear, startHour, endHour, startMinute, endMinute,
+                    locations, sensorHours);
         }
-        
-        // Obtain threshold hours for sensor operation
-        sensorHours = (String) inputSensorHours.getValue();
-        
-        // Obtain three-character location codes
-        locations = (ArrayList<String>) sensorList.getSelectedValuesList();
-        locations = Filter.parseLocationCodes(locations);
-        
-        MessageDialogs.DEBUG(String.join(", ", locations), debug);
-        
-        query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,
-                startYear, endYear, startHour, endHour, startMinute, endMinute,
-                locations, sensorHours);
-        
         new SearchOutput().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_submitSearchActionPerformed
@@ -501,8 +509,11 @@ public class Search extends javax.swing.JFrame {
 
     private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
         // TODO add your handling code here:
+        sessionData = true;
+        
         new Sensor().setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_sensorButtonActionPerformed
 
     /**

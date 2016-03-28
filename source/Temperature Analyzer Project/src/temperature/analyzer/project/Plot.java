@@ -6,6 +6,7 @@
 package temperature.analyzer.project;
 
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Plot extends javax.swing.JFrame {
      */
     public Plot() {
         initComponents();
+        if (sessionData) {
+            searchdbButton.setText("View Data");
+        }
         graphedCalc.setVisible(false);
     }
 
