@@ -193,7 +193,7 @@ public class Search extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -284,7 +284,7 @@ public class Search extends javax.swing.JFrame {
         orTxt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         orTxt.setText("OR");
 
-        sensorHoursSpinner.setModel(new javax.swing.SpinnerNumberModel(2000, 500, null, 500));
+        sensorHoursSpinner.setModel(new javax.swing.SpinnerNumberModel(2000, 500, null, 100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -14,7 +14,8 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionDat
 
 /**
  *
- * @author Quinntero and rcatlett
+ * @author Quinntero
+ * @author rcatlett
  */
 public class Upload extends javax.swing.JFrame {
 
