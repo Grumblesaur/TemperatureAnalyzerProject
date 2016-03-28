@@ -279,10 +279,10 @@ public class Upload extends javax.swing.JFrame {
             }
         }
         else {
+            sessionData = true;
             MessageDialogs.UploadSuccess();
             new SearchOutput().setVisible(true);
             this.setVisible(false);
-            sessionData = true;
         }
     }//GEN-LAST:event_fileToUploadActionPerformed
 
