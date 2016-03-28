@@ -42,6 +42,7 @@ public class Search extends javax.swing.JFrame {
         uploadfileButton = new javax.swing.JButton();
         aboutButton = new javax.swing.JButton();
         searchdbButton = new javax.swing.JButton();
+        sensorButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         sensorTxt = new java.awt.Label();
@@ -49,8 +50,8 @@ public class Search extends javax.swing.JFrame {
         inputSensorHours = new javax.swing.JFormattedTextField();
         sensorListPane = new javax.swing.JScrollPane();
         sensorList = new javax.swing.JList<>();
-        chooseSensorTxt = new java.awt.Label();
         submitSearch = new javax.swing.JButton();
+        chooseSensorTxt = new java.awt.Label();
         startDayTxt = new java.awt.Label();
         startMonthTxt = new java.awt.Label();
         startYearTxt = new java.awt.Label();
@@ -107,6 +108,13 @@ public class Search extends javax.swing.JFrame {
             }
         });
 
+        sensorButton.setText("Edit Sensors");
+        sensorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sensorButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -119,6 +127,8 @@ public class Search extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchdbButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sensorButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aboutButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -130,7 +140,8 @@ public class Search extends javax.swing.JFrame {
                     .addComponent(aboutButton)
                     .addComponent(uploadfileButton)
                     .addComponent(homeButton)
-                    .addComponent(searchdbButton))
+                    .addComponent(searchdbButton)
+                    .addComponent(sensorButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -164,7 +175,7 @@ public class Search extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -193,14 +204,14 @@ public class Search extends javax.swing.JFrame {
         sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
         sensorListPane.setViewportView(sensorList);
 
-        chooseSensorTxt.setText("Select Sensor(s): ");
-
         submitSearch.setText("Submit This Search");
         submitSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitSearchActionPerformed(evt);
             }
         });
+
+        chooseSensorTxt.setText("Select Sensor(s): ");
 
         startDayTxt.setText("Start Day: ");
 
@@ -255,9 +266,9 @@ public class Search extends javax.swing.JFrame {
 
         stopMinuteTxt.setText("Minute: ");
 
-        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         orTxt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         orTxt.setText("OR");
@@ -342,7 +353,7 @@ public class Search extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,6 +499,12 @@ public class Search extends javax.swing.JFrame {
         // TODO: grab previously selected search and apply a year range to it.
     }//GEN-LAST:event_submitPrevSearchActionPerformed
 
+    private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
+        // TODO add your handling code here:
+        new Sensor().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_sensorButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -538,6 +555,7 @@ public class Search extends javax.swing.JFrame {
     private javax.swing.JList<String> prevSearchList;
     private javax.swing.JScrollPane prevSearchPanel;
     private javax.swing.JButton searchdbButton;
+    private javax.swing.JButton sensorButton;
     private javax.swing.JList<String> sensorList;
     private javax.swing.JScrollPane sensorListPane;
     private java.awt.Label sensorTxt;

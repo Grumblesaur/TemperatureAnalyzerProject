@@ -38,6 +38,7 @@ public class Plot extends javax.swing.JFrame {
         uploadfileButton = new javax.swing.JButton();
         aboutButton = new javax.swing.JButton();
         searchdbButton = new javax.swing.JButton();
+        sensorButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
@@ -82,6 +83,13 @@ public class Plot extends javax.swing.JFrame {
             }
         });
 
+        sensorButton.setText("Edit Sensors");
+        sensorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sensorButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -94,6 +102,8 @@ public class Plot extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchdbButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sensorButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aboutButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -105,7 +115,8 @@ public class Plot extends javax.swing.JFrame {
                     .addComponent(aboutButton)
                     .addComponent(uploadfileButton)
                     .addComponent(homeButton)
-                    .addComponent(searchdbButton))
+                    .addComponent(searchdbButton)
+                    .addComponent(sensorButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -315,6 +326,12 @@ public class Plot extends javax.swing.JFrame {
         graphedCalc.setVisible(true);
     }//GEN-LAST:event_graphButtonActionPerformed
 
+    private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
+        // TODO add your handling code here:
+        new Sensor().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_sensorButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -366,6 +383,7 @@ public class Plot extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JRadioButton monthTime;
     private javax.swing.JButton searchdbButton;
+    private javax.swing.JButton sensorButton;
     private javax.swing.JLabel taplogoLabel;
     private javax.swing.ButtonGroup timeType;
     private javax.swing.JLayeredPane topBanner;
