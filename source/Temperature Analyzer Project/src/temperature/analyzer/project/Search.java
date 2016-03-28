@@ -265,9 +265,9 @@ public class Search extends javax.swing.JFrame {
 
         stopMinuteTxt.setText("Minute: ");
 
-        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        startMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
+        stopMinuteSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         orTxt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         orTxt.setText("OR");
