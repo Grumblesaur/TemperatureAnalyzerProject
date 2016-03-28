@@ -486,7 +486,7 @@ public class Search extends javax.swing.JFrame {
             }
 
             // Obtain threshold hours for sensor operation
-            //sensorHours = (String) inputSensorHours.getValue();    //James I commented this out - Kris
+            sensorHours = (String) sensorHoursSpinner.getValue();
 
             // Obtain three-character location codes
             locations = (ArrayList<String>) sensorList.getSelectedValuesList();
