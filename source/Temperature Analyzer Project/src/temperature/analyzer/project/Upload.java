@@ -219,7 +219,7 @@ public class Upload extends javax.swing.JFrame {
 
         @Override
         public boolean accept(File file) {
-            // Allow just directories and files with ".txt" extension...
+            // Allow just directories and files with ".csv" extension...
             return file.isDirectory() || file.getAbsolutePath().endsWith(".csv");
         }
 

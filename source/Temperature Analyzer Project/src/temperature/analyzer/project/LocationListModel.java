@@ -8,33 +8,66 @@ package temperature.analyzer.project;
 
 import javax.swing.event.ListDataListener;
 import javax.swing.ListModel;
+import java.util.ArrayList;
 
-/**
+/** Implement ListModel for use in Search module's rendering of location list.
  *
  * @author james
  */
 public class LocationListModel implements ListModel<String> {
+    private final ArrayList<ListDataListener> listeners;
+    private String[] locations;
+    
+    public LocationListModel() {
+        this.locations = null;
+        this.listeners = new ArrayList<>();
+    }
+    
+    public LocationListModel(String[] locations) {
+        this.locations = locations;
+        this.listeners = new ArrayList<>();
+    }
+    
+    public LocationListModel(ArrayList<String> locations) {
+        String[] temp = new String[locations.size()];
+        // Use for-loop because casting locations.toArray() to type String[]
+        // causes a runtime exception since Java's type rules are STUPID
+        for (int i = 0; i < locations.size(); i++) {
+            temp[i] = locations.get(i);
+        }
+        this.locations = temp;
+        this.listeners = new ArrayList<>();
+    }
+    
+    public void setLocationArray(String[] locations) {
+        this.locations = locations;
+    }
+    
+    public boolean isNull() {
+        return locations == null;
+    }
+    
+    public boolean isEmpty() {
+        return locations.length == 0;
+    }
+    
     @Override
     public void addListDataListener(ListDataListener l) {
-        // TODO
-        return;
+        listeners.add(l);
     }
     
     @Override
     public String getElementAt(int index) {
-        // TODO
-        return "";
+        return locations[index];
     }
     
     @Override
     public int getSize() {
-        // TODO
-        return 0;
+        return locations.length;
     }
     
     @Override
     public void removeListDataListener(ListDataListener l) {
-        // TODO
-        return;
+        listeners.remove(l);
     }
 }

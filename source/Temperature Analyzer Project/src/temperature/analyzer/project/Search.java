@@ -9,9 +9,11 @@ import java.util.Scanner;
 import java.io.FileReader;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
+import temperature.analyzer.project.LocationListModel;
 
 import java.io.FileNotFoundException;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
+
 
 /**
  *
@@ -27,6 +29,7 @@ public class Search extends javax.swing.JFrame {
     String query;
     ArrayList<String> locations;
     String[] locationArray = null;
+    LocationListModel llm = null;
     
     /**
      * Creates new form to build SQL search queries
@@ -35,10 +38,11 @@ public class Search extends javax.swing.JFrame {
         /* Get locations from stored file. */
         try {
             locations = getLocations();
-            locationArray = (String[]) locations.toArray();
         } catch (Exception e) {
             MessageDialogs.InternalError("No locations stored!");
         }
+        llm = new LocationListModel(locations);
+        
         initComponents();
         if (!sessionData) {
             viewDataButton.setVisible(false);
@@ -64,7 +68,7 @@ public class Search extends javax.swing.JFrame {
         while (fileIn.hasNextLine()) {
             locs.add(fileIn.nextLine());
         }
-        
+        fileIn.close();
         return locs;
     }
     
@@ -241,11 +245,7 @@ public class Search extends javax.swing.JFrame {
 
         chooseTxt.setText("Choose a range of dates and times to select information from the database: ");
 
-        sensorList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "BMS Bald Mesa", "BBR Beaver Ba Rd Camp", "BOR Boren Mesa", "BRR Brumley Ridge", "BPA Burro Pass", "BPT Burro Pass Trail", "CCR Chicken Creek", "CKL Clark Lake", "DIN Dinosaur Tracks", "DFM Dry Fork Mill Cr", "EDC E. Dark Canyon", "EMP E. Mt. Peale", "GEP Geyser Pass", "GOB Gold Basin", "GBR Gold Basin Road", "GRV  Grandview", "HRC Horse Creek", "HWY Hwy 46 La Sal", "LSP La Sal Pass", "LPJ L SAl Pass Jct", "LSS La Sal SNOTEL site", "LBB Lower Beaver Basin", "LGP Lower Geyser Pa Rd", "MER Mellenthin E Ridge", "MEM Mellenthin Meadows", "MOM Moonlight Meadows", "MEL Mt. Mellenthin", "NPE N. Peale RG", "SBM South Beaver Mesa", "UBB Upper Beaver Basin", "UD1 Upper Dark Canyon", "UDC Upper Dark Canyon 2", "WME Warner Meadows", "WFM Wet Fork Mill Cr" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        sensorList.setModel(llm);
         sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
         sensorListPane.setViewportView(sensorList);
 

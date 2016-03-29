@@ -17,8 +17,9 @@ public class TemperatureAnalyzerProject {
     public static boolean debug = true;
     public static boolean presentation = false;
     public static boolean sessionData = false;
-    public static String locationFile = "locs.txt";
-    public static String previousQueries = "history.txt";
+    
+    public static String locationFile = "src/temperature/analyzer/project/persistent/locations.txt";
+    public static String previousQueries = "src/temperature/analyzer/project/persistent/history.txt";
     
     public static ResultSet dataForSession;
     /**
@@ -26,6 +27,7 @@ public class TemperatureAnalyzerProject {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         new Home().setVisible(true);
         
     }
