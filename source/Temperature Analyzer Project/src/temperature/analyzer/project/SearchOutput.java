@@ -5,6 +5,9 @@
  */
 package temperature.analyzer.project;
 
+import java.sql.ResultSetMetaData;
+import javax.swing.JTable;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
 /**
@@ -22,6 +25,37 @@ public class SearchOutput extends javax.swing.JFrame {
         if (!sessionData){
             viewDataButton.setVisible(false);
         }
+        resultTable.setVisible(false);
+        setTable();
+        
+    }
+    
+    private void setTable() {
+        Object[][] data = null;
+        String[] colNames = null;
+        
+        // Copied/Modified from http://stackoverflow.com/questions/930745/how-do-i-display-a-java-resultset-visually
+        try {
+            ResultSetMetaData meta = dataForSession.getMetaData();
+            colNames = new String[meta.getColumnCount()];
+            for (int i = 0; i < colNames.length; i++) {
+                colNames[i] = meta.getColumnLabel(i+1);
+            }
+            data = new Object[0][colNames.length];
+            int row = 0;
+            while(dataForSession.next()) {
+                for (int i = 0; i < colNames.length; i++) {
+                    data[row][i] = dataForSession.getObject(i+1);
+                }
+                row++;
+            }
+            
+        } catch (Exception err) {
+            MessageDialogs.tableError(err.getMessage());
+        } 
+        
+        resultTable = new JTable(data, colNames);
+        resultTable.setVisible(true); 
     }
 
     /**
@@ -44,7 +78,7 @@ public class SearchOutput extends javax.swing.JFrame {
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        resultTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         plotButton = new javax.swing.JButton();
         newSearchButton = new javax.swing.JButton();
@@ -132,8 +166,8 @@ public class SearchOutput extends javax.swing.JFrame {
 
         worldmapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/world_map.png"))); // NOI18N
 
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        resultTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -166,7 +200,7 @@ public class SearchOutput extends javax.swing.JFrame {
                 "Date", "Sensor", "Location", "GPS Coordinates", "Elevation", "Aspect"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(resultTable);
 
         jLabel1.setText("<html><u><b>Filter</u></b><p>Date Interval:   startDateSpin - endDateSpin</p><p>Sensors:</p>");
 
@@ -268,7 +302,7 @@ public class SearchOutput extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         new Home().setVisible(true);
@@ -372,10 +406,10 @@ public class SearchOutput extends javax.swing.JFrame {
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton newSearchButton;
     private javax.swing.JButton plotButton;
+    private javax.swing.JTable resultTable;
     private java.awt.Scrollbar scrollbar1;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;

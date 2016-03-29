@@ -53,4 +53,8 @@ public class MessageDialogs {
     public static void InternalError(String msg) {
         JOptionPane.showMessageDialog(null, msg, "Internal Error", JOptionPane.INFORMATION_MESSAGE);
     }
+    public static void  tableError(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Table Creaton Error", JOptionPane.INFORMATION_MESSAGE);
+
+    }
 }

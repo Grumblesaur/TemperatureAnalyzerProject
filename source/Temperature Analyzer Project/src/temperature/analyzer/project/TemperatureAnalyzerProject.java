@@ -5,6 +5,8 @@
  */
 package temperature.analyzer.project;
 
+import java.sql.ResultSet;
+
 /*
  *
  * @author Quinntero
@@ -18,12 +20,14 @@ public class TemperatureAnalyzerProject {
     public static String locationFile = "locs.txt";
     public static String previousQueries = "history.txt";
     
+    public static ResultSet dataForSession;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         new Home().setVisible(true);
+        
     }
     
 }

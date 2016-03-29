@@ -47,11 +47,50 @@ public class Filter {
     public static String createDataQuery(String sd, String ed, String sm,
         String em, String sy, String ey, String sh, String eh, String smin,
         String emin, ArrayList<String> locations, String threshold) {
-        String query = "";
+        // Beginning of every query (for tester)
         
-        // TODO: requisite concatenations
+        //TODO: filter locations over thresholds
+        //ArrayList<String> limitedLocation;
+        //limiedLocation = DatabaseConnection.filterLocs(sy, ey, locations, threshold);
+        
+        String query = "SELECT * FROM APP.Tester WHERE ";
+        
+        // Creating date strings
+        String startDate = createDate(sd, sm, sy, sh, smin);
+        String endDate = createDate(ed, em, ey, eh, emin);
+        query = query + "DATE BETWEEN " + startDate + " AND " + endDate;
+        
+        // will return "", "LOCATION = x", or "LOCATION IN (x,y,z)"
+        String locString = createLocation(locations);
+        if (locString.length() > 0) {
+            query = query + " AND "+ locString;
+        }
+        
+        query = query + ";";
         
         return query;
     }
-
+    
+    //getting dates together as string
+    public static String createDate (String day, String month, String year, String hour, String min) {
+        String q = month + "/" + day + "/" + year + " " + hour + ":" + min;
+        return q;
+    }
+    
+    // Piecing together the location list for the query
+    public static String createLocation (ArrayList<String> locs) {
+        String q = "";
+        int size = locs.size();
+        if (size != 0) {
+            q = q + "LOCATION ";
+            if (size == 1) {
+                q = q + "= " + locs.get(0);
+            }
+            else {
+                q = q + "IN ( " + String.join(", ", locs) + ")";
+            }
+        }
+        
+        return q;
+    }
 }

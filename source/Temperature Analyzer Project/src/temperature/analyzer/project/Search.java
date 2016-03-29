@@ -11,6 +11,7 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.presentati
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
 import java.io.FileNotFoundException;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 
 /**
  *
@@ -533,7 +534,14 @@ public class Search extends javax.swing.JFrame {
                     startYear, endYear, startHour, endHour, startMinute, endMinute,
                     locations, sensorHours);
             
+
             // TODO: execute SQL query and obtain returnset
+
+            DatabaseConnection databaseCon = new DatabaseConnection();
+            databaseCon.searchData(query, sensorHours);
+            dataForSession = databaseCon.rs;
+            
+
         }
         sessionData = true;
         new SearchOutput().setVisible(true);
