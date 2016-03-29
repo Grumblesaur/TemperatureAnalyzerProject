@@ -10,9 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-
-import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 /**
  *
@@ -63,30 +60,23 @@ public class DatabaseConnection {
             rs = stmt.executeQuery(SQL);
                 
         } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, err.getMessage());
+            MessageDialogs.noConnectionError(err.getMessage());
         }
-        /*
-        
-        try {
-            String id;
-            if (!rs.last()){
-                id = "1";
-            }
-            else {
-               rs.last();
-               id = rs.getString("ID"); 
-               curRow = Integer.parseInt(id) + 1;
-               id = String.valueOf(curRow);
-            }
-       
-            
-            MessageDialogs.DEBUG("Inserting", debug);
-            String SQL = "INSERT INTO APP.Tester VALUES("+ loc + ", " + date + ", " + temp +")";
-            stmt = this.con.createStatement();
-            stmt.executeUpdate(SQL);
-         
-        } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, err.getMessage());
-        }*/
     }
+    
+    public void searchData (String query, String threshold) {
+       
+        try {
+            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery(query);
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+    }
+   
+    
+    // only select locations who have more than threshold hours lpgged a year
+    /*public ArrayList<String> filterLocs (String starty, String endy, ArrayList<String> locs, String threshold) {
+        TO DO
+    }*/
 }

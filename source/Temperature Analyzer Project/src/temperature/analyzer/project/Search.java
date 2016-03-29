@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 
 /**
  *
@@ -498,6 +499,11 @@ public class Search extends javax.swing.JFrame {
             query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,
                     startYear, endYear, startHour, endHour, startMinute, endMinute,
                     locations, sensorHours);
+            
+            DatabaseConnection databaseCon = new DatabaseConnection();
+            databaseCon.searchData(query, sensorHours);
+            dataForSession = databaseCon.rs;
+            
         }
         sessionData = true;
         new SearchOutput().setVisible(true);

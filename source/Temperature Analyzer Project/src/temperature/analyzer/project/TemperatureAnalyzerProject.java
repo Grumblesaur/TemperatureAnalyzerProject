@@ -5,6 +5,8 @@
  */
 package temperature.analyzer.project;
 
+import java.sql.ResultSet;
+
 /*
  *
  * @author Quinntero
@@ -15,12 +17,14 @@ public class TemperatureAnalyzerProject {
     public static boolean debug = true;
     public static boolean presentation = false;
     public static boolean sessionData = false;
+    public static ResultSet dataForSession;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         new Home().setVisible(true);
+        
     }
     
 }

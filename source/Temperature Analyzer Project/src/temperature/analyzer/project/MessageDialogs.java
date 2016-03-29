@@ -49,4 +49,9 @@ public class MessageDialogs {
     public static void InputError(String msg) {
         JOptionPane.showMessageDialog(null, msg, "Input Error", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public static void  tableError (String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Table Creaton Error", JOptionPane.INFORMATION_MESSAGE);
+
+    }
 }
