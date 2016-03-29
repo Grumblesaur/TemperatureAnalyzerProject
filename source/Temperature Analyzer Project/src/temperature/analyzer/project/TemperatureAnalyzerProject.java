@@ -15,6 +15,9 @@ public class TemperatureAnalyzerProject {
     public static boolean debug = true;
     public static boolean presentation = false;
     public static boolean sessionData = false;
+    public static String locationFile = "locs.txt";
+    public static String previousQueries = "history.txt";
+    
     /**
      * @param args the command line arguments
      */

@@ -16,7 +16,7 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 /**
  *
- * @author ruth
+ * @author rcatlett
  */
 public class DatabaseConnection {
     Connection con;

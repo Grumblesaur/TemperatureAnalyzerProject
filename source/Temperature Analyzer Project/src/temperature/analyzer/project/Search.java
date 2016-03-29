@@ -5,9 +5,12 @@
  */
 package temperature.analyzer.project;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileReader;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
-
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -22,18 +25,48 @@ public class Search extends javax.swing.JFrame {
     String sensorHours;
     String query;
     ArrayList<String> locations;
+    String[] locationArray = null;
     
     /**
      * Creates new form to build SQL search queries
      */
     public Search() {
+        /* Get locations from stored file. */
+        try {
+            locations = getLocations();
+            locationArray = (String[]) locations.toArray();
+        } catch (Exception e) {
+            MessageDialogs.InternalError("No locations stored!");
+        }
         initComponents();
         if (!sessionData) {
             viewDataButton.setVisible(false);
         }
-        
-    }
 
+    }
+    
+    /** Method to obtain location names stored in a file.
+     * 
+     * @return An ArrayList populated with location names.
+     */
+    private ArrayList<String> getLocations() throws FileNotFoundException {
+        ArrayList<String> locs = new ArrayList<String>();
+        Scanner fileIn = null;
+        try {
+            fileIn = new Scanner(
+                new FileReader(TemperatureAnalyzerProject.locationFile));
+        } catch (FileNotFoundException e) {
+            MessageDialogs.InternalError(e.getMessage());
+            throw e;
+        }
+        
+        while (fileIn.hasNextLine()) {
+            locs.add(fileIn.nextLine());
+        }
+        
+        return locs;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -475,11 +508,11 @@ public class Search extends javax.swing.JFrame {
             startMinute = startMinuteSpinner.getValue().toString();
             endMinute = stopMinuteSpinner.getValue().toString();
 
+            // Ensure that start date occurs before or is equal to end date
             SimpleDate startDate, endDate;
             startDate = new SimpleDate(startDay, startMonth, startYear,
                 startHour, startMinute);
             endDate = new SimpleDate(endDay, endMonth, endYear, endHour, endMinute);
-
             if (startDate.compareTo(endDate) == 1) {
                 MessageDialogs.InputError("Starting date occurs after ending date!");
                 return;
@@ -494,10 +527,13 @@ public class Search extends javax.swing.JFrame {
             locations = Filter.parseLocationCodes(locations);
 
             MessageDialogs.DEBUG(String.join(", ", locations), debug);
-
+            
+            // Create SQL query
             query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,
                     startYear, endYear, startHour, endHour, startMinute, endMinute,
                     locations, sensorHours);
+            
+            // TODO: execute SQL query and obtain returnset
         }
         sessionData = true;
         new SearchOutput().setVisible(true);
