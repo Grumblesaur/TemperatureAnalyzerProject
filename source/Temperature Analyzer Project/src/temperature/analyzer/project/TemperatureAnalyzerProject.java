@@ -23,6 +23,12 @@ public class TemperatureAnalyzerProject {
     public static String serialNumbers = "src/temperature/analyzer/project/persistent/history.txt";
     
     public static ResultSet dataForSession;
+
+    /**
+     *
+     */
+    public static DatabaseConnection databaseCon = new DatabaseConnection();
+    
     /**
      * @param args the command line arguments
      */
