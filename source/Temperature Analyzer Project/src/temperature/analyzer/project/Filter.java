@@ -58,15 +58,15 @@ public class Filter {
         // Creating date strings
         String startDate = createDate(sd, sm, sy, sh, smin);
         String endDate = createDate(ed, em, ey, eh, emin);
-        query = query + "DATE BETWEEN " + startDate + " AND " + endDate;
+        //query = query + "DATE BETWEEN " + startDate + " AND " + endDate;
         
         // will return "", "LOCATION = x", or "LOCATION IN (x,y,z)"
         String locString = createLocation(locations);
         if (locString.length() > 0) {
-            query = query + " AND "+ locString;
+            //query = query + " AND "+ locString;
+            query = query + locString;
         }
-        
-        query = query + ";";
+       
         
         return query;
     }
@@ -84,10 +84,10 @@ public class Filter {
         if (size != 0) {
             q = q + "LOCATION ";
             if (size == 1) {
-                q = q + "= " + locs.get(0);
+                q = q + "= '" + locs.get(0) + "'";
             }
             else {
-                q = q + "IN ( " + String.join(", ", locs) + ")";
+                q = q + "IN ( '" + String.join("', '", locs) + "')";
             }
         }
         
