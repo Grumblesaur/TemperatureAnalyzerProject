@@ -14,8 +14,11 @@ package temperature.analyzer.project;
 /* Imports */
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import static temperature.analyzer.project.Search.debug;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 
 public class Filter {
     /** Transforms locations into their three-letter codes.
@@ -102,27 +105,46 @@ public class Filter {
     }
     
     
-    /** Method to obtain location names stored in a file.
+    /** Method to obtain location names stored in a database table.
      * 
      * @return An ArrayList populated with location names.
-     * @throws java.io.FileNotFoundException
      */
-    public static ArrayList<String> getLocations() throws FileNotFoundException {
+    public static ArrayList<String> getLocations() {
         ArrayList<String> locs = new ArrayList<>();
-        Scanner fileIn = null;
+        // From database
         try {
-            fileIn = new Scanner(
-                new FileReader(TemperatureAnalyzerProject.locationFile));
-        } catch (FileNotFoundException e) {
-            MessageDialogs.InternalError(e.getMessage());
-            throw e;
+            databaseCon.searchData(databaseCon, "SELECT * FROM APP.LOCATION","");
+            String locationInfo;
+            while(databaseCon.rs.next()) {
+                locationInfo = databaseCon.rs.getString(1) + " " + databaseCon.rs.getString(2);
+                MessageDialogs.DEBUG(locationInfo, debug);
+                locs.add(locationInfo);
+            }
+        } catch (SQLException err) {
+            MessageDialogs.readDatabase(err.getMessage());
         }
-        
-        while (fileIn.hasNextLine()) {
-            locs.add(fileIn.nextLine());
-        }
-        fileIn.close();
         return locs;
+    }
+    
+    /** Method to obtain location names stored in a database table.
+     * 
+     * @return An ArrayList populated with location names.
+     */
+    public static ArrayList<Integer> getSensors() {
+        ArrayList<Integer> sensors = new ArrayList<>();
+        // From database
+        try {
+            databaseCon.searchData(databaseCon, "SELECT * FROM APP.SENSOR","");
+            Integer serial;
+            while(databaseCon.rs.next()) {
+                serial = databaseCon.rs.getInt(1);
+                MessageDialogs.DEBUG(serial.toString(), debug);
+                sensors.add(serial);
+            }
+        } catch (SQLException err) {
+            MessageDialogs.readDatabase(err.getMessage());
+        }
+        return sensors;
     }
     
 }

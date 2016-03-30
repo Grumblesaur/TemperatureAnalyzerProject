@@ -17,7 +17,10 @@ public class Sensor extends javax.swing.JFrame {
 
     ArrayList<String> locations;
     ArrayList<String> codes;
+    ArrayList<Integer> sensors;
     LocationListModel llm;
+    SensorListModel slm;
+    
     String locCode;
     String locName;
     
@@ -25,11 +28,7 @@ public class Sensor extends javax.swing.JFrame {
      * Creates new form Home
      */
     public Sensor () {
-        try {
-            locations = Filter.getLocations();
-        } catch (FileNotFoundException e) {
-            MessageDialogs.InternalError("Locations file not found!");
-        }
+        locations = Filter.getLocations();
         
         // store three-letter codes separately
         codes = new ArrayList<>();
@@ -39,6 +38,9 @@ public class Sensor extends javax.swing.JFrame {
         
         locCode = locName = "";
         llm = new LocationListModel(locations);
+        
+        sensors = Filter.getSensors();
+        slm = new SensorListModel(sensors);
         
         initComponents();
         if (!sessionData) {
@@ -74,7 +76,7 @@ public class Sensor extends javax.swing.JFrame {
         addLocButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         serialListPane = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        serialList = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         newSerial = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -190,7 +192,7 @@ public class Sensor extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -229,12 +231,9 @@ public class Sensor extends javax.swing.JFrame {
 
         jLabel2.setText("Sensor Serial:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        serialListPane.setViewportView(jList1);
+        serialList.setModel(slm);
+        serialList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple serial numbers.\n</html");
+        serialListPane.setViewportView(serialList);
 
         jLabel3.setText("Serial Numbers:");
 
@@ -478,7 +477,6 @@ public class Sensor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField newCode;
     private javax.swing.JTextField newLocation;
@@ -490,6 +488,7 @@ public class Sensor extends javax.swing.JFrame {
     private javax.swing.JButton sensorButton;
     private javax.swing.JList<String> sensorList;
     private javax.swing.JScrollPane sensorListPane;
+    private javax.swing.JList<Integer> serialList;
     private javax.swing.JScrollPane serialListPane;
     private javax.swing.JLabel taplogoLabel;
     private javax.swing.JLayeredPane topBanner;

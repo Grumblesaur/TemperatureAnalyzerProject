@@ -137,6 +137,7 @@ public class CSVParser {
         databaseCon.addData(databaseCon, loc, date, temp);
     }
 
+    
     // debug print, basically
     private static void TESTOUT(String message) {
             System.out.println(message);

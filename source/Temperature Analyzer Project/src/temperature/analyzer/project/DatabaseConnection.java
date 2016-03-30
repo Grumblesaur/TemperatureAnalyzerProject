@@ -36,9 +36,9 @@ public class DatabaseConnection {
     
     public void addData(DatabaseConnection db, String loc, String date, String temp){
         try {
-            stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL = "SELECT * FROM APP.Tester";
-            db.rs = stmt.executeQuery(SQL);
+            db.rs = db.stmt.executeQuery(SQL);
             
             db.rs.last();
             int id_num = db.rs.getRow() + 1;
@@ -55,9 +55,9 @@ public class DatabaseConnection {
             db.stmt.close();
             db.rs.close();
             
-            db.stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             SQL = "SELECT * FROM APP.Tester";
-            db.rs = stmt.executeQuery(SQL);
+            db.rs = db.stmt.executeQuery(SQL);
                 
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
@@ -67,13 +67,27 @@ public class DatabaseConnection {
     public void searchData (DatabaseConnection db, String query, String threshold) {
        
         try {
-            db.stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            db.rs = stmt.executeQuery(query);
+            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.rs = db.stmt.executeQuery(query);
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
    
+    public boolean emptyTable (DatabaseConnection db, String table) {
+        boolean empty = true;
+        try {
+            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String query = "SELECT * FROM " + table;
+            db.rs = db.stmt.executeQuery(query);
+            if (db.rs.isBeforeFirst()) {    
+                empty = false;
+            }
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return empty;
+    }
     
     // only select locations who have more than threshold hours lpgged a year
     /*public ArrayList<String> filterLocs (String starty, String endy, ArrayList<String> locs, String threshold) {
