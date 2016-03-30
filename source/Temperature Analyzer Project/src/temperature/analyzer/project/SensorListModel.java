@@ -9,6 +9,7 @@ package temperature.analyzer.project;
 import javax.swing.event.ListDataListener;
 import javax.swing.ListModel;
 import java.util.ArrayList;
+import static java.util.Arrays.sort;
 
 /** Implement ListModel for use in Search module's rendering of location list.
  *
@@ -35,6 +36,7 @@ public class SensorListModel implements ListModel<Integer> {
         for (int i = 0; i < sens.size(); i++) {
             sensorList[i] = sens.get(i);
         }
+        sort(sensorList);
         this.sensors = sensorList;
         this.listeners = new ArrayList<>();
     }
