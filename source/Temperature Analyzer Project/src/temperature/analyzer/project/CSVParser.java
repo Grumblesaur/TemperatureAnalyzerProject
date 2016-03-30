@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 public class CSVParser {
@@ -27,7 +28,7 @@ public class CSVParser {
     */
    
     
-    public static void uploadFile(DatabaseConnection database, String filename)
+    public static void uploadFile(String filename)
         throws Exception {
 
             /* Inform client about input requirements, demonstrate how gnarly
@@ -72,29 +73,31 @@ public class CSVParser {
             MessageDialogs.DEBUG("Reading File", debug);
             while (line != null) {
                     line = bufr.readLine();
-                    point = line.split(",");
-                    date = point[0];
+                    if (line != null) {
+                        point = line.split(",");
+                        date = point[0];
 
-                    /* Assign NaN if no measurement was recorded at this time. */
-                    if (point.length == 2) {
-                            temp = point[1];
-                    } else {
-                            temp = "NaN";
+                        /* Assign NaN if no measurement was recorded at this time. */
+                        if (point.length == 2) {
+                                temp = point[1];
+                        } else {
+                                temp = "NaN";
+                        }
+
+                        /* we have proven that the parser can loop through the file,
+                            so we'll hide this dialogue box pop-up to avoid prompting the
+                            user 50,000+ times
+                        */
+                        //MessageDialogs.showData(location, date, temp);
+                        writeToDB(location, date, temp);
                     }
-                    
-                    /* we have proven that the parser can loop through the file,
-                        so we'll hide this dialogue box pop-up to avoid prompting the
-                        user 50,000+ times
-                    */
-                    // MessageDialogs.showData(location, date, temp);
-                    writeToDB(database, location, date, temp);
             }
             MessageDialogs.UploadSuccess();
             
     }
 
     /* Actual database communication pending. Write output to console. */
-    private static void writeToDB(DatabaseConnection database, String loc, String date, String temp) {
+    private static void writeToDB(String loc, String date, String temp) {
             /* Semi-redundant variables for parsing to ease reading. */
     //        float degrees = 0.0f;
     //        if (temp.equals("NaN")) {
@@ -131,7 +134,7 @@ public class CSVParser {
     // Test Database
         
         //MessageDialogs.DEBUG("Going to Add", debug);
-        database.addData(loc, date, temp);
+        databaseCon.addData(databaseCon, loc, date, temp);
     }
 
     // debug print, basically

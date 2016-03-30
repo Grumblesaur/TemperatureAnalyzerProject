@@ -105,9 +105,10 @@ public class Filter {
     /** Method to obtain location names stored in a file.
      * 
      * @return An ArrayList populated with location names.
+     * @throws java.io.FileNotFoundException
      */
     public static ArrayList<String> getLocations() throws FileNotFoundException {
-        ArrayList<String> locs = new ArrayList<String>();
+        ArrayList<String> locs = new ArrayList<>();
         Scanner fileIn = null;
         try {
             fileIn = new Scanner(

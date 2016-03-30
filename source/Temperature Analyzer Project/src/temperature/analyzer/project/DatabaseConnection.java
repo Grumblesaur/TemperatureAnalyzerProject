@@ -34,41 +34,41 @@ public class DatabaseConnection {
            }
     }
     
-    public void addData(String loc, String date, String temp){
+    public void addData(DatabaseConnection db, String loc, String date, String temp){
         try {
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String SQL = "SELECT * FROM APP.Tester";
-            rs = stmt.executeQuery(SQL);
+            db.rs = stmt.executeQuery(SQL);
             
-            rs.last();
-            int id_num = rs.getRow() + 1;
+            db.rs.last();
+            int id_num = db.rs.getRow() + 1;
             
-            rs.moveToInsertRow();
+            db.rs.moveToInsertRow();
             
-            rs.updateInt("ID", id_num);
-            rs.updateString("Location", loc);
-            rs.updateString("Date", date);
-            rs.updateString("Temp", temp);
+            db.rs.updateInt("ID", id_num);
+            db.rs.updateString("Location", loc);
+            db.rs.updateString("Date", date);
+            db.rs.updateString("Temp", temp);
             
-            rs.insertRow();
+            db.rs.insertRow();
             
-            stmt.close();
-            rs.close();
+            db.stmt.close();
+            db.rs.close();
             
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             SQL = "SELECT * FROM APP.Tester";
-            rs = stmt.executeQuery(SQL);
+            db.rs = stmt.executeQuery(SQL);
                 
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
     
-    public void searchData (String query, String threshold) {
+    public void searchData (DatabaseConnection db, String query, String threshold) {
        
         try {
-            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stmt.executeQuery(query);
+            db.stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.rs = stmt.executeQuery(query);
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }

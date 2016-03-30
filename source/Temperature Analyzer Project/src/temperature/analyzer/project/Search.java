@@ -517,7 +517,7 @@ public class Search extends javax.swing.JFrame {
 
             // TODO: execute SQL query and obtain returnset
 
-            databaseCon.searchData(query, sensorHours);
+            databaseCon.searchData(databaseCon, query, sensorHours);
             dataForSession = databaseCon.rs;
             
         }
@@ -528,6 +528,16 @@ public class Search extends javax.swing.JFrame {
 
     private void submitPrevSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPrevSearchActionPerformed
         // TODO: grab previously selected search and apply a year range to it.
+        /*
+            take seleceted option
+            Stirng query = this option
+            databaseCon.searchData(query, sensorHours);
+            dataForSession = databaseCon.rs;
+            sessionData = true;
+        */
+        
+        new SearchOutput().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_submitPrevSearchActionPerformed
 
     private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed

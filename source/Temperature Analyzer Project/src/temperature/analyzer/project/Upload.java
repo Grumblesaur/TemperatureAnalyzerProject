@@ -6,12 +6,15 @@
 package temperature.analyzer.project;
 
 import java.io.File;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ProgressMonitor;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 
 /**
  *
@@ -267,14 +270,15 @@ public class Upload extends javax.swing.JFrame {
             String filePath = fileToUpload.getSelectedFile().getPath();
              // use path instead of filename
 
-            DatabaseConnection databaseCon = new DatabaseConnection();
-
             try {
                 
-                CSVParser.uploadFile(databaseCon, filePath);
+                CSVParser.uploadFile(filePath);
                 
                 sessionData = true;
-                new About().setVisible(true);
+                //TODO Change to just search uploaded data
+                databaseCon.searchData(databaseCon, "SELECT * FROM APP.Tester", "1000");
+                dataForSession = databaseCon.rs;
+                new SearchOutput().setVisible(true);
                 this.setVisible(false);
             } catch (SQLException err){
                 MessageDialogs.noConnectionError(err.getMessage());
