@@ -20,6 +20,7 @@ public class TemperatureAnalyzerProject {
     
     public static String locationFile = "src/temperature/analyzer/project/persistent/locations.txt";
     public static String previousQueries = "src/temperature/analyzer/project/persistent/history.txt";
+    public static String serialNumbers = "src/temperature/analyzer/project/persistent/history.txt";
     
     public static ResultSet dataForSession;
     /**

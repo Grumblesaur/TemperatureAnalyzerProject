@@ -5,22 +5,47 @@
  */
 package temperature.analyzer.project;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 /**
  *
  * @author Quinntero
+ * @author james
  */
 public class Sensor extends javax.swing.JFrame {
 
+    ArrayList<String> locations;
+    ArrayList<String> codes;
+    LocationListModel llm;
+    String locCode;
+    String locName;
+    
     /**
      * Creates new form Home
      */
     public Sensor () {
+        try {
+            locations = Filter.getLocations();
+        } catch (FileNotFoundException e) {
+            MessageDialogs.InternalError("Locations file not found!");
+        }
+        
+        // store three-letter codes separately
+        codes = new ArrayList<>();
+        for (String loc : locations) {
+            codes.add(loc.split(" ")[0]);
+        }
+        
+        locCode = locName = "";
+        llm = new LocationListModel(locations);
+        
         initComponents();
         if (!sessionData) {
             viewDataButton.setVisible(false);
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,7 +190,7 @@ public class Sensor extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -175,11 +200,7 @@ public class Sensor extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        sensorList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "BMS Bald Mesa", "BBR Beaver Ba Rd Camp", "BOR Boren Mesa", "BRR Brumley Ridge", "BPA Burro Pass", "BPT Burro Pass Trail", "CCR Chicken Creek", "CKL Clark Lake", "DIN Dinosaur Tracks", "DFM Dry Fork Mill Cr", "EDC E. Dark Canyon", "EMP E. Mt. Peale", "GEP Geyser Pass", "GOB Gold Basin", "GBR Gold Basin Road", "GRV  Grandview", "HRC Horse Creek", "HWY Hwy 46 La Sal", "LSP La Sal Pass", "LPJ L SAl Pass Jct", "LSS La Sal SNOTEL site", "LBB Lower Beaver Basin", "LGP Lower Geyser Pa Rd", "MER Mellenthin E Ridge", "MEM Mellenthin Meadows", "MOM Moonlight Meadows", "MEL Mt. Mellenthin", "NPE N. Peale RG", "SBM South Beaver Mesa", "UBB Upper Beaver Basin", "UD1 Upper Dark Canyon", "UDC Upper Dark Canyon 2", "WME Warner Meadows", "WFM Wet Fork Mill Cr" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        sensorList.setModel(llm);
         sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
         sensorListPane.setViewportView(sensorList);
 
@@ -200,6 +221,11 @@ public class Sensor extends javax.swing.JFrame {
         });
 
         addLocButton.setText("Add Location");
+        addLocButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLocButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Sensor Serial:");
 
@@ -363,11 +389,11 @@ public class Sensor extends javax.swing.JFrame {
     }//GEN-LAST:event_newSerialActionPerformed
 
     private void newCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCodeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_newCodeActionPerformed
 
     private void newLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLocationActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_newLocationActionPerformed
 
     private void viewDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDataButtonActionPerformed
@@ -375,6 +401,37 @@ public class Sensor extends javax.swing.JFrame {
         new SearchOutput().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_viewDataButtonActionPerformed
+
+    private void addLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocButtonActionPerformed
+        String location = "";
+        locName = newLocation.getText();
+        locCode = newCode.getText();
+        // Location code must be alphanumeric and three characters long
+        if (!locCode.matches("^[a-zA-Z0-9]*$") || locCode.length() != 3) {
+            MessageDialogs.InputError("Invalid location code: " + locCode);
+            return;
+        }
+        
+        // Location name cannot be blank or whitespace-only
+        if (!Filter.isEmptyOrWhitespace(locName)) {
+            MessageDialogs.InputError("Invalid location name: " + locName);
+            return;
+        }
+        
+        // Guard against accidental SQL injections by escaping quotes
+        // (replace with call to mogrify() ?)
+        locName = locName.replace("'", "\\'");
+        locName = locName.replace("\"", "\\\"");
+        
+        // Update location list
+        location = locCode + " " + locName;
+        if (locations.contains(location)) {
+            MessageDialogs.InputError("Location already exists.");
+            return;
+        }
+        locations.add(location);
+        llm = new LocationListModel(locations);
+    }//GEN-LAST:event_addLocButtonActionPerformed
 
     /**
      * @param args the command line arguments

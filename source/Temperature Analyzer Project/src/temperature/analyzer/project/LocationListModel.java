@@ -51,6 +51,15 @@ public class LocationListModel implements ListModel<String> {
         return locations.length == 0;
     }
     
+    public ArrayList<String> getArrayList() {
+        ArrayList<String> temp = new ArrayList<>();
+        for (String s : locations) {
+            temp.add(s);
+        }
+        return temp;
+    }
+    
+    
     @Override
     public void addListDataListener(ListDataListener l) {
         listeners.add(l);

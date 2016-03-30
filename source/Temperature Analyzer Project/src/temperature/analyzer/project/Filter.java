@@ -12,7 +12,10 @@ package temperature.analyzer.project;
  */
 
 /* Imports */
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Filter {
     /** Transforms locations into their three-letter codes.
@@ -93,4 +96,32 @@ public class Filter {
         
         return q;
     }
+    
+    public static boolean isEmptyOrWhitespace(String s) {
+        return !s.isEmpty() && !s.trim().isEmpty();
+    }
+    
+    
+    /** Method to obtain location names stored in a file.
+     * 
+     * @return An ArrayList populated with location names.
+     */
+    public static ArrayList<String> getLocations() throws FileNotFoundException {
+        ArrayList<String> locs = new ArrayList<String>();
+        Scanner fileIn = null;
+        try {
+            fileIn = new Scanner(
+                new FileReader(TemperatureAnalyzerProject.locationFile));
+        } catch (FileNotFoundException e) {
+            MessageDialogs.InternalError(e.getMessage());
+            throw e;
+        }
+        
+        while (fileIn.hasNextLine()) {
+            locs.add(fileIn.nextLine());
+        }
+        fileIn.close();
+        return locs;
+    }
+    
 }
