@@ -29,7 +29,7 @@ public class Search extends javax.swing.JFrame {
     String query;
     ArrayList<String> locations;
     String[] locationArray = null;
-    LocationListModel llm = null;
+    LocationListModel llm;
     
     /**
      * Creates new form to build SQL search queries
@@ -37,7 +37,7 @@ public class Search extends javax.swing.JFrame {
     public Search() {
         /* Get locations from stored file. */
         try {
-            locations = getLocations();
+            locations = Filter.getLocations();
         } catch (Exception e) {
             MessageDialogs.InternalError("No locations stored!");
         }
@@ -48,28 +48,6 @@ public class Search extends javax.swing.JFrame {
             viewDataButton.setVisible(false);
         }
 
-    }
-    
-    /** Method to obtain location names stored in a file.
-     * 
-     * @return An ArrayList populated with location names.
-     */
-    private ArrayList<String> getLocations() throws FileNotFoundException {
-        ArrayList<String> locs = new ArrayList<String>();
-        Scanner fileIn = null;
-        try {
-            fileIn = new Scanner(
-                new FileReader(TemperatureAnalyzerProject.locationFile));
-        } catch (FileNotFoundException e) {
-            MessageDialogs.InternalError(e.getMessage());
-            throw e;
-        }
-        
-        while (fileIn.hasNextLine()) {
-            locs.add(fileIn.nextLine());
-        }
-        fileIn.close();
-        return locs;
     }
     
     /**
