@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -69,18 +70,32 @@ public class DatabaseConnection {
         boolean canAdd = false;
         try {
             this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' OR \"Location\" = '" + loc + "'";
+            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' OR  \"Location\" = '" + loc + "'";
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
                 canAdd = true;
-            }
-            else {
-                MessageDialogs.noConnectionError("Repreat code or location");
             }
         } catch (SQLException err) {
            MessageDialogs.noConnectionError(err.getMessage());
         }
         return canAdd;
+    }
+    
+    // Funciton to check if a location exists
+    public boolean exists(String code, String loc) {
+        boolean exist = true;
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' AND  \"Location\" = '" + loc + "'";
+            ResultSet codeRS = this.stmt.executeQuery(SQL);
+            if (!codeRS.isBeforeFirst()){
+                //here if RS is empty
+                exist = false;
+            }
+        } catch (SQLException err) {
+           MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return exist;
     }
     
     // Function to add a location the the database
@@ -117,22 +132,44 @@ public class DatabaseConnection {
         }
     }
     
-    public void removeLoc(String code, String loc){
+    public boolean removeLoc(String code, String loc){
+        boolean done = false;
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = " + code + " AND \"Locatoin\" = " + loc;
-            this.rs = this.stmt.executeQuery(SQL);
-            
-            this.stmt.close();
-            this.rs.close();
+            if (!this.checkDependency(code)) {
+                String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = '" + code + "' AND \"Location\" = '" + loc + "'";
+                this.stmt.executeUpdate(SQL);
+                done = true;
 
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            SQL = "SELECT * FROM APP.Location";
-            this.rs = this.stmt.executeQuery(SQL);
+                this.stmt.close();
+
+                this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                SQL = "SELECT * FROM APP.Location";
+                this.rs = this.stmt.executeQuery(SQL);
+            }
+            else {
+                MessageDialogs.dependent();
+            }
             
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
+        return done;
+    }
+    
+    public boolean checkDependency(String c) {
+        boolean exists = false;
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Sensor WHERE \"Location_Symbol\" = '"+ c + "'";
+            ResultSet test = this.stmt.executeQuery(SQL);
+            
+            if (test.isBeforeFirst()) {
+                exists = true;
+            }
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return exists;
     }
     
     public void searchData (DatabaseConnection db, String query, String threshold) {
@@ -143,21 +180,6 @@ public class DatabaseConnection {
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
-    }
-   
-    public boolean emptyTable (DatabaseConnection db, String table) {
-        boolean empty = true;
-        try {
-            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String query = "SELECT * FROM " + table;
-            db.rs = db.stmt.executeQuery(query);
-            if (db.rs.isBeforeFirst()) {    
-                empty = false;
-            }
-        } catch (SQLException err) {
-            MessageDialogs.noConnectionError(err.getMessage());
-        }
-        return empty;
     }
     
     // only select locations who have more than threshold hours lpgged a year

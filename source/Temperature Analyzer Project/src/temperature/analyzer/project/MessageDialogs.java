@@ -63,4 +63,12 @@ public class MessageDialogs {
         JOptionPane.showMessageDialog(null, msg, "Database Read Error", JOptionPane.INFORMATION_MESSAGE);
 
     }
+    
+    public static void confirm(String action) {
+        JOptionPane.showMessageDialog(null, action, "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+     public static void dependent() {
+        JOptionPane.showMessageDialog(null, "Sensor still at this location", "Removal Error", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

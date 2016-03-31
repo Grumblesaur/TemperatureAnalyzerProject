@@ -7,6 +7,7 @@ package temperature.analyzer.project;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 /**
@@ -411,7 +412,7 @@ public class Sensor extends javax.swing.JFrame {
         locName = newLocation.getText();
         locCode = newCode.getText();
         // Location code must be alphanumeric and three characters long
-        if (!locCode.matches("^[a-zA-Z0-9]*$") || locCode.length() != 3) {
+        if (!locCode.matches("^[A-Z0-9]*$") || locCode.length() != 3) {
             MessageDialogs.InputError("Invalid location code: " + locCode);
             return;
         }
@@ -430,12 +431,16 @@ public class Sensor extends javax.swing.JFrame {
         // Update location table
         if (databaseCon.canAdd(locCode, locName)) {
             databaseCon.addLoc(locCode, locName);
+            MessageDialogs.confirm("Location Added Successfully");
             // Update the arrayList
             locations = Filter.getLocations();
             newCode.setText("");
             newLocation.setText("");
             llm = new LocationListModel(locations);
             sensorList.setModel(llm);
+        } 
+        else {
+            MessageDialogs.noConnectionError("Repeat code or location");
         }
         
     }//GEN-LAST:event_addLocButtonActionPerformed
@@ -446,7 +451,7 @@ public class Sensor extends javax.swing.JFrame {
         locCode = newCode.getText();
         
         // Location code must be alphanumeric and three characters long
-        if (!locCode.matches("^[a-zA-Z0-9]*$") || locCode.length() != 3) {
+        if (!locCode.matches("^[A-Z0-9]*$") || locCode.length() != 3) {
             MessageDialogs.InputError("Invalid location code: " + locCode);
             return;
         }
@@ -462,15 +467,33 @@ public class Sensor extends javax.swing.JFrame {
         locName = locName.replace("'", "\\'");
         locName = locName.replace("\"", "\\\"");
         
-        // Check if in the location table
-        if (!databaseCon.canAdd(locCode, locName)) {
-            databaseCon.removeLoc(locCode, locName);
-            // Update the arrayList
-            locations = Filter.getLocations();
-            newCode.setText("");
-            newLocation.setText("");
-            llm = new LocationListModel(locations);
-            sensorList.setModel(llm);
+        
+        if (databaseCon.exists(locCode, locName)) {
+            if (databaseCon.checkDependency(locCode)) {
+                MessageDialogs.noConnectionError("Cannot delete, still exists in Sensor Table");
+                newCode.setText("");
+                newLocation.setText("");
+            }
+            else {
+                Integer n = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete this location?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION);
+                if (n == 0) {
+                    databaseCon.removeLoc(locCode, locName);
+                    MessageDialogs.confirm("Location Deleted Successfully");
+                }
+                locations = Filter.getLocations();
+                newCode.setText("");
+                newLocation.setText("");
+                llm = new LocationListModel(locations);
+                sensorList.setModel(llm);
+
+            } 
+        } 
+        else {
+            MessageDialogs.noConnectionError("Location does not exist"); 
         }
     }//GEN-LAST:event_removeLocButtonActionPerformed
 
