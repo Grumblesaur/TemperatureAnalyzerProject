@@ -7,6 +7,7 @@ package temperature.analyzer.project;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 /**
  *
@@ -422,14 +423,17 @@ public class Sensor extends javax.swing.JFrame {
         locName = locName.replace("'", "\\'");
         locName = locName.replace("\"", "\\\"");
         
-        // Update location list
-        location = locCode + " " + locName;
-        if (locations.contains(location)) {
-            MessageDialogs.InputError("Location already exists.");
-            return;
+        // Update location table
+        if (databaseCon.canAdd(locCode, locName)) {
+            databaseCon.addLoc(locCode, locName);
+            // Update the arrayList
+            locations = Filter.getLocations();
+            newCode.setText("");
+            newLocation.setText("");
+            llm = new LocationListModel(locations);
+            sensorList.setModel(llm);
         }
-        locations.add(location);
-        llm = new LocationListModel(locations);
+        
     }//GEN-LAST:event_addLocButtonActionPerformed
 
     /**

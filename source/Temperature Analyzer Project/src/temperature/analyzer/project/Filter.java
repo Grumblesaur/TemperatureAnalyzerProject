@@ -117,7 +117,7 @@ public class Filter {
             String locationInfo;
             while(databaseCon.rs.next()) {
                 locationInfo = databaseCon.rs.getString(1) + " " + databaseCon.rs.getString(2);
-                MessageDialogs.DEBUG(locationInfo, debug);
+                //MessageDialogs.DEBUG(locationInfo, debug);
                 locs.add(locationInfo);
             }
         } catch (SQLException err) {
@@ -138,7 +138,7 @@ public class Filter {
             Integer serial;
             while(databaseCon.rs.next()) {
                 serial = databaseCon.rs.getInt(1);
-                MessageDialogs.DEBUG(serial.toString(), debug);
+                //MessageDialogs.DEBUG(serial.toString(), debug);
                 sensors.add(serial);
             }
         } catch (SQLException err) {

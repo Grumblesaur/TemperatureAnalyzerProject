@@ -64,6 +64,59 @@ public class DatabaseConnection {
         }
     }
     
+    // Funciton to check if a location is unique
+    public boolean canAdd(String code, String loc) {
+        boolean canAdd = false;
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' OR \"Location\" = '" + loc + "'";
+            ResultSet codeRS = this.stmt.executeQuery(SQL);
+            if (!codeRS.isBeforeFirst()){
+                canAdd = true;
+            }
+            else {
+                MessageDialogs.noConnectionError("Repreat code or location");
+            }
+        } catch (SQLException err) {
+           MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return canAdd;
+    }
+    
+    // Function to add a location the the database
+
+    /**
+     *
+     * @param code
+     * @param loc
+     */
+    public void addLoc(String code, String loc){
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Location";
+            this.rs = this.stmt.executeQuery(SQL);
+            
+            this.rs.last();
+
+            this.rs.moveToInsertRow();
+
+            this.rs.updateString("Symbol", code);
+            this.rs.updateString("Location", loc);
+
+            this.rs.insertRow();
+
+            this.stmt.close();
+            this.rs.close();
+
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            SQL = "SELECT * FROM APP.Location";
+            this.rs = this.stmt.executeQuery(SQL);
+            
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+    }
+    
     public void searchData (DatabaseConnection db, String query, String threshold) {
        
         try {
