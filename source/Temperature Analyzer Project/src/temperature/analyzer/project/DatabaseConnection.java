@@ -117,6 +117,24 @@ public class DatabaseConnection {
         }
     }
     
+    public void removeLoc(String code, String loc){
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = " + code + " AND \"Locatoin\" = " + loc;
+            this.rs = this.stmt.executeQuery(SQL);
+            
+            this.stmt.close();
+            this.rs.close();
+
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            SQL = "SELECT * FROM APP.Location";
+            this.rs = this.stmt.executeQuery(SQL);
+            
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+    }
+    
     public void searchData (DatabaseConnection db, String query, String threshold) {
        
         try {

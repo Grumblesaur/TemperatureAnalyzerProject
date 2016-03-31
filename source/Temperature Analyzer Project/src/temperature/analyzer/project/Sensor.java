@@ -261,6 +261,11 @@ public class Sensor extends javax.swing.JFrame {
         removeSerialButton.setText("Remove Sensor");
 
         removeLocButton.setText("Remove Location");
+        removeLocButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeLocButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -403,7 +408,6 @@ public class Sensor extends javax.swing.JFrame {
     }//GEN-LAST:event_viewDataButtonActionPerformed
 
     private void addLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocButtonActionPerformed
-        String location = "";
         locName = newLocation.getText();
         locCode = newCode.getText();
         // Location code must be alphanumeric and three characters long
@@ -435,6 +439,40 @@ public class Sensor extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_addLocButtonActionPerformed
+
+    private void removeLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLocButtonActionPerformed
+        // TODO add your handling code here:
+        locName = newLocation.getText();
+        locCode = newCode.getText();
+        
+        // Location code must be alphanumeric and three characters long
+        if (!locCode.matches("^[a-zA-Z0-9]*$") || locCode.length() != 3) {
+            MessageDialogs.InputError("Invalid location code: " + locCode);
+            return;
+        }
+        
+        // Location name cannot be blank or whitespace-only
+        if (!Filter.isEmptyOrWhitespace(locName)) {
+            MessageDialogs.InputError("Invalid location name: " + locName);
+            return;
+        }
+        
+        // Guard against accidental SQL injections by escaping quotes
+        // (replace with call to mogrify() ?)
+        locName = locName.replace("'", "\\'");
+        locName = locName.replace("\"", "\\\"");
+        
+        // Check if in the location table
+        if (!databaseCon.canAdd(locCode, locName)) {
+            databaseCon.removeLoc(locCode, locName);
+            // Update the arrayList
+            locations = Filter.getLocations();
+            newCode.setText("");
+            newLocation.setText("");
+            llm = new LocationListModel(locations);
+            sensorList.setModel(llm);
+        }
+    }//GEN-LAST:event_removeLocButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -15,21 +15,21 @@ import static java.util.Arrays.sort;
  *
  * @author james
  */
-public class LocationListModel implements ListModel<String> {
+public class SaveSearchListModel implements ListModel<String> {
     private final ArrayList<ListDataListener> listeners;
     private String[] locations;
     
-    public LocationListModel() {
+    public SaveSearchListModel() {
         this.locations = null;
         this.listeners = new ArrayList<>();
     }
     
-    public LocationListModel(String[] locations) {
+    public SaveSearchListModel(String[] locations) {
         this.locations = locations;
         this.listeners = new ArrayList<>();
     }
     
-    public LocationListModel(ArrayList<String> locations) {
+    public SaveSearchListModel(ArrayList<String> locations) {
         String[] temp = new String[locations.size()];
         // Use for-loop because casting locations.toArray() to type String[]
         // causes a runtime exception since Java's type rules are STUPID
