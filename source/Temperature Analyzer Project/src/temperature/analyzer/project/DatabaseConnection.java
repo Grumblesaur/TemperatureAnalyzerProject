@@ -98,6 +98,23 @@ public class DatabaseConnection {
         return exist;
     }
     
+    // Checks if serial number exists
+    public boolean exists(Integer serial) {
+        boolean exist = true;
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Sensor WHERE \"Serial_Number\" = " + serial;
+            ResultSet codeRS = this.stmt.executeQuery(SQL);
+            if (!codeRS.isBeforeFirst()){
+                //here if RS is empty
+                exist = false;
+            }
+        } catch (SQLException err) {
+           MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return exist;
+    }
+    
     // Function to add a location the the database
 
     /**
@@ -122,16 +139,12 @@ public class DatabaseConnection {
 
             this.stmt.close();
             this.rs.close();
-
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            SQL = "SELECT * FROM APP.Location";
-            this.rs = this.stmt.executeQuery(SQL);
-            
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
     
+    // Function to remove a location from the table
     public boolean removeLoc(String code, String loc){
         boolean done = false;
         try {
@@ -141,10 +154,6 @@ public class DatabaseConnection {
                 done = true;
 
                 this.stmt.close();
-
-                this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                SQL = "SELECT * FROM APP.Location";
-                this.rs = this.stmt.executeQuery(SQL);
             }
             else {
                 MessageDialogs.dependent();
@@ -156,6 +165,39 @@ public class DatabaseConnection {
         return done;
     }
     
+    // Function to add a serial from the table
+    public void addSerial(Integer serial){
+        try {
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            String SQL = "INSERT INTO APP.Sensor VALUES (" + serial;
+            SQL = SQL + ", (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))";
+            this.stmt.executeUpdate(SQL);
+            
+            this.stmt.close();
+            
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+    }
+    
+    // Function to remove a serial from the table
+    public boolean removeSerial(Integer serial){
+        boolean done = false;
+        try {
+            String s = serial.toString();
+            String SQL = "DELETE FROM APP.Sensor WHERE \"Serial_Number\" = " + s;
+            this.stmt.executeUpdate(SQL);
+            done = true;
+
+            this.stmt.close();
+            
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+        return done;
+    }
+    
+    // Checks to see if a location is being used in a sensor
     public boolean checkDependency(String c) {
         boolean exists = false;
         try {

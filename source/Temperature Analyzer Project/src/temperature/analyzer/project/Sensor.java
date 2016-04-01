@@ -260,6 +260,11 @@ public class Sensor extends javax.swing.JFrame {
         });
 
         removeSerialButton.setText("Remove Sensor");
+        removeSerialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSerialButtonActionPerformed(evt);
+            }
+        });
 
         removeLocButton.setText("Remove Location");
         removeLocButton.addActionListener(new java.awt.event.ActionListener() {
@@ -384,6 +389,26 @@ public class Sensor extends javax.swing.JFrame {
 
     private void newSerialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSerialButtonActionPerformed
         // TODO add your handling code here:
+        String serial = newSerial.getText();
+        
+        if (!serial.matches("^[0-9]*$")) {
+            MessageDialogs.InputError("Invalid serial number: " + serial);
+            newSerial.setText("");
+            return;
+        }
+        
+        Integer serial_num = Integer.parseInt(serial);
+        if (!databaseCon.exists(serial_num)) {
+            databaseCon.addSerial(serial_num);
+            MessageDialogs.confirm("Serial Added Successfully");
+            sensors = Filter.getSensors();
+            newSerial.setText("");
+            slm = new SensorListModel(sensors);
+            serialList.setModel(slm);
+        }
+        else {
+            MessageDialogs.noConnectionError("Serial Number Already Exists");
+        }
     }//GEN-LAST:event_newSerialButtonActionPerformed
 
     private void editLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLocButtonActionPerformed
@@ -496,6 +521,38 @@ public class Sensor extends javax.swing.JFrame {
             MessageDialogs.noConnectionError("Location does not exist"); 
         }
     }//GEN-LAST:event_removeLocButtonActionPerformed
+
+    private void removeSerialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSerialButtonActionPerformed
+        // TODO add your handling code here:
+        String serial = newSerial.getText();
+        
+        if (!serial.matches("^[0-9]*$")) {
+            MessageDialogs.InputError("Invalid serial number: " + serial);
+            return;
+        }
+        
+        Integer serial_num = Integer.parseInt(serial);
+        if (!databaseCon.exists(serial_num)) {
+            MessageDialogs.noConnectionError("Serial Number does not Exists");
+            newSerial.setText("");
+        }
+        else {
+            Integer n = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete this serial?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION);
+            if (n == 0) {
+                databaseCon.removeSerial(serial_num);
+                MessageDialogs.confirm("Serial Deleted Successfully");
+            }
+            sensors = Filter.getSensors();
+            newSerial.setText("");
+            slm = new SensorListModel(sensors);
+            serialList.setModel(slm);
+            
+        }
+    }//GEN-LAST:event_removeSerialButtonActionPerformed
 
     /**
      * @param args the command line arguments
