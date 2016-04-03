@@ -30,8 +30,8 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="539" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="367" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="439" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,9 +40,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topBanner" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="263" max="-2" attributes="0"/>
-              <EmptySpace pref="397" max="32767" attributes="0"/>
+              <EmptySpace pref="391" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -199,7 +199,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;  &lt;p align=&quot;center&quot;&gt;This software was developed by the legendary TAP Team: &lt;/p&gt;  &lt;div align=&quot;center&quot;&gt;          &lt;p&gt;Ruth Catlett&lt;/p&gt;      &lt;p&gt;Kris Hooks&lt;/p&gt;      &lt;p&gt;Yireda Jilili&lt;/p&gt;      &lt;p&gt;James Murphy &lt;/p&gt;  &lt;/div&gt;  &lt;p align=&quot;center&quot;&gt;   This project was the TAP Team&apos;s final assignment for &lt;/p&gt;  &lt;p align=&quot;center&quot;&gt;Dr. Polack&apos;s    CPSC 430 class in Spring 2016 at the &lt;/p&gt;  &lt;p align=&quot;center&quot;&gt;University of Mary Washington. &lt;/p&gt; &lt;/html&gt;  &lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;  &lt;p align=&quot;center&quot;&gt;This software was developed by the legendary TAP Team: &lt;/p&gt;  &lt;div align=&quot;center&quot;&gt;      &lt;p&gt; &lt;/p&gt;     &lt;p&gt;Ruth Catlett&lt;/p&gt;   &lt;p&gt; &lt;/p&gt;   &lt;p&gt;Kris Hooks&lt;/p&gt;   &lt;p&gt; &lt;/p&gt;    &lt;p&gt;Yireda Jilili&lt;/p&gt;    &lt;p&gt; &lt;/p&gt;   &lt;p&gt;James Murphy &lt;/p&gt;  &lt;p&gt; &lt;/p&gt;  &lt;/div&gt;  &lt;p align=&quot;center&quot;&gt;   This project was the TAP Team&apos;s final assignment for &lt;/p&gt;  &lt;p align=&quot;center&quot;&gt;Dr. Polack&apos;s    CPSC 430 class in Spring 2016 at the &lt;/p&gt;  &lt;p align=&quot;center&quot;&gt;University of Mary Washington. &lt;/p&gt; &lt;/html&gt;  &lt;/html&gt;"/>
       </Properties>
     </Component>
   </SubComponents>

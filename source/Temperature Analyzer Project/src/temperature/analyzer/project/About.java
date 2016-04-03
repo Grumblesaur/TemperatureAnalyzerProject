@@ -10,6 +10,7 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionDat
 /**
  *
  * @author rcatlett
+ * @author Quinntero
  */
 public class About extends javax.swing.JFrame {
 
@@ -161,7 +162,7 @@ public class About extends javax.swing.JFrame {
                     .addGap(0, 7, Short.MAX_VALUE)))
         );
 
-        jLabel1.setText("<html>  <p align=\"center\">This software was developed by the legendary TAP Team: </p>  <div align=\"center\">          <p>Ruth Catlett</p>      <p>Kris Hooks</p>      <p>Yireda Jilili</p>      <p>James Murphy </p>  </div>  <p align=\"center\">   This project was the TAP Team's final assignment for </p>  <p align=\"center\">Dr. Polack's    CPSC 430 class in Spring 2016 at the </p>  <p align=\"center\">University of Mary Washington. </p> </html>  </html>");
+        jLabel1.setText("<html>  <p align=\"center\">This software was developed by the legendary TAP Team: </p>  <div align=\"center\">      <p> </p>     <p>Ruth Catlett</p>   <p> </p>   <p>Kris Hooks</p>   <p> </p>    <p>Yireda Jilili</p>    <p> </p>   <p>James Murphy </p>  <p> </p>  </div>  <p align=\"center\">   This project was the TAP Team's final assignment for </p>  <p align=\"center\">Dr. Polack's    CPSC 430 class in Spring 2016 at the </p>  <p align=\"center\">University of Mary Washington. </p> </html>  </html>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,17 +174,17 @@ public class About extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(182, 182, 182))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(439, 439, 439))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
 
         pack();
