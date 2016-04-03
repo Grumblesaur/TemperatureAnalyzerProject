@@ -516,6 +516,25 @@ public class Search extends javax.swing.JFrame {
             MessageDialogs.DEBUG("Query to Database is: " + query, debug);
 
             // TODO: execute SQL query and obtain returnset
+            // 
+            // Kris says: maybe something like this:
+            // 
+            // ArrayList columnNames = new ArrayList();
+            // ArrayList data = new ArrayList();
+            // Statement stmt = databaseCon.createStatement();
+            // ResultSet rs = stmt.executeQuery(query);
+            // ResultSetMetaData md = rs.getMetaData();
+            // int columns = md.getColumnCount();
+            // for (int i = 1; i <= columns; i++){ // get column names
+            //    columnNames.add(md.getColumnName(i));
+            // }
+            // while (rs.next()){                // get data from rows
+            //    ArrayList row = new ArrayList(columns);
+            //    for (int i = 1; i <= columns; i++){
+            //       row.add(rs.getObject(i));
+            //    }
+            //    data.add(row);
+            // }
 
             databaseCon.searchData(databaseCon, query, sensorHours);
             dataForSession = databaseCon.rs;
