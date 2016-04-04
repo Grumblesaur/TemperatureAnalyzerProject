@@ -13,7 +13,7 @@ import static java.util.Arrays.sort;
 
 /** Implement ListModel for use in Search module's rendering of location list.
  *
- * @author james
+ * @author rcatlett
  */
 public class SaveSearchListModel implements ListModel<String> {
     private final ArrayList<ListDataListener> listeners;
