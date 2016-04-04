@@ -205,7 +205,7 @@ public class Sensor extends javax.swing.JFrame {
         );
 
         sensorList.setModel(llm);
-        sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
+        sensorList.setToolTipText("<html>Click to select or deselect.<br> To move sensors, please only select one location. </html>");
         sensorListPane.setViewportView(sensorList);
 
         jLabel1.setText("Sensor Locations");
@@ -239,6 +239,7 @@ public class Sensor extends javax.swing.JFrame {
 
         jLabel3.setText("Serial Numbers:");
 
+        newSerial.setToolTipText("<html>Serial Number must be numeric. </html>");
         newSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newSerialActionPerformed(evt);
@@ -247,12 +248,14 @@ public class Sensor extends javax.swing.JFrame {
 
         jLabel4.setText("Sensor Location:");
 
+        newCode.setToolTipText("<html> Location Code must be 3 characters long and alpahnumeric. <br>\nLocation Code must be unique.</html>");
         newCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newCodeActionPerformed(evt);
             }
         });
 
+        newLocation.setToolTipText("<html> Location name must be unique. </html>");
         newLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newLocationActionPerformed(evt);

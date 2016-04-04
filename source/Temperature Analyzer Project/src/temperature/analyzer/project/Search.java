@@ -10,8 +10,6 @@ import java.io.FileReader;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
-import temperature.analyzer.project.LocationListModel;
-
 import java.io.FileNotFoundException;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 

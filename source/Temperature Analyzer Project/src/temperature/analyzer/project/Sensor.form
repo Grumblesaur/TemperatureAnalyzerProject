@@ -285,7 +285,7 @@
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="llm" type="code"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Click to select or deselect.&lt;br&gt;&#xa;Use CTRL + click or SHIFT + click  to select multiple sensors.&#xa;&lt;/html&gt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Click to select or deselect.&lt;br&gt; To move sensors, please only select one location. &lt;/html&gt;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -350,6 +350,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="newSerial">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;Serial Number must be numeric. &lt;/html&gt;"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newSerialActionPerformed"/>
       </Events>
@@ -360,11 +363,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="newCode">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt; Location Code must be 3 characters long and alpahnumeric. &lt;br&gt;&#xa;Location Code must be unique.&lt;/html&gt;"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newCodeActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="newLocation">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt; Location name must be unique. &lt;/html&gt;"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newLocationActionPerformed"/>
       </Events>
