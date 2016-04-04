@@ -391,6 +391,12 @@ public class Sensor extends javax.swing.JFrame {
         // TODO add your handling code here:
         String serial = newSerial.getText();
         
+        if (serial.isEmpty()) {
+            MessageDialogs.InputError("Invalid serial number");
+            newSerial.setText("");
+            return;
+        }
+         
         if (!serial.matches("^[0-9]*$")) {
             MessageDialogs.InputError("Invalid serial number: " + serial);
             newSerial.setText("");
@@ -413,6 +419,41 @@ public class Sensor extends javax.swing.JFrame {
 
     private void editLocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLocButtonActionPerformed
         // TODO add your handling code here:
+        
+        if (serialList.isSelectionEmpty()) { 
+            MessageDialogs.editError("No serials selected");   
+        }
+        else {
+            sensors = (ArrayList<Integer>) serialList.getSelectedValuesList();
+            String sensList = sensors.get(0).toString();
+            if (sensors.size() > 1){
+                for (int i = 1; i < sensors.size(); i++){
+                    sensList = sensList + ", " + sensors.get(i);
+                }
+            }
+            if (sensorList.isSelectionEmpty()) { 
+                MessageDialogs.editError("No location selected");   
+            }
+            else {
+                locations = (ArrayList<String>) sensorList.getSelectedValuesList();
+                locations = Filter.parseLocationCodes(locations);
+                if (locations.size() != 1) {
+                    MessageDialogs.editError("Too many locations selected");
+                }
+                else {
+                    Integer n = JOptionPane.showConfirmDialog(
+                                null,
+                                "Are you sure you want to move the folowing sensors to " + locations.get(0) +"? " + sensList,
+                                "Confirm Deletion",
+                                JOptionPane.YES_NO_OPTION);
+                            if (n == 0) {
+                                if (databaseCon.moveSensors(sensors, locations.get(0))){
+                                    MessageDialogs.confirm("Locations Moved Successfully");
+                                }
+                            }
+                }
+            }
+        } 
     }//GEN-LAST:event_editLocButtonActionPerformed
 
     private void newSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSerialActionPerformed
@@ -525,6 +566,11 @@ public class Sensor extends javax.swing.JFrame {
     private void removeSerialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSerialButtonActionPerformed
         // TODO add your handling code here:
         String serial = newSerial.getText();
+        
+        if (serial.isEmpty()) {
+            MessageDialogs.InputError("Invalid serial number");
+            return;
+        }
         
         if (!serial.matches("^[0-9]*$")) {
             MessageDialogs.InputError("Invalid serial number: " + serial);

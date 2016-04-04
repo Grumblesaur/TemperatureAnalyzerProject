@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -163,6 +164,27 @@ public class DatabaseConnection {
             MessageDialogs.noConnectionError(err.getMessage());
         }
         return done;
+    }
+    
+    public boolean moveSensors(ArrayList<Integer> sensors, String newLoc) {
+        // TODO: Code moving the sensors - update the sensor location
+        boolean moved = false;
+        try {
+            String toMove = "(" + sensors.get(0).toString();
+            for (int i = 1; i < sensors.size(); i++){
+                 toMove += ", " + sensors.get(i).toString();
+            }
+            toMove += ")";
+            
+            this.stmt = this.con.createStatement();
+            String SQL = "UPDATE APP.Sensor SET \"Location_Symbol\" = '" + newLoc + "' WHERE \"Serial_Number\" IN " + toMove;
+            
+            this.stmt.executeUpdate(SQL);
+            moved = true;
+        } catch (SQLException err) {
+            MessageDialogs.editError(err.getMessage());
+        }
+        return moved;
     }
     
     // Function to add a serial from the table

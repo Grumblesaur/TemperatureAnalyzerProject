@@ -68,7 +68,12 @@ public class MessageDialogs {
         JOptionPane.showMessageDialog(null, action, "Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
     
-     public static void dependent() {
+    public static void dependent() {
         JOptionPane.showMessageDialog(null, "Sensor still at this location", "Removal Error", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public static void editError(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Edit Error", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
 }
