@@ -5,7 +5,6 @@
  */
 package temperature.analyzer.project;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
@@ -19,7 +18,7 @@ public class Sensor extends javax.swing.JFrame {
 
     ArrayList<String> locations;
     ArrayList<String> codes;
-    ArrayList<Integer> sensors;
+    ArrayList<String> sensors;
     LocationListModel llm;
     SensorListModel slm;
     
@@ -194,7 +193,7 @@ public class Sensor extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -427,8 +426,8 @@ public class Sensor extends javax.swing.JFrame {
             MessageDialogs.editError("No serials selected");   
         }
         else {
-            sensors = (ArrayList<Integer>) serialList.getSelectedValuesList();
-            String sensList = sensors.get(0).toString();
+            sensors = (ArrayList<String>) serialList.getSelectedValuesList();
+            String sensList = sensors.get(0);
             if (sensors.size() > 1){
                 for (int i = 1; i < sensors.size(); i++){
                     sensList = sensList + ", " + sensors.get(i);
@@ -450,8 +449,18 @@ public class Sensor extends javax.swing.JFrame {
                                 "Confirm Deletion",
                                 JOptionPane.YES_NO_OPTION);
                             if (n == 0) {
-                                if (databaseCon.moveSensors(sensors, locations.get(0))){
+                                // type conversion from ArrayList<String> to ArrayList<Integer>
+                                ArrayList<Integer> sn = new ArrayList<>();
+                                for (String s : sensors) {
+                                    sn.add(Integer.parseInt((s.split(",")[0])));
+                                }
+                                // stick these back in the database after an update
+                                if (databaseCon.moveSensors(sn, locations.get(0))){
                                     MessageDialogs.confirm("Locations Moved Successfully");
+                                    sensors = Filter.getSensors();
+                                    newSerial.setText("");
+                                    slm = new SensorListModel(sensors);
+                                    serialList.setModel(slm);
                                 }
                             }
                 }
@@ -659,7 +668,7 @@ public class Sensor extends javax.swing.JFrame {
     private javax.swing.JButton sensorButton;
     private javax.swing.JList<String> sensorList;
     private javax.swing.JScrollPane sensorListPane;
-    private javax.swing.JList<Integer> serialList;
+    private javax.swing.JList<String> serialList;
     private javax.swing.JScrollPane serialListPane;
     private javax.swing.JLabel taplogoLabel;
     private javax.swing.JLayeredPane topBanner;

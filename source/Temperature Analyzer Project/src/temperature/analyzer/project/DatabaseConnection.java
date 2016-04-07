@@ -57,8 +57,10 @@ public class DatabaseConnection {
     public boolean canAdd(String code, String loc) {
         boolean canAdd = false;
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' OR  \"Location\" = '" + loc + "'";
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" +
+                    code + "' OR  \"Location\" = '" + loc + "'";
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
                 canAdd = true;
@@ -73,8 +75,10 @@ public class DatabaseConnection {
     public boolean exists(String code, String loc) {
         boolean exist = true;
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" + code + "' AND  \"Location\" = '" + loc + "'";
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" +
+                    code + "' AND  \"Location\" = '" + loc + "'";
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
                 //here if RS is empty
@@ -90,7 +94,8 @@ public class DatabaseConnection {
     public boolean exists(Integer serial) {
         boolean exist = true;
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             String SQL = "SELECT * FROM APP.Sensor WHERE \"Serial_Number\" = " + serial;
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
@@ -127,7 +132,8 @@ public class DatabaseConnection {
         boolean done = false;
         try {
             if (!this.checkDependency(code)) {
-                String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = '" + code + "' AND \"Location\" = '" + loc + "'";
+                String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = '" +
+                        code + "' AND \"Location\" = '" + loc + "'";
                 this.stmt.executeUpdate(SQL);
                 done = true;
 
@@ -154,7 +160,8 @@ public class DatabaseConnection {
             toMove += ")";
             
             this.stmt = this.con.createStatement();
-            String SQL = "UPDATE APP.Sensor SET \"Location_Symbol\" = '" + newLoc + "' WHERE \"Serial_Number\" IN " + toMove;
+            String SQL = "UPDATE APP.Sensor SET \"Location_Symbol\" = '" +
+                    newLoc + "' WHERE \"Serial_Number\" IN " + toMove;
             
             this.stmt.executeUpdate(SQL);
             moved = true;
@@ -167,7 +174,8 @@ public class DatabaseConnection {
     // Function to add a serial from the table
     public void addSerial(Integer serial){
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             String SQL = "INSERT INTO APP.Sensor VALUES (" + serial;
             SQL = SQL + ", (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))";
             this.stmt.executeUpdate(SQL);
@@ -200,7 +208,8 @@ public class DatabaseConnection {
     public boolean checkDependency(String c) {
         boolean exists = false;
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             String SQL = "SELECT * FROM APP.Sensor WHERE \"Location_Symbol\" = '"+ c + "'";
             ResultSet test = this.stmt.executeQuery(SQL);
             
@@ -216,15 +225,21 @@ public class DatabaseConnection {
     public void searchData (DatabaseConnection db, String query, String threshold) {
        
         try {
-            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             db.rs = db.stmt.executeQuery(query);
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
     
-    // only select locations who have more than threshold hours lpgged a year
-    /*public ArrayList<String> filterLocs (String starty, String endy, ArrayList<String> locs, String threshold) {
-        TO DO
-    }*/
+    /* only select locations who have more than threshold hours logged a year
+    public ArrayList<String> filterLocs (String starty, String endy,
+        ArrayList<String> locs, String threshold) {
+        ArrayList<String> ret = new ArrayList<>();
+        // TODO (?)
+        
+        
+        return ret;
+    } */
 }
