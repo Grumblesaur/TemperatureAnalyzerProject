@@ -32,5 +32,35 @@ public class Calculation {
         return 0.00; // dummy value for compilation
     }
     
+    /** Obtain an array of highs for each month. */
+    public static double[] monthlyHighs(List l) {
+        int monthCount = 0;
+        double[] ret = new double[monthCount];
+        // break list into slices of months
+        // for each month slice, call recordHigh() to find the high
+        //     add each recordHigh() value to the return array
+        return ret;
+    }
+    
+    /** Obtain an array of lows for each month. */
+    public static double[] monthlyLows(List l) {
+        int monthCount = 0;
+        double[] ret = new double[monthCount];
+        // break list into slices of months
+        // for each month slice, call recordLow() to find the low
+        //     add each recordLow() value to the return array
+        return ret;
+    }
+    
+    /** Obtain an array of average temperatures for each month. */
+    public static double[] monthlyAverage(List l) {
+        int monthCount = 0;
+        double[] ret = new double[monthCount];
+        // break list into slices of month
+        // for each month slice, call average() to find the average
+        //     add each average() value to the return array
+        return ret;
+    }
+    
     // TODO create methods that will find values for each month in a result set.
 }
