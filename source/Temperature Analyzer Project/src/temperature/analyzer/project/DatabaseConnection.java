@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import static temperature.analyzer.project.Search.debug;
 
 /**
  *
@@ -36,31 +38,16 @@ public class DatabaseConnection {
            }
     }
     
-    public void addData(DatabaseConnection db, String loc, String date, String temp){
+    public void addData(DatabaseConnection db, String loc, String date, String time, String temp){
         try {
-            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Tester";
-            db.rs = db.stmt.executeQuery(SQL);
+            String SQL = "INSERT INTO APP.Measurement VALUES (" + temp +
+                ", '" + date + "', '" + time + "', (SELECT \"Symbol\" FROM" +
+                " APP.LOCATION WHERE \"Symbol\" = '" + loc + "'))"; 
+           
+            //MessageDialogs.DEBUG(SQL, debug);
+            db.stmt = db.con.createStatement();
+            db.stmt.executeUpdate(SQL);
             
-            db.rs.last();
-            int id_num = db.rs.getRow() + 1;
-            
-            db.rs.moveToInsertRow();
-            
-            db.rs.updateInt("ID", id_num);
-            db.rs.updateString("Location", loc);
-            db.rs.updateString("Date", date);
-            db.rs.updateString("Temp", temp);
-            
-            db.rs.insertRow();
-            
-            db.stmt.close();
-            db.rs.close();
-            
-            db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            SQL = "SELECT * FROM APP.Tester";
-            db.rs = db.stmt.executeQuery(SQL);
-                
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
@@ -125,21 +112,11 @@ public class DatabaseConnection {
      */
     public void addLoc(String code, String loc){
         try {
-            this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Location";
-            this.rs = this.stmt.executeQuery(SQL);
-            
-            this.rs.last();
-
-            this.rs.moveToInsertRow();
-
-            this.rs.updateString("Symbol", code);
-            this.rs.updateString("Location", loc);
-
-            this.rs.insertRow();
-
+            String SQL = "INSERT INTO APP.Location VALUES ('" + code + "', '" + loc + "')";
+            this.stmt.executeUpdate(SQL);
+          
             this.stmt.close();
-            this.rs.close();
+            
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }

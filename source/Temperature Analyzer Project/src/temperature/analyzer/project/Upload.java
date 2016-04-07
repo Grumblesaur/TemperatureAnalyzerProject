@@ -276,7 +276,7 @@ public class Upload extends javax.swing.JFrame {
                 
                 sessionData = true;
                 //TODO Change to just search uploaded data
-                databaseCon.searchData(databaseCon, "SELECT * FROM APP.Tester", "1000");
+                databaseCon.searchData(databaseCon, "SELECT * FROM APP.Measurement", "1000");
                 dataForSession = databaseCon.rs;
                 new SearchOutput().setVisible(true);
                 this.setVisible(false);

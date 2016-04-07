@@ -25,11 +25,14 @@ public class MessageDialogs {
     }
     
     //Debug Dialog
-    public static void showData(String location, String date, String temp) {
-        String message = "Location: " + location + "\n String: " + date;
-        message = message + "\n Temp: " + temp;
+    public static void showData(String location, String date, String time, String temp, boolean bug) {
+        if (bug) {
+            String message = "Location: " + location + "\n Date: " + date;
+            message = message + "\n Time: " + time + "\nTemp: " + temp;
         
-        JOptionPane.showMessageDialog(null, message, "Data to Upload", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Data to Upload", JOptionPane.INFORMATION_MESSAGE);
+    
+        }
     }
     
     public static void UploadError(String error) {

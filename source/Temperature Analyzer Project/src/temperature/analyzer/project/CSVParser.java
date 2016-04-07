@@ -57,7 +57,7 @@ public class CSVParser {
             }
 
             /* Grab the header for the location code. */
-            String line, location, date, temp;
+            String line, location, date, time, temp;
             try { // XXX: this try-block might not be necessary
                     line = bufr.readLine();
                     location = line.split(",")[1];
@@ -68,36 +68,41 @@ public class CSVParser {
 
             /* Obtain one line at a time and write the temperature data to DB.*/
             line = bufr.readLine();
-            String[] point = null;
+            String[] point;
             
             MessageDialogs.DEBUG("Reading File", debug);
+            String[] dateAndTime;
+            String[] dateParts;
             while (line != null) {
                     line = bufr.readLine();
                     if (line != null) {
                         point = line.split(",");
-                        date = point[0];
-
+                        dateAndTime = point[0].split(" ");
+                        dateParts = dateAndTime[0].split("/");
+                        date = dateParts[0] + "/" + dateParts[1]+ "/20" + dateParts[2];
+                        time = dateAndTime[1];
                         /* Assign NaN if no measurement was recorded at this time. */
                         if (point.length == 2) {
                                 temp = point[1];
                         } else {
-                                temp = "NaN";
+                                temp = "null";
                         }
 
                         /* we have proven that the parser can loop through the file,
                             so we'll hide this dialogue box pop-up to avoid prompting the
                             user 50,000+ times
                         */
-                        //MessageDialogs.showData(location, date, temp);
-                        writeToDB(location, date, temp);
+                        //MessageDialogs.showData(location, date, time, temp, debug);
+                        databaseCon.addData(databaseCon, location, date, time, temp);
+                        
                     }
             }
             MessageDialogs.UploadSuccess();
             
     }
 
-    /* Actual database communication pending. Write output to console. */
-    private static void writeToDB(String loc, String date, String temp) {
+    /* Actual database communication pending. Write output to console. 
+    private static void writeToDB(String loc, String date, String time, String temp) {
             /* Semi-redundant variables for parsing to ease reading. */
     //        float degrees = 0.0f;
     //        if (temp.equals("NaN")) {
@@ -131,11 +136,11 @@ public class CSVParser {
     //        TESTOUT(Float.toString(degrees) + "°C\t" + year + "\t" + month +
     //                "\t" + day + "\t" + clockTime + "\t" + loc);
     
-    // Test Database
-        
-        //MessageDialogs.DEBUG("Going to Add", debug);
+    // Test Database*/
+        /*
+        MessageDialogs.DEBUG("Going to Add", debug);
         databaseCon.addData(databaseCon, loc, date, temp);
-    }
+    }*/
 
     
     // debug print, basically
