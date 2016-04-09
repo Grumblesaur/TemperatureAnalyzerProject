@@ -8,7 +8,7 @@ CREATE TABLE APP.SENSOR (
         REFERENCES APP.LOCATION ("Symbol"));
 
 CREATE TABLE APP.MEASUREMENT (
-  "Temperature" INT NOT NULL,
+  "Temperature" DECIMAL (9,4),
   "Date" DATE,
   "Time" TIME,
   "Location_Symbol" VARCHAR(3) NOT NULL 

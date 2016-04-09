@@ -32,4 +32,5 @@ INSERT INTO APP.LOCATION VALUES
 ('UD1', 'Upper Dark Canyon'),
 ('UDC', 'Upper Dark Canyon 2'),
 ('WME', 'Warner Meadows'),
-('WFM', 'Wet Fork Mill Cr');
+('WFM', 'Wet Fork Mill Cr'),
+('OFF', 'Office');
