@@ -484,7 +484,13 @@ public class Search extends javax.swing.JFrame {
             startHour = startHourSpinner.getValue().toString();
             endHour = stopHourSpinner.getValue().toString();
             startMinute = startMinuteSpinner.getValue().toString();
+            if (startMinute.length() < 2) {
+                startMinute = "0" + startMinute;
+            }
             endMinute = stopMinuteSpinner.getValue().toString();
+            if (endMinute.length() < 2) {
+                endMinute = "0" + endMinute;
+            }
 
             // Ensure that start date occurs before or is equal to end date
             SimpleDate startDate, endDate;
@@ -501,10 +507,14 @@ public class Search extends javax.swing.JFrame {
             MessageDialogs.DEBUG("sensorsHours = " + sensorHours, debug);
 
             // Obtain three-character location codes
-            locations = (ArrayList<String>) sensorList.getSelectedValuesList();
-            locations = Filter.parseLocationCodes(locations);
-
-            MessageDialogs.DEBUG(String.join(", ", locations), debug);
+            if (sensorList.isSelectionEmpty()) { 
+                locations = null;  
+            }
+            else {
+                locations = (ArrayList<String>) sensorList.getSelectedValuesList();
+                locations = Filter.parseLocationCodes(locations);
+                MessageDialogs.DEBUG(String.join(", ", locations), debug);
+            }
             
             // Create SQL query
             query = Filter.createDataQuery(startDay, endDay, startMonth, endMonth,

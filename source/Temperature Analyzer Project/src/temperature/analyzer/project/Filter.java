@@ -59,18 +59,27 @@ public class Filter {
         //ArrayList<String> limitedLocation;
         //limiedLocation = DatabaseConnection.filterLocs(sy, ey, locations, threshold);
         
-        String query = "SELECT * FROM APP.Tester WHERE ";
+        String query = "SELECT * FROM APP.Measurement WHERE ";
         
         // Creating date strings
-        String startDate = createDate(sd, sm, sy, sh, smin);
-        String endDate = createDate(ed, em, ey, eh, emin);
-        //query = query + "DATE BETWEEN " + startDate + " AND " + endDate;
+        String startDate = createDate(sd, sm, sy);
+        String startTime = createTime(sh, smin);
+        String endDate = createDate(ed, em, ey);
+        String endTime = createTime(eh, emin);
+        
+        //SELECT b FROM MyTable b WHERE b.date < "+sqlToday";
+        
+        query = query + "\"Date\" BETWEEN '" + startDate + "' AND '" + endDate + "'";
+        
+        query = query + " AND \"Time\" BETWEEN '" + startTime + "' AND '" + endTime + "'";
         
         // will return "", "LOCATION = x", or "LOCATION IN (x,y,z)"
-        String locString = createLocation(locations);
-        if (locString.length() > 0) {
-            //query = query + " AND "+ locString;
-            query = query + locString;
+        if (locations != null) {
+            String locString = createLocation(locations);
+            if (locString.length() > 0) {
+                query = query + " AND "+ locString;
+                //query = query + locString;
+            }
         }
        
         
@@ -78,8 +87,13 @@ public class Filter {
     }
     
     //getting dates together as string
-    public static String createDate (String day, String month, String year, String hour, String min) {
-        String q = month + "/" + day + "/" + year + " " + hour + ":" + min;
+    public static String createDate (String day, String month, String year) {
+        String q = month + "/" + day + "/" + year;
+        return q;
+    }
+    
+    public static String createTime (String hour, String min) {
+        String q = hour + ":" + min;
         return q;
     }
     
