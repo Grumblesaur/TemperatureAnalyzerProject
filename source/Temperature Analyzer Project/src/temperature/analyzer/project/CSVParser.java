@@ -12,22 +12,17 @@ package temperature.analyzer.project;
  */
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JOptionPane;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 public class CSVParser {
     /** Parser algorithm to move data points to database.
-     * @param database A connection to a MySQL database.
      * @param filename The name of the file to be parsed.
      * @throws Exception Because non-generic exceptions are too
      * obnoxious to actually invest time in.
     */
    
-    
     public static void uploadFile(String filename)
         throws Exception {
 

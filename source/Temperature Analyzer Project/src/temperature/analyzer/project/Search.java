@@ -527,8 +527,8 @@ public class Search extends javax.swing.JFrame {
             // 
             // Kris says: maybe something like this:
             // 
-            // ArrayList columnNames = new ArrayList();
-            // ArrayList data = new ArrayList();
+            // ArrayList<String> columnNames = new ArrayList<>();
+            // ArrayList<> data = new ArrayList<>();
             // Statement stmt = databaseCon.createStatement();
             // ResultSet rs = stmt.executeQuery(query);
             // ResultSetMetaData md = rs.getMetaData();
@@ -537,7 +537,7 @@ public class Search extends javax.swing.JFrame {
             //    columnNames.add(md.getColumnName(i));
             // }
             // while (rs.next()){                // get data from rows
-            //    ArrayList row = new ArrayList(columns);
+            //    ArrayList<String> row = new ArrayList<>(columns);
             //    for (int i = 1; i <= columns; i++){
             //       row.add(rs.getObject(i));
             //    }

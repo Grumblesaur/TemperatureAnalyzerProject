@@ -13,24 +13,25 @@ import static java.util.Arrays.sort;
 
 /** Implement ListModel for use in Search module's rendering of location list.
  *
+ * @author rcatlett
  * @author james
  */
-public class SensorListModel implements ListModel<Integer> {
+public class SensorListModel implements ListModel<String> {
     private final ArrayList<ListDataListener> listeners;
-    private Integer[] sensors;
+    private String[] sensors;
     
     public SensorListModel() {
         this.sensors = null;
         this.listeners = new ArrayList<>();
     }
     
-    public SensorListModel(Integer[] sens) {
+    public SensorListModel(String[] sens) {
         this.sensors = sens;
         this.listeners = new ArrayList<>();
     }
     
-    public SensorListModel(ArrayList<Integer> sens) {
-        Integer[] sensorList = new Integer[sens.size()];
+    public SensorListModel(ArrayList<String> sens) {
+        String[] sensorList = new String[sens.size()];
         // Use for-loop because casting locations.toArray() to type String[]
         // causes a runtime exception since Java's type rules are STUPID
         for (int i = 0; i < sens.size(); i++) {
@@ -41,7 +42,7 @@ public class SensorListModel implements ListModel<Integer> {
         this.listeners = new ArrayList<>();
     }
     
-    public void setLocationArray(Integer[] sens) {
+    public void setLocationArray(String[] sens) {
         this.sensors = sens;
     }
     
@@ -53,9 +54,9 @@ public class SensorListModel implements ListModel<Integer> {
         return sensors.length == 0;
     }
     
-    public ArrayList<Integer> getArrayList() {
-        ArrayList<Integer> sensList = new ArrayList<>();
-        for (Integer s : sensors) {
+    public ArrayList<String> getArrayList() {
+        ArrayList<String> sensList = new ArrayList<>();
+        for (String s : sensors) {
             sensList.add(s);
         }
         return sensList;
@@ -68,7 +69,7 @@ public class SensorListModel implements ListModel<Integer> {
     }
     
     @Override
-    public Integer getElementAt(int index) {
+    public String getElementAt(int index) {
         return sensors[index];
     }
     

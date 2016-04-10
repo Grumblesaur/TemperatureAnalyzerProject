@@ -9,15 +9,12 @@ package temperature.analyzer.project;
 /** Helper module for parsing field data from search page and creating SQL
  * queries.
  * @author james
+ * @author rcatlett
  */
 
 /* Imports */
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
-import static temperature.analyzer.project.Search.debug;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 
 public class Filter {
@@ -27,7 +24,7 @@ public class Filter {
      * @return An ArrayList of location three-letter codes
      */
     public static ArrayList<String> parseLocationCodes(ArrayList<String> locs) {
-        ArrayList<String> newlocs = new ArrayList<String>();
+        ArrayList<String> newlocs = new ArrayList<>();
         for (String loc : locs) {
             newlocs.add(loc.split(" ")[0]);
         }
@@ -144,16 +141,18 @@ public class Filter {
      * 
      * @return An ArrayList populated with location names.
      */
-    public static ArrayList<Integer> getSensors() {
-        ArrayList<Integer> sensors = new ArrayList<>();
+    public static ArrayList<String> getSensors() {
+        ArrayList<String> sensors = new ArrayList<>();
         // From database
         try {
             databaseCon.searchData(databaseCon, "SELECT * FROM APP.SENSOR","");
             Integer serial;
+            String locationCode = "";
             while(databaseCon.rs.next()) {
                 serial = databaseCon.rs.getInt(1);
-                //MessageDialogs.DEBUG(serial.toString(), debug);
-                sensors.add(serial);
+                locationCode = databaseCon.rs.getString(2);
+                //MessageDialogs.DEBUG(serial.toString(), true);
+                sensors.add(serial.toString() + ", " + locationCode);
             }
         } catch (SQLException err) {
             MessageDialogs.readDatabase(err.getMessage());
