@@ -10,7 +10,6 @@ package temperature.analyzer.project;
  * @author jmurp
  */
 
-import java.util.List;
 import java.sql.ResultSet;
 
 public class Calculation {

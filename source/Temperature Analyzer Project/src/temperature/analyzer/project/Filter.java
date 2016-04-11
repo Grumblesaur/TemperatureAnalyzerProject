@@ -147,7 +147,7 @@ public class Filter {
         try {
             databaseCon.searchData(databaseCon, "SELECT * FROM APP.SENSOR","");
             Integer serial;
-            String locationCode = "";
+            String locationCode;
             while(databaseCon.rs.next()) {
                 serial = databaseCon.rs.getInt(1);
                 locationCode = databaseCon.rs.getString(2);

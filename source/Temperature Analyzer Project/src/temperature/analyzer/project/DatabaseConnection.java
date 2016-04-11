@@ -369,7 +369,6 @@ public class DatabaseConnection {
     }
     
     public void searchData (DatabaseConnection db, String query, String threshold) {
-       
         try {
             db.stmt = db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);

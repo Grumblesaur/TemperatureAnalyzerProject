@@ -30,6 +30,7 @@ public class Search extends javax.swing.JFrame {
     ArrayList<String> locations;
     String[] locationArray = null;
     LocationListModel llm;
+    SaveSearchListModel previousQueries;
     
     /**
      * Creates new form to build SQL search queries
@@ -42,7 +43,7 @@ public class Search extends javax.swing.JFrame {
             MessageDialogs.InternalError("No locations stored!");
         }
         llm = new LocationListModel(locations);
-        
+        previousQueries = new SaveSearchListModel();
         initComponents();
         if (!sessionData) {
             viewDataButton.setVisible(false);
@@ -523,27 +524,6 @@ public class Search extends javax.swing.JFrame {
                     locations, sensorHours);
             
             MessageDialogs.DEBUG("Query to Database is: " + query, debug);
-
-            // TODO: execute SQL query and obtain returnset
-            // 
-            // Kris says: maybe something like this:
-            // 
-            // ArrayList<String> columnNames = new ArrayList<>();
-            // ArrayList<> data = new ArrayList<>();
-            // Statement stmt = databaseCon.createStatement();
-            // ResultSet rs = stmt.executeQuery(query);
-            // ResultSetMetaData md = rs.getMetaData();
-            // int columns = md.getColumnCount();
-            // for (int i = 1; i <= columns; i++){ // get column names
-            //    columnNames.add(md.getColumnName(i));
-            // }
-            // while (rs.next()){                // get data from rows
-            //    ArrayList<String> row = new ArrayList<>(columns);
-            //    for (int i = 1; i <= columns; i++){
-            //       row.add(rs.getObject(i));
-            //    }
-            //    data.add(row);
-            // }
             
             databaseCon.searchData(databaseCon, query, sensorHours);
             dataForSession = databaseCon.rs;
@@ -561,7 +541,7 @@ public class Search extends javax.swing.JFrame {
         } catch (SQLException err) {
             MessageDialogs.tableError(err.getMessage());
         } 
-    }//GEN-LAST:event_submitSearchActionPerformed
+    }                                            
 
     private void submitPrevSearchActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO: grab previously selected search and apply a year range to it.
@@ -576,7 +556,7 @@ public class Search extends javax.swing.JFrame {
         */
         
         
-    }//GEN-LAST:event_submitPrevSearchActionPerformed
+    }                                                
 
     private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
