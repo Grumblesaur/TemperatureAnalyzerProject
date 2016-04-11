@@ -27,165 +27,173 @@ public class DatabaseConnection {
     ResultSet rs;
     int curRow = 0;
     ArrayList<Statement> statements = new ArrayList<>();
+    
+    
+    String dbName = "mytap";
     String protocol = "jdbc:derby:";
+    private String dbURL = protocol + dbName + ";create=true";
     public DatabaseConnection() {
         try {
-               // Connect to the network database
-              // String host = "jdbc:derby://localhost:1527/mytap";
-              // String uName = "root";
-              // String uPass = "pass";
-              // con = DriverManager.getConnection(host, uName, uPass);
-              //Connect to embedded database
-              Properties props = new Properties();
-              String dbName = "mytap";
-              con = DriverManager.getConnection(protocol + dbName + ";create=true",
-                      props);
-              
-              stmt = con.createStatement();
-              statements.add(stmt);
-              con.setAutoCommit(false);
-              
-              //creates Location table
-              String query ="CREATE TABLE APP.LOCATION (\"Symbol\" VARCHAR(3) NOT NULL primary key," +
-                                                    "\"Location\" VARCHAR(45) NOT NULL)";
-              //creates Sensor Table
-              String query2 = "CREATE TABLE APP.SENSOR("+
-                                  "\"Serial_Number\" INTEGER NOT NULL primary key," +
-                                  "\"Location_Symbol\" VARCHAR(3) REFERENCES APP.LOCATION (\"Symbol\"))";
-              //creates Measurement Table
-              String query3 = "CREATE TABLE APP.MEASUREMENT (\"Temperature\" DECIMAL (9,4)," +
-                 "\"Date\" DATE, \"Time\" TIME,\"Location_Symbol\" VARCHAR(3) NOT NULL "
-                 + "REFERENCES APP.Location (\"Symbol\"))";
-              
-              //add queries
-              boolean locationExist = isTableExist("Location", query);
-              boolean sensorExist = isTableExist("Sensor", query2);
-              boolean measurementExist  = isTableExist("Measurement",query3);
-              if(locationExist){
-                
-                DatabaseMetaData meta = con.getMetaData();
-                    try (ResultSet res = meta.getTables(null, null, null, new String[] {"TABLE"})) {
-                        System.out.println("List of Tables: ");
-                        while (res.next()){
-                            System.out.println(res.getString("TABLE_NAME"));
-                        }   }
-            }
-            if(locationExist){
-               stmt.execute("Delete From Sensor Where 1=1");
+            // Connect to the network database
+            // String host = "jdbc:derby://localhost:1527/mytap";
+            // String uName = "root";
+            // String uPass = "pass";
+            // con = DriverManager.getConnection(host, uName, uPass);
+            //Connect to embedded database
+            
+            Properties props = new Properties();
+            con = DriverManager.getConnection(dbURL, props);
+            con.setAutoCommit(true);
+            
+            stmt = con.createStatement();
+            statements.add(stmt);
+            con.setAutoCommit(false);
+
+            //creates Location table
+            String query ="CREATE TABLE LOCATION (\"Symbol\" VARCHAR(3) NOT NULL primary key," +
+                                                  "\"Location\" VARCHAR(45) NOT NULL)";
+            //creates Sensor Table
+            String query2 = "CREATE TABLE SENSOR("+
+                                "\"Serial_Number\" INTEGER NOT NULL primary key," +
+                                "\"Location_Symbol\" VARCHAR(3) REFERENCES LOCATION (\"Symbol\"))";
+            //creates Measurement Table
+            String query3 = "CREATE TABLE MEASUREMENT (\"Temperature\" DECIMAL (9,4)," +
+               "\"Date\" DATE, \"Time\" TIME,\"Location_Symbol\" VARCHAR(3) NOT NULL "
+               + "REFERENCES LOCATION (\"Symbol\"))";
+
+            //add queries
+            boolean locationExist = isTableExist("Location", query);
+            boolean sensorExist = isTableExist("Sensor", query2);
+            boolean measurementExist  = isTableExist("Measurement",query3);
+            
+            if(!locationExist){
                stmt.execute(loadLocation());
+            }
+            if(!sensorExist){
                stmt.execute(loadSensor());
             }
 
-           } catch (SQLException err) {
-               MessageDialogs.noConnectionError(err.getMessage());
-           }
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+            if (err.getNextException() !=null) {
+                MessageDialogs.noConnectionError(err.getNextException().getMessage());
+            }
+        }
     }
+    
     private boolean isTableExist(String sTablename, String query) throws SQLException{
         boolean exists = false;
-        if(con!=null)
-        {
-        
+        if(con!=null) {
             DatabaseMetaData dbmd = con.getMetaData();
             ResultSet db = dbmd.getTables(null, null, sTablename.toUpperCase(),null);
-            if(db.next()){
+            if(db.next()) {
                 exists=true;
-                    //System.out.println("Table "+db.getString("TABLE_NAME")+"already exists !!");
-            }else {
-            //System.out.println("Write your create table function here !!!");
-            stmt.execute(query);
-            }   return exists; }
+                //System.out.println("Table "+db.getString("TABLE_NAME")+"already exists !!");
+            } 
+            else {
+                //System.out.println("Write your create table function here !!!");
+                stmt.execute(query);
+            } 
+            db.close();
+        }
         return exists;
     }   
+    
+    private String loadSensor() {
+        return  "INSERT INTO APP.SENSOR (\"Serial_Number\", \"Location_Symbol\") VALUES " +
+            "(441384,(select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+            "(532797, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BMS'))," +
+            "(532798, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPA'))," +
+            "(532800, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HRC'))," +
+            "(532801, (select \"Symbol\" from APP.Location where \"Symbol\" = 'NPE'))," +
+            "(533551, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPT'))," +
+            "(533560, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EMP'))," +
+            "(555494, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
+            "(555497, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GRV'))," +
+            "(555498, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MER'))," +
+            "(555501, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GEP'))," +
+            "(555502, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WFM'))," +
+            "(555505, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BOR'))," +
+            "(555506, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LSP'))," +
+            "(625100, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MOM'))," +
+            "(625102, (select \"Symbol\" from APP.Location where \"Symbol\" = 'DIN'))," +
+            "(695788, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+            "(710736, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
+            "(710737, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GOB'))," +
+            "(710738, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+            "(710739, (select \"Symbol\" from APP.Location where \"Symbol\" = 'SBM'))," +
+            "(733935, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WME'))," +
+            "(733936, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GBR'))," +
+            "(733937, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEM'))," +
+            "(733938, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+            "(733939, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CKL'))," +
+            "(984395, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HWY'))," +
+            "(1001871, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BRR'))," +
+            "(1001872, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EDC'))," +
+            "(1001873, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CCR'))," +
+            "(1001874, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LPJ'))";
 
+    }
+        
+    private String loadLocation() {
+        return "INSERT INTO APP.LOCATION VALUES ('BMS', 'Bald Mesa')," +
+            "('BBR', 'Beaver Ba Rd Camp'), ('BOR', 'Boren Mesa')," +
+            "('BRR', 'Brumley Ridge'), ('BPA', 'Burro Pass')," +
+            "('BPT', 'Burro Pass Trail'), ('CCR', 'Chicken Creek')," +
+            "('CKL', 'Clark Lake'), ('DIN', 'Dinosaur Tracks')," +
+            "('DFM', 'Dry Fork Mill Cr'), ('EDC', 'E. Dark Canyon')," +
+            "('EMP', 'E. Mt. Peale'), ('GEP', 'Geyser Pass')," +
+            "('GOB', 'Gold Basin'), ('GBR', 'Gold Basin Road')," +
+            "('GRV', 'Grandview'), ('HRC', 'Horse Creek')," +
+            "('HWY', 'Hwy 46 La Sal'), ('LSP', 'La Sal Pass')," +
+            "('LPJ', 'L SAl Pass Jct'), ('LSS', 'La Sal SNOTEL site')," +
+            "('LBB', 'Lower Beaver Basin'), ('LGP', 'Lower Geyser Pa Rd')," +
+            "('MER', 'Mellenthin E Ridge'), ('MEM', 'Mellenthin Meadows')," +
+            "('MOM', 'Moonlight Meadows'), ('MEL', 'Mt. Mellenthin')," +
+            "('NPE', 'N. Peale RG'), ('SBM', 'South Beaver Mesa')," +
+            "('UBB', 'Upper Beaver Basin'), ('UD1', 'Upper Dark Canyon')," +
+            "('UDC', 'Upper Dark Canyon 2'), ('WME', 'Warner Meadows')," +
+            "('WFM', 'Wet Fork Mill Cr'), ('OFF', 'Office')";    
+ }
+    
+    public void save() {
+        try {
+            if (this.rs != null)
+            {
+                this.rs.close();
+            }
+            if (this.stmt != null)
+            {
+                this.stmt.close();
+            }
+            if (this.con != null)
+            {
+                DriverManager.getConnection(dbURL + ";shutdown=true");
+                this.con.close();
+            }           
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+
+    }
+    
     public void addData(DatabaseConnection db, String loc, String date, String time, String temp){
         try {
-            String SQL = "INSERT INTO APP.Measurement VALUES (" + temp +
+            String SQL = "INSERT INTO Measurement VALUES (" + temp +
                 ", '" + date + "', '" + time + "', (SELECT \"Symbol\" FROM" +
-                " APP.LOCATION WHERE \"Symbol\" = '" + loc + "'))"; 
+                " LOCATION WHERE \"Symbol\" = '" + loc + "'))"; 
            
             //MessageDialogs.DEBUG(SQL, debug);
             db.stmt = db.con.createStatement();
             db.stmt.executeUpdate(SQL);
+            db.stmt.close();
             
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
-        private String loadSensor() throws SQLException{
-        return  "INSERT INTO APP.SENSOR (\"Serial_Number\", \"Location_Symbol\") VALUES " +
-"(441384,(select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
-"(532797, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BMS'))," +
-"(532798, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPA'))," +
-"(532800, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HRC'))," +
-"(532801, (select \"Symbol\" from APP.Location where \"Symbol\" = 'NPE'))," +
-"(533551, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPT'))," +
-"(533560, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EMP'))," +
-"(555494, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
-"(555497, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GRV'))," +
-"(555498, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MER'))," +
-"(555501, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GEP'))," +
-"(555502, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WFM'))," +
-"(555505, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BOR'))," +
-"(555506, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LSP'))," +
-"(625100, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MOM'))," +
-"(625102, (select \"Symbol\" from APP.Location where \"Symbol\" = 'DIN'))," +
-"(695788, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
-"(710736, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
-"(710737, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GOB'))," +
-"(710738, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
-"(710739, (select \"Symbol\" from APP.Location where \"Symbol\" = 'SBM'))," +
-"(733935, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WME'))," +
-"(733936, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GBR'))," +
-"(733937, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEM'))," +
-"(733938, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
-"(733939, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CKL'))," +
-"(984395, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HWY'))," +
-"(1001871, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BRR'))," +
-"(1001872, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EDC'))," +
-"(1001873, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CCR'))," +
-"(1001874, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LPJ'))";
-
-    }
-        
- private String loadLocation() throws SQLException{
-        stmt.execute("Delete From Location Where 1=1");
-        return "INSERT INTO APP.LOCATION VALUES\n" +
-"('BMS', 'Bald Mesa'),\n" +
-"('BBR', 'Beaver Ba Rd Camp'),\n" +
-"('BOR', 'Boren Mesa'),\n" +
-"('BRR', 'Brumley Ridge'),\n" +
-"('BPA', 'Burro Pass'),\n" +
-"('BPT', 'Burro Pass Trail'),\n" +
-"('CCR', 'Chicken Creek'),\n" +
-"('CKL', 'Clark Lake'),\n" +
-"('DIN', 'Dinosaur Tracks'),\n" +
-"('DFM', 'Dry Fork Mill Cr'),\n" +
-"('EDC', 'E. Dark Canyon'),\n" +
-"('EMP', 'E. Mt. Peale'),\n" +
-"('GEP', 'Geyser Pass'),\n" +
-"('GOB', 'Gold Basin'),\n" +
-"('GBR', 'Gold Basin Road'),\n" +
-"('GRV', 'Grandview'),\n" +
-"('HRC', 'Horse Creek'),\n" +
-"('HWY', 'Hwy 46 La Sal'),\n" +
-"('LSP', 'La Sal Pass'),\n" +
-"('LPJ', 'L SAl Pass Jct'),\n" +
-"('LSS', 'La Sal SNOTEL site'),\n" +
-"('LBB', 'Lower Beaver Basin'),\n" +
-"('LGP', 'Lower Geyser Pa Rd'),\n" +
-"('MER', 'Mellenthin E Ridge'),\n" +
-"('MEM', 'Mellenthin Meadows'),\n" +
-"('MOM', 'Moonlight Meadows'),\n" +
-"('MEL', 'Mt. Mellenthin'),\n" +
-"('NPE', 'N. Peale RG'),\n" +
-"('SBM', 'South Beaver Mesa'),\n" +
-"('UBB', 'Upper Beaver Basin'),\n" +
-"('UD1', 'Upper Dark Canyon'),\n" +
-"('UDC', 'Upper Dark Canyon 2'),\n" +
-"('WME', 'Warner Meadows'),\n" +
-"('WFM', 'Wet Fork Mill Cr'),\n" +
-"('OFF', 'Office')";    
- }
+    
+    
     // Funciton to check if a location is unique
     public boolean canAdd(String code, String loc) {
         boolean canAdd = false;
@@ -198,6 +206,7 @@ public class DatabaseConnection {
             if (!codeRS.isBeforeFirst()){
                 canAdd = true;
             }
+            codeRS.close();
         } catch (SQLException err) {
            MessageDialogs.noConnectionError(err.getMessage());
         }
@@ -210,13 +219,14 @@ public class DatabaseConnection {
         try {
             this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Location WHERE \"Symbol\" = '" +
+            String SQL = "SELECT * FROM Location WHERE \"Symbol\" = '" +
                     code + "' AND  \"Location\" = '" + loc + "'";
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
                 //here if RS is empty
                 exist = false;
             }
+            codeRS.close();
         } catch (SQLException err) {
            MessageDialogs.noConnectionError(err.getMessage());
         }
@@ -229,12 +239,13 @@ public class DatabaseConnection {
         try {
             this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Sensor WHERE \"Serial_Number\" = " + serial;
+            String SQL = "SELECT * FROM Sensor WHERE \"Serial_Number\" = " + serial;
             ResultSet codeRS = this.stmt.executeQuery(SQL);
             if (!codeRS.isBeforeFirst()){
                 //here if RS is empty
                 exist = false;
             }
+            codeRS.close();
         } catch (SQLException err) {
            MessageDialogs.noConnectionError(err.getMessage());
         }
@@ -250,7 +261,7 @@ public class DatabaseConnection {
      */
     public void addLoc(String code, String loc){
         try {
-            String SQL = "INSERT INTO APP.Location VALUES ('" + code + "', '" + loc + "')";
+            String SQL = "INSERT INTO Location VALUES ('" + code + "', '" + loc + "')";
             this.stmt.executeUpdate(SQL);
           
             this.stmt.close();
@@ -265,7 +276,7 @@ public class DatabaseConnection {
         boolean done = false;
         try {
             if (!this.checkDependency(code)) {
-                String SQL = "DELETE FROM APP.Location WHERE \"Symbol\" = '" +
+                String SQL = "DELETE FROM Location WHERE \"Symbol\" = '" +
                         code + "' AND \"Location\" = '" + loc + "'";
                 this.stmt.executeUpdate(SQL);
                 done = true;
@@ -293,7 +304,7 @@ public class DatabaseConnection {
             toMove += ")";
             
             this.stmt = this.con.createStatement();
-            String SQL = "UPDATE APP.Sensor SET \"Location_Symbol\" = '" +
+            String SQL = "UPDATE Sensor SET \"Location_Symbol\" = '" +
                     newLoc + "' WHERE \"Serial_Number\" IN " + toMove;
             
             this.stmt.executeUpdate(SQL);
@@ -309,8 +320,8 @@ public class DatabaseConnection {
         try {
             this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String SQL = "INSERT INTO APP.Sensor VALUES (" + serial;
-            SQL = SQL + ", (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))";
+            String SQL = "INSERT INTO Sensor VALUES (" + serial;
+            SQL = SQL + ", (select \"Symbol\" from Location where \"Symbol\" = 'OFF'))";
             this.stmt.executeUpdate(SQL);
             
             this.stmt.close();
@@ -325,7 +336,7 @@ public class DatabaseConnection {
         boolean done = false;
         try {
             String s = serial.toString();
-            String SQL = "DELETE FROM APP.Sensor WHERE \"Serial_Number\" = " + s;
+            String SQL = "DELETE FROM Sensor WHERE \"Serial_Number\" = " + s;
             this.stmt.executeUpdate(SQL);
             done = true;
 
@@ -343,12 +354,14 @@ public class DatabaseConnection {
         try {
             this.stmt = this.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            String SQL = "SELECT * FROM APP.Sensor WHERE \"Location_Symbol\" = '"+ c + "'";
+            String SQL = "SELECT * FROM Sensor WHERE \"Location_Symbol\" = '"+ c + "'";
             ResultSet test = this.stmt.executeQuery(SQL);
             
             if (test.isBeforeFirst()) {
                 exists = true;
             }
+            test.close();
+            this.stmt.close();
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
         }
