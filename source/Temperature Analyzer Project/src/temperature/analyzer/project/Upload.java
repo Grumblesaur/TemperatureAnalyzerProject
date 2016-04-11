@@ -271,15 +271,14 @@ public class Upload extends javax.swing.JFrame {
              // use path instead of filename
 
             try {
-                
-                CSVParser.uploadFile(filePath);
-                
-                sessionData = true;
-                //TODO Change to just search uploaded data
-                databaseCon.searchData(databaseCon, "SELECT * FROM APP.Measurement", "1000");
-                dataForSession = databaseCon.rs;
-                new SearchOutput().setVisible(true);
-                this.setVisible(false);
+                if (CSVParser.uploadFile(filePath)) {
+                    sessionData = true;
+                    //TODO Change to just search uploaded data
+                    databaseCon.searchData(databaseCon, "SELECT * FROM APP.Measurement", "1000");
+                    dataForSession = databaseCon.rs;
+                    new SearchOutput().setVisible(true);
+                    this.setVisible(false);
+                }
             } catch (SQLException err){
                 MessageDialogs.noConnectionError(err.getMessage());
             } catch (Exception ex) {

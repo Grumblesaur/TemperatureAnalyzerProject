@@ -19,13 +19,14 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 public class CSVParser {
     /** Parser algorithm to move data points to database.
      * @param filename The name of the file to be parsed.
+     * @return 
      * @throws Exception Because non-generic exceptions are too
      * obnoxious to actually invest time in.
     */
    
-    public static void uploadFile(String filename)
+    public static boolean uploadFile(String filename)
         throws Exception {
-
+            boolean uploaded = false;
             /* Inform client about input requirements, demonstrate how gnarly
                     an xls file is under the hood to support this point.
             */
@@ -60,40 +61,47 @@ public class CSVParser {
                    MessageDialogs.UploadError("Issue with header capture!");
                    throw new Exception("Issue with header capture!");
             }
-
-            /* Obtain one line at a time and write the temperature data to DB.*/
-            line = bufr.readLine();
-            String[] point;
             
-            MessageDialogs.DEBUG("Reading File", debug);
-            String[] dateAndTime;
-            String[] dateParts;
-            while (line != null) {
-                    line = bufr.readLine();
-                    if (line != null) {
-                        point = line.split(",");
-                        dateAndTime = point[0].split(" ");
-                        dateParts = dateAndTime[0].split("/");
-                        date = dateParts[0] + "/" + dateParts[1]+ "/20" + dateParts[2];
-                        time = dateAndTime[1];
-                        /* Assign NaN if no measurement was recorded at this time. */
-                        if (point.length == 2) {
-                                temp = point[1];
-                        } else {
-                                temp = "null";
+            if (databaseCon.checkDependency(location)) {
+
+                /* Obtain one line at a time and write the temperature data to DB.*/
+                line = bufr.readLine();
+                String[] point;
+
+                MessageDialogs.DEBUG("Reading File", debug);
+                String[] dateAndTime;
+                String[] dateParts;
+                while (line != null) {
+                        line = bufr.readLine();
+                        if (line != null) {
+                            point = line.split(",");
+                            dateAndTime = point[0].split(" ");
+                            dateParts = dateAndTime[0].split("/");
+                            date = dateParts[0] + "/" + dateParts[1]+ "/20" + dateParts[2];
+                            time = dateAndTime[1];
+                            /* Assign NaN if no measurement was recorded at this time. */
+                            if (point.length == 2) {
+                                    temp = point[1];
+                            } else {
+                                    temp = "null";
+                            }
+
+                            /* we have proven that the parser can loop through the file,
+                                so we'll hide this dialogue box pop-up to avoid prompting the
+                                user 50,000+ times
+                            */
+                            //MessageDialogs.showData(location, date, time, temp, debug);
+                            databaseCon.addData(databaseCon, location, date, time, temp);
+
                         }
-
-                        /* we have proven that the parser can loop through the file,
-                            so we'll hide this dialogue box pop-up to avoid prompting the
-                            user 50,000+ times
-                        */
-                        //MessageDialogs.showData(location, date, time, temp, debug);
-                        databaseCon.addData(databaseCon, location, date, time, temp);
-                        
-                    }
+                }
+                MessageDialogs.UploadSuccess();
+                uploaded=true;
             }
-            MessageDialogs.UploadSuccess();
-            
+            else {
+                MessageDialogs.UploadFail();
+            }
+        return uploaded;
     }
 
     /* Actual database communication pending. Write output to console. 

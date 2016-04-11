@@ -46,7 +46,11 @@ public class MessageDialogs {
     }
     
     public static void UploadSuccess() {
-        JOptionPane.showMessageDialog(null, "Done", "Upload Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Upload Success", "Done", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public static void UploadFail() {
+        JOptionPane.showMessageDialog(null, "Upload Failed", "Done", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public static void InputError(String msg) {
