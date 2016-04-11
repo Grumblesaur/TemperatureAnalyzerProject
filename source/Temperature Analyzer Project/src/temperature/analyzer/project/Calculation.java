@@ -10,7 +10,7 @@ package temperature.analyzer.project;
  * @author jmurp
  */
 
-import java.util.List;
+import java.sql.ResultSet;
 
 public class Calculation {
     
@@ -18,22 +18,22 @@ public class Calculation {
     // may need to cast result set to some type of list (probably ArrayList)
     
     /** Calculate record high for entire result set. */
-    public static double recordHigh(List l) {
+    public static double recordHigh(ResultSet data) {
         return 0.00; // dummy value for compilation
     }
     
     /** Calculate record low for entire result set. */
-    public static double recordLow(List l) {
+    public static double recordLow(ResultSet data) {
         return 0.00; // dummy value for compilation
     }
     
     /** Calculate average for entire result set. */
-    public static double average(List l) {
+    public static double average(ResultSet data) {
         return 0.00; // dummy value for compilation
     }
     
     /** Obtain an array of highs for each month. */
-    public static double[] monthlyHighs(List l) {
+    public static double[] monthlyHighs(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
         // break list into slices of months
@@ -43,7 +43,7 @@ public class Calculation {
     }
     
     /** Obtain an array of lows for each month. */
-    public static double[] monthlyLows(List l) {
+    public static double[] monthlyLows(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
         // break list into slices of months
@@ -53,7 +53,7 @@ public class Calculation {
     }
     
     /** Obtain an array of average temperatures for each month. */
-    public static double[] monthlyAverage(List l) {
+    public static double[] monthlyAverage(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
         // break list into slices of month

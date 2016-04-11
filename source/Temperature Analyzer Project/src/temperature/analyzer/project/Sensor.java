@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 /**
- *
+ * @author rcatlett
  * @author Quinntero
  * @author james
  */
@@ -33,9 +33,9 @@ public class Sensor extends javax.swing.JFrame {
         
         // store three-letter codes separately
         codes = new ArrayList<>();
-        for (String loc : locations) {
+        locations.stream().forEach((loc) -> {
             codes.add(loc.split(" ")[0]);
-        }
+        });
         
         locCode = locName = "";
         llm = new LocationListModel(locations);
@@ -641,10 +641,8 @@ public class Sensor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Home().setVisible(true);
         });
     }
 
