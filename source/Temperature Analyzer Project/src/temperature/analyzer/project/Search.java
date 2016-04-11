@@ -544,7 +544,7 @@ public class Search extends javax.swing.JFrame {
             //    }
             //    data.add(row);
             // }
-
+            
             databaseCon.searchData(databaseCon, query, sensorHours);
             dataForSession = databaseCon.rs;
             
