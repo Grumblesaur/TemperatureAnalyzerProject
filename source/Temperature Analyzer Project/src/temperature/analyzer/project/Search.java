@@ -484,6 +484,7 @@ public class Search extends javax.swing.JFrame {
             endYear = stopYearSpinner.getValue().toString();
             startHour = startHourSpinner.getValue().toString();
             endHour = stopHourSpinner.getValue().toString();
+            // Add extra minute digit
             startMinute = startMinuteSpinner.getValue().toString();
             if (startMinute.length() < 2) {
                 startMinute = "0" + startMinute;
