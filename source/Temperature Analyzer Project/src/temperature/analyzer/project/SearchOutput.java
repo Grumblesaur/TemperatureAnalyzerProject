@@ -6,7 +6,10 @@
 package temperature.analyzer.project;
 
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 
@@ -25,37 +28,38 @@ public class SearchOutput extends javax.swing.JFrame {
         if (!sessionData){
             viewDataButton.setVisible(false);
         }
-        resultTable.setVisible(false);
-        setTable();
+        JTable resultTable = new JTable(setTable());
+        jScrollPane1.getViewport().add(resultTable);
         
     }
     
-    private void setTable() {
-        Object[][] data = null;
+    // algorithm borrowed from 
+    // http://stackoverflow.com/questions/930745/how-do-i-display-a-java-resultset-visually
+    private DefaultTableModel setTable() {
         String[] colNames = null;
-        
-        // Copied/Modified from http://stackoverflow.com/questions/930745/how-do-i-display-a-java-resultset-visually
+        DefaultTableModel model = new DefaultTableModel();
         try {
             ResultSetMetaData meta = dataForSession.getMetaData();
             colNames = new String[meta.getColumnCount()];
             for (int i = 0; i < colNames.length; i++) {
                 colNames[i] = meta.getColumnLabel(i+1);
             }
-            data = new Object[0][colNames.length];
-            int row = 0;
+            
+            model.setColumnIdentifiers(colNames);
+            
             while(dataForSession.next()) {
-                for (int i = 0; i < colNames.length; i++) {
-                    data[row][i] = dataForSession.getObject(i+1);
+                Object data[] = new Object[colNames.length];
+                for (int i = 0; i < data.length; i++) {
+                    data[i] = dataForSession.getObject(i+1);
+                    //JOptionPane.showMessageDialog(null, data[i], "Database Column", JOptionPane.INFORMATION_MESSAGE);
                 }
-                row++;
+                model.addRow(data);
             }
             
         } catch (Exception err) {
             MessageDialogs.tableError(err.getMessage());
         } 
-        
-        resultTable = new JTable(data, colNames);
-        resultTable.setVisible(true); 
+        return model;
     }
 
     /**
@@ -78,7 +82,6 @@ public class SearchOutput extends javax.swing.JFrame {
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        resultTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         plotButton = new javax.swing.JButton();
         newSearchButton = new javax.swing.JButton();
@@ -165,25 +168,6 @@ public class SearchOutput extends javax.swing.JFrame {
         taplogoLabel.setText("jLabel2");
 
         worldmapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/world_map.png"))); // NOI18N
-
-        resultTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        resultTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Location", "Date", "Time", "Temperature"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(resultTable);
 
         jLabel1.setText("<html><u><b>Filter</u></b><p>Date Interval:   startDateSpin - endDateSpin</p><p>Sensors:</p>");
 
@@ -280,7 +264,7 @@ public class SearchOutput extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(632, 725, Short.MAX_VALUE))
+                .addGap(632, 1141, Short.MAX_VALUE))
         );
 
         pack();
@@ -392,7 +376,6 @@ public class SearchOutput extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton newSearchButton;
     private javax.swing.JButton plotButton;
-    private javax.swing.JTable resultTable;
     private java.awt.Scrollbar scrollbar1;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;
