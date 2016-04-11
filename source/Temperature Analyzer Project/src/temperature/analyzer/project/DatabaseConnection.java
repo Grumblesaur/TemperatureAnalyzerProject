@@ -6,12 +6,14 @@
 package temperature.analyzer.project;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 import javax.swing.JOptionPane;
 import static temperature.analyzer.project.Search.debug;
 
@@ -24,20 +26,77 @@ public class DatabaseConnection {
     Statement stmt;
     ResultSet rs;
     int curRow = 0;
-        
+    ArrayList<Statement> statements = new ArrayList<>();
+    String protocol = "jdbc:derby:";
     public DatabaseConnection() {
         try {
-               // Connect to the database
-               String host = "jdbc:derby://localhost:1527/mytap";
-               String uName = "root";
-               String uPass = "pass";
-               con = DriverManager.getConnection(host, uName, uPass);
+               // Connect to the network database
+              // String host = "jdbc:derby://localhost:1527/mytap";
+              // String uName = "root";
+              // String uPass = "pass";
+              // con = DriverManager.getConnection(host, uName, uPass);
+              //Connect to embedded database
+              Properties props = new Properties();
+              String dbName = "mytap";
+              con = DriverManager.getConnection(protocol + dbName + ";create=true",
+                      props);
+              
+              stmt = con.createStatement();
+              statements.add(stmt);
+              con.setAutoCommit(false);
+              
+              //creates Location table
+              String query ="CREATE TABLE APP.LOCATION (\"Symbol\" VARCHAR(3) NOT NULL primary key," +
+                                                    "\"Location\" VARCHAR(45) NOT NULL)";
+              //creates Sensor Table
+              String query2 = "CREATE TABLE APP.SENSOR("+
+                                  "\"Serial_Number\" INTEGER NOT NULL primary key," +
+                                  "\"Location_Symbol\" VARCHAR(3) REFERENCES APP.LOCATION (\"Symbol\"))";
+              //creates Measurement Table
+              String query3 = "CREATE TABLE APP.MEASUREMENT (\"Temperature\" DECIMAL (9,4)," +
+                 "\"Date\" DATE, \"Time\" TIME,\"Location_Symbol\" VARCHAR(3) NOT NULL "
+                 + "REFERENCES APP.Location (\"Symbol\"))";
+              
+              //add queries
+              boolean locationExist = isTableExist("Location", query);
+              boolean sensorExist = isTableExist("Sensor", query2);
+              boolean measurementExist  = isTableExist("Measurement",query3);
+              if(locationExist){
+                
+                DatabaseMetaData meta = con.getMetaData();
+                    try (ResultSet res = meta.getTables(null, null, null, new String[] {"TABLE"})) {
+                        System.out.println("List of Tables: ");
+                        while (res.next()){
+                            System.out.println(res.getString("TABLE_NAME"));
+                        }   }
+            }
+            if(locationExist){
+               stmt.execute("Delete From Sensor Where 1=1");
+               stmt.execute(loadLocation());
+               stmt.execute(loadSensor());
+            }
 
            } catch (SQLException err) {
                MessageDialogs.noConnectionError(err.getMessage());
            }
     }
-    
+    private boolean isTableExist(String sTablename, String query) throws SQLException{
+        boolean exists = false;
+        if(con!=null)
+        {
+        
+            DatabaseMetaData dbmd = con.getMetaData();
+            ResultSet db = dbmd.getTables(null, null, sTablename.toUpperCase(),null);
+            if(db.next()){
+                exists=true;
+                    //System.out.println("Table "+db.getString("TABLE_NAME")+"already exists !!");
+            }else {
+            //System.out.println("Write your create table function here !!!");
+            stmt.execute(query);
+            }   return exists; }
+        return exists;
+    }   
+
     public void addData(DatabaseConnection db, String loc, String date, String time, String temp){
         try {
             String SQL = "INSERT INTO APP.Measurement VALUES (" + temp +
@@ -52,7 +111,81 @@ public class DatabaseConnection {
             MessageDialogs.noConnectionError(err.getMessage());
         }
     }
-    
+        private String loadSensor() throws SQLException{
+        return  "INSERT INTO APP.SENSOR (\"Serial_Number\", \"Location_Symbol\") VALUES " +
+"(441384,(select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+"(532797, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BMS'))," +
+"(532798, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPA'))," +
+"(532800, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HRC'))," +
+"(532801, (select \"Symbol\" from APP.Location where \"Symbol\" = 'NPE'))," +
+"(533551, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BPT'))," +
+"(533560, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EMP'))," +
+"(555494, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
+"(555497, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GRV'))," +
+"(555498, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MER'))," +
+"(555501, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GEP'))," +
+"(555502, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WFM'))," +
+"(555505, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BOR'))," +
+"(555506, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LSP'))," +
+"(625100, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MOM'))," +
+"(625102, (select \"Symbol\" from APP.Location where \"Symbol\" = 'DIN'))," +
+"(695788, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+"(710736, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEL'))," +
+"(710737, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GOB'))," +
+"(710738, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+"(710739, (select \"Symbol\" from APP.Location where \"Symbol\" = 'SBM'))," +
+"(733935, (select \"Symbol\" from APP.Location where \"Symbol\" = 'WME'))," +
+"(733936, (select \"Symbol\" from APP.Location where \"Symbol\" = 'GBR'))," +
+"(733937, (select \"Symbol\" from APP.Location where \"Symbol\" = 'MEM'))," +
+"(733938, (select \"Symbol\" from APP.Location where \"Symbol\" = 'OFF'))," +
+"(733939, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CKL'))," +
+"(984395, (select \"Symbol\" from APP.Location where \"Symbol\" = 'HWY'))," +
+"(1001871, (select \"Symbol\" from APP.Location where \"Symbol\" = 'BRR'))," +
+"(1001872, (select \"Symbol\" from APP.Location where \"Symbol\" = 'EDC'))," +
+"(1001873, (select \"Symbol\" from APP.Location where \"Symbol\" = 'CCR'))," +
+"(1001874, (select \"Symbol\" from APP.Location where \"Symbol\" = 'LPJ'))";
+
+    }
+        
+ private String loadLocation() throws SQLException{
+        stmt.execute("Delete From Location Where 1=1");
+        return "INSERT INTO APP.LOCATION VALUES\n" +
+"('BMS', 'Bald Mesa'),\n" +
+"('BBR', 'Beaver Ba Rd Camp'),\n" +
+"('BOR', 'Boren Mesa'),\n" +
+"('BRR', 'Brumley Ridge'),\n" +
+"('BPA', 'Burro Pass'),\n" +
+"('BPT', 'Burro Pass Trail'),\n" +
+"('CCR', 'Chicken Creek'),\n" +
+"('CKL', 'Clark Lake'),\n" +
+"('DIN', 'Dinosaur Tracks'),\n" +
+"('DFM', 'Dry Fork Mill Cr'),\n" +
+"('EDC', 'E. Dark Canyon'),\n" +
+"('EMP', 'E. Mt. Peale'),\n" +
+"('GEP', 'Geyser Pass'),\n" +
+"('GOB', 'Gold Basin'),\n" +
+"('GBR', 'Gold Basin Road'),\n" +
+"('GRV', 'Grandview'),\n" +
+"('HRC', 'Horse Creek'),\n" +
+"('HWY', 'Hwy 46 La Sal'),\n" +
+"('LSP', 'La Sal Pass'),\n" +
+"('LPJ', 'L SAl Pass Jct'),\n" +
+"('LSS', 'La Sal SNOTEL site'),\n" +
+"('LBB', 'Lower Beaver Basin'),\n" +
+"('LGP', 'Lower Geyser Pa Rd'),\n" +
+"('MER', 'Mellenthin E Ridge'),\n" +
+"('MEM', 'Mellenthin Meadows'),\n" +
+"('MOM', 'Moonlight Meadows'),\n" +
+"('MEL', 'Mt. Mellenthin'),\n" +
+"('NPE', 'N. Peale RG'),\n" +
+"('SBM', 'South Beaver Mesa'),\n" +
+"('UBB', 'Upper Beaver Basin'),\n" +
+"('UD1', 'Upper Dark Canyon'),\n" +
+"('UDC', 'Upper Dark Canyon 2'),\n" +
+"('WME', 'Warner Meadows'),\n" +
+"('WFM', 'Wet Fork Mill Cr'),\n" +
+"('OFF', 'Office')";    
+ }
     // Funciton to check if a location is unique
     public boolean canAdd(String code, String loc) {
         boolean canAdd = false;
