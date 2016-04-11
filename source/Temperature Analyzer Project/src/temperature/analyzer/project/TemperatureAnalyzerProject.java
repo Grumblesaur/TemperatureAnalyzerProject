@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package temperature.analyzer.project;
 
 import java.sql.ResultSet;
@@ -13,12 +8,14 @@ import java.sql.ResultSet;
  * @author rcatlett
  */
 public class TemperatureAnalyzerProject {
-    // debug bool
+    // debug booleans
     public static boolean debug = true;
     public static boolean presentation = false;
     public static boolean sessionData = false;
-    public static boolean testing = false;
+    public static boolean testing = true;
     
+    
+    // TODO change these locations - wrong, using SQL files now - perhaps use to start tables?
     public static String locationFile = "src/temperature/analyzer/project/persistent/locations.txt";
     public static String previousQueries = "src/temperature/analyzer/project/persistent/history.txt";
     public static String serialNumbers = "src/temperature/analyzer/project/persistent/history.txt";
@@ -26,7 +23,7 @@ public class TemperatureAnalyzerProject {
     public static ResultSet dataForSession;
 
     /**
-     *
+     * Create the database for the running instance
      */
     public static DatabaseConnection databaseCon = new DatabaseConnection();
     
@@ -34,8 +31,6 @@ public class TemperatureAnalyzerProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
         new Home().setVisible(true);
         
     }
