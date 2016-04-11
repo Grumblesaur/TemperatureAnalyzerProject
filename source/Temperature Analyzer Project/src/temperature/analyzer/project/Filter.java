@@ -99,7 +99,7 @@ public class Filter {
         String q = "";
         int size = locs.size();
         if (size != 0) {
-            q = q + "LOCATION ";
+            q = q + "\"Location_Symbol\" ";
             if (size == 1) {
                 q = q + "= '" + locs.get(0) + "'";
             }

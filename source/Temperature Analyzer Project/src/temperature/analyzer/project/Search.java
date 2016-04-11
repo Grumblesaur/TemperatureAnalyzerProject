@@ -11,6 +11,7 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.presentati
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 
 
@@ -208,7 +209,7 @@ public class Search extends javax.swing.JFrame {
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
             .addGroup(topBannerLayout.createSequentialGroup()
                 .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -223,7 +224,7 @@ public class Search extends javax.swing.JFrame {
         chooseTxt.setText("Choose a range of dates and times to select information from the database: ");
 
         sensorList.setModel(llm);
-        sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.\n</html>");
+        sensorList.setToolTipText("<html>Click to select or deselect.<br>\nUse CTRL + click or SHIFT + click  to select multiple sensors.<br>\nDo not select a sensor to search ALL sensors.\n</html>");
         sensorListPane.setViewportView(sensorList);
 
         submitSearch.setText("Submit This Search");
@@ -548,9 +549,18 @@ public class Search extends javax.swing.JFrame {
             dataForSession = databaseCon.rs;
             
         }
-        sessionData = true;
-        new SearchOutput().setVisible(true);
-        this.setVisible(false);
+        try {
+            if (dataForSession.isBeforeFirst()) {
+                sessionData = true;
+                new SearchOutput().setVisible(true);
+                this.setVisible(false);
+            }
+            else {
+                MessageDialogs.tableError("No results");
+            }
+        } catch (SQLException err) {
+            MessageDialogs.tableError(err.getMessage());
+        } 
     }//GEN-LAST:event_submitSearchActionPerformed
 
     private void submitPrevSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPrevSearchActionPerformed
@@ -561,10 +571,11 @@ public class Search extends javax.swing.JFrame {
             databaseCon.searchData(query, sensorHours);
             dataForSession = databaseCon.rs;
             sessionData = true;
+            new SearchOutput().setVisible(true);
+            this.setVisible(false);
         */
         
-        new SearchOutput().setVisible(true);
-        this.setVisible(false);
+        
     }//GEN-LAST:event_submitPrevSearchActionPerformed
 
     private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
