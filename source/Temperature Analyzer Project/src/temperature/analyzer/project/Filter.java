@@ -25,9 +25,9 @@ public class Filter {
      */
     public static ArrayList<String> parseLocationCodes(ArrayList<String> locs) {
         ArrayList<String> newlocs = new ArrayList<>();
-        for (String loc : locs) {
+        locs.stream().forEach((loc) -> {
             newlocs.add(loc.split(" ")[0]);
-        }
+        });
         return newlocs;
     }
     
@@ -66,32 +66,28 @@ public class Filter {
         
         //SELECT b FROM MyTable b WHERE b.date < "+sqlToday";
         
-        query = query + "\"Date\" BETWEEN '" + startDate + "' AND '" + endDate + "'";
+        query += "\"Date\" BETWEEN '" + startDate + "' AND '" + endDate + "'";
         
-        query = query + " AND \"Time\" BETWEEN '" + startTime + "' AND '" + endTime + "'";
+        query += " AND \"Time\" BETWEEN '" + startTime + "' AND '" + endTime + "'";
         
         // will return "", "LOCATION = x", or "LOCATION IN (x,y,z)"
         if (locations != null) {
             String locString = createLocation(locations);
             if (locString.length() > 0) {
-                query = query + " AND "+ locString;
+                query += " AND "+ locString;
                 //query = query + locString;
             }
         }
-       
-        
         return query;
     }
     
     //getting dates together as string
     public static String createDate (String day, String month, String year) {
-        String q = month + "/" + day + "/" + year;
-        return q;
+        return month + "/" + day + "/" + year;
     }
     
     public static String createTime (String hour, String min) {
-        String q = hour + ":" + min;
-        return q;
+        return hour + ":" + min;
     }
     
     // Piecing together the location list for the query
@@ -99,12 +95,12 @@ public class Filter {
         String q = "";
         int size = locs.size();
         if (size != 0) {
-            q = q + "\"Location_Symbol\" ";
+            q += "\"Location_Symbol\" ";
             if (size == 1) {
-                q = q + "= '" + locs.get(0) + "'";
+                q += "= '" + locs.get(0) + "'";
             }
             else {
-                q = q + "IN ( '" + String.join("', '", locs) + "')";
+                q += "IN ( '" + String.join("', '", locs) + "')";
             }
         }
         
@@ -158,6 +154,5 @@ public class Filter {
             MessageDialogs.readDatabase(err.getMessage());
         }
         return sensors;
-    }
-    
+    }   
 }

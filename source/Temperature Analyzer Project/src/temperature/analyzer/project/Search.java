@@ -5,12 +5,9 @@
  */
 package temperature.analyzer.project;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileReader;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 
