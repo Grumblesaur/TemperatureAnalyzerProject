@@ -10,11 +10,11 @@ package temperature.analyzer.project;
  * @author james
  */
 public class SimpleDate implements Comparable<SimpleDate> {
-    private int day;
-    private int month;
-    private int year;
-    private int hour;
-    private int minute;
+    private final int day;
+    private final int month;
+    private final int year;
+    private final int hour;
+    private final int minute;
     
     /** Construct a SimpleDate from String arguments.
      * 

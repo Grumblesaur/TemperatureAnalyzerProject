@@ -1,8 +1,8 @@
 package temperature.analyzer.project;
 
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
+//import java.sql.SQLException;
+//import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
@@ -35,7 +35,7 @@ public class SearchOutput extends javax.swing.JFrame {
     // algorithm borrowed from 
     // http://stackoverflow.com/questions/930745/how-do-i-display-a-java-resultset-visually
     private DefaultTableModel setTable() {
-        String[] colNames = null;
+        String[] colNames;
         DefaultTableModel model = new DefaultTableModel();
         try {
             ResultSetMetaData meta = dataForSession.getMetaData();
@@ -332,10 +332,8 @@ public class SearchOutput extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SearchOutput().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new SearchOutput().setVisible(true);
         });
     }
 

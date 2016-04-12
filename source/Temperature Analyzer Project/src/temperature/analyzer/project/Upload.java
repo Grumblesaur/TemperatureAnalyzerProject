@@ -6,11 +6,11 @@
 package temperature.analyzer.project;
 
 import java.io.File;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ProgressMonitor;
+//import javax.swing.ProgressMonitor;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.presentation;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
@@ -334,10 +334,8 @@ public class Upload extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Upload().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Upload().setVisible(true);
         });
     }
 

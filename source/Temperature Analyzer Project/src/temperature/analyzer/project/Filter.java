@@ -83,7 +83,7 @@ public class Filter {
     
     //getting dates together as string
     public static String createDate (String day, String month, String year) {
-        return month + "/" + day + "/" + year;
+        return year + "-" + month + "-" + day;
     }
     
     public static String createTime (String hour, String min) {
