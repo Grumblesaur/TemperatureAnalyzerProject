@@ -2,14 +2,14 @@ package temperature.analyzer.project;
 
 import java.sql.ResultSet;
 
-/*
+/**
  *
  * @author Quinntero
  * @author rcatlett
  */
 public class TemperatureAnalyzerProject {
     // debug booleans
-    public static boolean debug = true;
+    public static boolean debug = false;
     public static boolean presentation = false;
     public static boolean sessionData = false;
     public static boolean testing = true;

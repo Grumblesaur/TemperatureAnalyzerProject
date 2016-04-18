@@ -15,6 +15,7 @@ package temperature.analyzer.project;
 /* Imports */
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 
 public class Filter {
@@ -25,7 +26,7 @@ public class Filter {
      */
     public static ArrayList<String> parseLocationCodes(ArrayList<String> locs) {
         ArrayList<String> newlocs = new ArrayList<>();
-        locs.stream().forEach((loc) -> {
+        locs.stream().forEach((String loc) -> {
             newlocs.add(loc.split(" ")[0]);
         });
         return newlocs;
