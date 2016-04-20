@@ -85,6 +85,7 @@ public class SearchOutput extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         plotButton = new javax.swing.JButton();
         newSearchButton = new javax.swing.JButton();
+        calculateButton = new javax.swing.JButton();
         scrollbar1 = new java.awt.Scrollbar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -195,6 +196,14 @@ public class SearchOutput extends javax.swing.JFrame {
             }
         });
 
+        calculateButton.setText("Calculate");
+        calculateButton.setToolTipText("");
+        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateButtonActionPerformed(evt);
+            }
+        });
+
         topBanner.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topBanner.setLayer(taplogoLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topBanner.setLayer(worldmapLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -202,6 +211,7 @@ public class SearchOutput extends javax.swing.JFrame {
         topBanner.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topBanner.setLayer(plotButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topBanner.setLayer(newSearchButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topBanner.setLayer(calculateButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout topBannerLayout = new javax.swing.GroupLayout(topBanner);
         topBanner.setLayout(topBannerLayout);
@@ -215,6 +225,8 @@ public class SearchOutput extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, topBannerLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(calculateButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(newSearchButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(plotButton))
@@ -247,7 +259,8 @@ public class SearchOutput extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topBannerLayout.createSequentialGroup()
                         .addGroup(topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(plotButton)
-                            .addComponent(newSearchButton))
+                            .addComponent(newSearchButton)
+                            .addComponent(calculateButton))
                         .addGap(35, 35, 35)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -327,6 +340,12 @@ public class SearchOutput extends javax.swing.JFrame {
         databaseCon.save();
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+        // TODO add your handling code here:
+        new Calculate().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_calculateButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,6 +358,7 @@ public class SearchOutput extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
+    private javax.swing.JButton calculateButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

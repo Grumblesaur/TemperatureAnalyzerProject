@@ -10,16 +10,43 @@ package temperature.analyzer.project;
  * @author jmurp
  */
 
-import java.sql.ResultSet;
+import java.sql.*; // END MY LIFE
+//import java.sql.ResultSet;
+//import java.sql.ResultSetMetaData;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 public class Calculation {
     
     // required for completion: knowing the form of a result set
     // may need to cast result set to some type of list (probably ArrayList)
     
-    /** Calculate record high for entire result set. */
+    /** Calculate record high for entire result set.
+     * @return A double.
+     * @param data an SQL ResultSet
+     */
     public static double recordHigh(ResultSet data) {
-        return 0.00; // dummy value for compilation
+        String[] colNames;
+        double high = 0.00;
+        ResultSetMetaData meta;
+        try {
+            meta = data.getMetaData();
+            colNames = new String[meta.getColumnCount()];
+            for (int i = 0; i < colNames.length; i++) {
+                colNames[i] = meta.getColumnLabel(i+1);
+            }
+            while (dataForSession.next()) {
+                Object[] stuff = new Object[colNames.length];
+                for (int i = 0; i < stuff.length; i++) {
+                    stuff[i] = data.getObject(i+1);
+                    MessageDialogs.DEBUG((String) stuff[i], debug);
+                }
+            }
+            
+        } catch (Exception e) {
+            MessageDialogs.InternalError(e.getMessage());
+        }
+        return high; // dummy value for compilation
     }
     
     /** Calculate record low for entire result set. */

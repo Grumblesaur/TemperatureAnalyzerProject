@@ -600,10 +600,8 @@ public class Search extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Search().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Search().setVisible(true);
         });
     }
 
