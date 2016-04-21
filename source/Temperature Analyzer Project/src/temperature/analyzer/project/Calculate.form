@@ -23,21 +23,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="topBanner" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="rangeHighTemp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                           <Component id="monthlyHighTemps" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jLabel1" min="-2" pref="367" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="367" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -52,6 +50,19 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="439" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="topBanner" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="548" max="-2" attributes="0"/>
+                      <Component id="runBatchButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,7 +86,9 @@
                   <Component id="monthlyLowTemps" alignment="3" max="32767" attributes="0"/>
                   <Component id="rangeLowTemp" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+              <Component id="runBatchButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="263" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
           </Group>
@@ -239,9 +252,6 @@
         <Property name="text" type="java.lang.String" value="High Temperature"/>
         <Property name="toolTipText" type="java.lang.String" value="The highest temperature in the entire date range."/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="High Temperature"/>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rangeHighTempActionPerformed"/>
       </Events>
@@ -252,7 +262,6 @@
         <Property name="toolTipText" type="java.lang.String" value="The average temperature for the entire date range."/>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Average Temperature"/>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
       <Events>
@@ -273,10 +282,6 @@
         <Property name="text" type="java.lang.String" value="Monthly Average Temperatures"/>
         <Property name="toolTipText" type="java.lang.String" value="The average temperatures for each month in the entire date range."/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Monthly Average Temperatures"/>
-        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="The average temperatures for each month in the entire date range."/>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthlyAverageTempsActionPerformed"/>
       </Events>
@@ -297,10 +302,18 @@
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Monthly High Temps"/>
-        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="The highest temperatures for each month in the entire date range."/>
       </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthlyHighTempsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="runBatchButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Run Batch"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runBatchButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

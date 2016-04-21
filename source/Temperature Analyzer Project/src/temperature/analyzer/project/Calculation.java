@@ -49,17 +49,26 @@ public class Calculation {
         return high; // dummy value for compilation
     }
     
-    /** Calculate record low for entire result set. */
+    /** Calculate record low for entire result set.
+     * @param data The working result set.
+     * @return whatever
+     */
     public static double recordLow(ResultSet data) {
         return 0.00; // dummy value for compilation
     }
     
-    /** Calculate average for entire result set. */
+    /** Calculate average for entire result set.
+     * @param data The working result set.
+     * @return I'm only using this tag because NetBeans is yelling at me.
+     */
     public static double average(ResultSet data) {
         return 0.00; // dummy value for compilation
     }
     
-    /** Obtain an array of highs for each month. */
+    /** Obtain an array of highs for each month.
+     * @param data THe working result set
+     * @return whatev', yo
+     */
     public static double[] monthlyHighs(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
@@ -69,7 +78,10 @@ public class Calculation {
         return ret;
     }
     
-    /** Obtain an array of lows for each month. */
+    /** Obtain an array of lows for each month.
+     * @param data The working result set
+     * @return whatev', yo
+     */
     public static double[] monthlyLows(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
@@ -79,7 +91,10 @@ public class Calculation {
         return ret;
     }
     
-    /** Obtain an array of average temperatures for each month. */
+    /** Obtain an array of average temperatures for each month.
+     * @param data
+     * @return something
+     */
     public static double[] monthlyAverage(ResultSet data) {
         int monthCount = 0;
         double[] ret = new double[monthCount];
