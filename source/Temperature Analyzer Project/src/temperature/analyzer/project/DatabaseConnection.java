@@ -168,6 +168,7 @@ public class DatabaseConnection {
             }
             if (this.con != null)
             {
+                this.con.commit();
                 DriverManager.getConnection(dbURL + ";shutdown=true");
                 this.con.close();
             }           
