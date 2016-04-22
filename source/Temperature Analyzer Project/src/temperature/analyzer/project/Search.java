@@ -511,6 +511,9 @@ public class Search extends javax.swing.JFrame {
             
             databaseCon.searchData(databaseCon, query, sensorHours);
             dataForSession = databaseCon.rs;
+            if (dataForSession != null) {
+                MessageDialogs.DEBUG("dataForSession is populated!", debug);
+            }
             
         }
         try {

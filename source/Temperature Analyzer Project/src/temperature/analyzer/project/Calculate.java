@@ -6,6 +6,7 @@
 package temperature.analyzer.project;
 
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
+import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -359,6 +360,11 @@ public class Calculate extends javax.swing.JFrame {
 
     private void runBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runBatchButtonActionPerformed
 
+        // sanity check code to be removed later
+        if (dataForSession != null) {
+            MessageDialogs.DEBUG("working dataset is populated", debug);
+        }
+        
         if (rangeHighTemp.isSelected()) {
             rangeHigh = Calculation.recordHigh(dataForSession);
         }

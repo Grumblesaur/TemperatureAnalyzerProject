@@ -33,6 +33,7 @@ public class Calculation {
         try {
             meta = data.getMetaData();
             colNames = new String[meta.getColumnCount()];
+            MessageDialogs.DEBUG(String.join(", ", colNames), debug);
             for (int i = 0; i < colNames.length; i++) {
                 colNames[i] = meta.getColumnLabel(i+1);
             }
@@ -40,7 +41,7 @@ public class Calculation {
                 Object[] stuff = new Object[colNames.length];
                 for (int i = 0; i < stuff.length; i++) {
                     stuff[i] = data.getObject(i+1);
-                    MessageDialogs.DEBUG((String) stuff[i], debug);
+                    MessageDialogs.DEBUG((String) stuff[i], true);
                 }
             }
             
