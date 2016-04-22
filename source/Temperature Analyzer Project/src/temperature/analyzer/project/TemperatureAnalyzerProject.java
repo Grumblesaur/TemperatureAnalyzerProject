@@ -3,7 +3,7 @@ package temperature.analyzer.project;
 import java.sql.ResultSet;
 
 /**
- *
+ * @author james
  * @author Quinntero
  * @author rcatlett
  */
@@ -13,12 +13,6 @@ public class TemperatureAnalyzerProject {
     public static boolean presentation = false;
     public static boolean sessionData = false;
     public static boolean testing = true;
-    
-    
-    // TODO change these locations - wrong, using SQL files now - perhaps use to start tables?
-    public static String locationFile = "src/temperature/analyzer/project/persistent/locations.txt";
-    public static String previousQueries = "src/temperature/analyzer/project/persistent/history.txt";
-    public static String serialNumbers = "src/temperature/analyzer/project/persistent/history.txt";
     
     public static ResultSet dataForSession;
 

@@ -7,7 +7,8 @@ package temperature.analyzer.project;
 
 /**
  *
- * @author jmurp
+ * @author james
+ * @author rcatlett
  */
 
 import java.sql.*; // END MY LIFE

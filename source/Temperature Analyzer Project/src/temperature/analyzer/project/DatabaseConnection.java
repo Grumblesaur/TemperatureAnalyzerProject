@@ -85,16 +85,16 @@ public class DatabaseConnection {
         boolean exists = false;
         if(con!=null) {
             DatabaseMetaData dbmd = con.getMetaData();
-            ResultSet db = dbmd.getTables(null, null, sTablename.toUpperCase(),null);
-            if(db.next()) {
-                exists=true;
-                //System.out.println("Table "+db.getString("TABLE_NAME")+"already exists !!");
-            } 
-            else {
-                //System.out.println("Write your create table function here !!!");
-                stmt.execute(query);
-            } 
-            db.close();
+            try (ResultSet db = dbmd.getTables(null, null, sTablename.toUpperCase(),null)) {
+                if (db.next()) {
+                    exists=true;
+                    //System.out.println("Table "+db.getString("TABLE_NAME")+"already exists !!");
+                } else {
+                    //System.out.println("Write your create table function here !!!");
+                    // XXX: Do we need this code if it's not necessary for determining if a table exists?
+                    stmt.execute(query);
+                }
+            }
         }
         return exists;
     }   
@@ -261,8 +261,7 @@ public class DatabaseConnection {
                 done = true;
 
                 this.stmt.close();
-            }
-            else {
+            } else {
                 MessageDialogs.dependent();
             }
             
