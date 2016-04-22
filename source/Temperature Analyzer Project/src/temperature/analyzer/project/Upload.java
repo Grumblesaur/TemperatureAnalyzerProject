@@ -273,6 +273,7 @@ public class Upload extends javax.swing.JFrame {
             try {
                 if (CSVParser.uploadFile(filePath)) {
                     sessionData = true;
+                    databaseCon.con.commit();
                     //TODO Change to just search uploaded data
                     databaseCon.searchData(databaseCon, "SELECT * FROM APP.Measurement", "1000");
                     dataForSession = databaseCon.rs;
