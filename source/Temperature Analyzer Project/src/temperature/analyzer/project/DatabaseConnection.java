@@ -156,6 +156,25 @@ public class DatabaseConnection {
             "('WFM', 'Wet Fork Mill Cr'), ('OFF', 'Office')";    
  }
     
+    public void save() {
+        try {
+            if (this.rs != null) {
+                this.rs.close();
+            }
+            if (this.stmt != null) {
+                this.stmt.close();
+            }
+            if (this.con != null) {
+                this.con.commit();
+                DriverManager.getConnection(dbURL + ";shutdown=true");
+                this.con.close();
+            }           
+        } catch (SQLException err) {
+            MessageDialogs.noConnectionError(err.getMessage());
+        }
+
+    }
+    
     public void addData(DatabaseConnection db, String loc, String date, String time, String temp){
         try {
             String SQL = "INSERT INTO Measurement VALUES (" + temp +
