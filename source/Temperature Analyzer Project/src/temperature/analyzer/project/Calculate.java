@@ -378,6 +378,8 @@ public class Calculate extends javax.swing.JFrame {
         if (monthlyAverageTemps.isSelected()) {
             monthlyAverages = Calculation.monthlyLows(dataForSession);
         }
+        
+        MessageDialogs.DEBUG(Double.toString(rangeHigh), true);
     }//GEN-LAST:event_runBatchButtonActionPerformed
 
     /**
