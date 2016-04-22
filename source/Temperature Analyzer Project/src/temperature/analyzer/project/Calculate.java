@@ -358,7 +358,7 @@ public class Calculate extends javax.swing.JFrame {
     }//GEN-LAST:event_monthlyHighTempsActionPerformed
 
     private void runBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runBatchButtonActionPerformed
-        // TODO add your handling code here:
+
         if (rangeHighTemp.isSelected()) {
             rangeHigh = Calculation.recordHigh(dataForSession);
         }

@@ -103,45 +103,33 @@ public class Search extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         homeButton.setText("Home");
-        homeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                homeButtonActionPerformed(evt);
-            }
+        homeButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            homeButtonActionPerformed(evt);
         });
 
         uploadfileButton.setText("Upload File");
-        uploadfileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uploadfileButtonActionPerformed(evt);
-            }
+        uploadfileButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            uploadfileButtonActionPerformed(evt);
         });
 
         aboutButton.setText("About");
-        aboutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButtonActionPerformed(evt);
-            }
+        aboutButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            aboutButtonActionPerformed(evt);
         });
 
         searchdbButton.setText("Search Database");
-        searchdbButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchdbButtonActionPerformed(evt);
-            }
+        searchdbButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            searchdbButtonActionPerformed(evt);
         });
 
         sensorButton.setText("Edit Sensors");
-        sensorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sensorButtonActionPerformed(evt);
-            }
+        sensorButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            sensorButtonActionPerformed(evt);
         });
 
         viewDataButton.setText("View Data");
-        viewDataButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewDataButtonActionPerformed(evt);
-            }
+        viewDataButton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            viewDataButtonActionPerformed(evt);
         });
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
@@ -226,10 +214,8 @@ public class Search extends javax.swing.JFrame {
         sensorListPane.setViewportView(sensorList);
 
         submitSearch.setText("Submit This Search");
-        submitSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitSearchActionPerformed(evt);
-            }
+        submitSearch.addActionListener((java.awt.event.ActionEvent evt) -> {
+            submitSearchActionPerformed(evt);
         });
 
         chooseSensorTxt.setText("Select Sensor(s): ");
@@ -271,16 +257,16 @@ public class Search extends javax.swing.JFrame {
 
         prevSearchList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            @Override
             public int getSize() { return strings.length; }
+            @Override
             public String getElementAt(int i) { return strings[i]; }
         });
         prevSearchPanel.setViewportView(prevSearchList);
 
         submitPrevSearch.setText("Submit This Previous Search");
-        submitPrevSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitPrevSearchActionPerformed(evt);
-            }
+        submitPrevSearch.addActionListener((java.awt.event.ActionEvent evt) -> {
+            submitPrevSearchActionPerformed(evt);
         });
 
         startMinuteTxt.setText("Minute: ");
@@ -585,15 +571,14 @@ public class Search extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
