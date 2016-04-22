@@ -78,7 +78,6 @@ public class SearchOutput extends javax.swing.JFrame {
         searchdbButton = new javax.swing.JButton();
         sensorButton = new javax.swing.JButton();
         viewDataButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
         taplogoLabel = new javax.swing.JLabel();
         worldmapLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -132,13 +131,6 @@ public class SearchOutput extends javax.swing.JFrame {
             }
         });
 
-        saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -156,9 +148,7 @@ public class SearchOutput extends javax.swing.JFrame {
                 .addComponent(sensorButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aboutButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,8 +160,7 @@ public class SearchOutput extends javax.swing.JFrame {
                     .addComponent(homeButton)
                     .addComponent(searchdbButton)
                     .addComponent(sensorButton)
-                    .addComponent(viewDataButton)
-                    .addComponent(saveButton))
+                    .addComponent(viewDataButton))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -336,10 +325,6 @@ public class SearchOutput extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_viewDataButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        databaseCon.save();
-    }//GEN-LAST:event_saveButtonActionPerformed
-
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         // TODO add your handling code here:
         new Calculate().setVisible(true);
@@ -365,7 +350,6 @@ public class SearchOutput extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JButton newSearchButton;
     private javax.swing.JButton plotButton;
-    private javax.swing.JButton saveButton;
     private java.awt.Scrollbar scrollbar1;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;
