@@ -5,7 +5,10 @@
  */
 package temperature.analyzer.project;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
@@ -409,6 +412,11 @@ public class Sensor extends javax.swing.JFrame {
         if (!databaseCon.exists(serial_num)) {
             databaseCon.addSerial(serial_num);
             MessageDialogs.confirm("Serial Added Successfully");
+            try {
+                databaseCon.con.commit();
+            } catch (SQLException ex) {
+                Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
+            }
             sensors = Filter.getSensors();
             newSerial.setText("");
             slm = new SensorListModel(sensors);
@@ -457,6 +465,11 @@ public class Sensor extends javax.swing.JFrame {
                                 // stick these back in the database after an update
                                 if (databaseCon.moveSensors(sn, locations.get(0))){
                                     MessageDialogs.confirm("Locations Moved Successfully");
+                                    try {
+                                        databaseCon.con.commit();
+                                    } catch (SQLException ex) {
+                                        Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                     sensors = Filter.getSensors();
                                     newSerial.setText("");
                                     slm = new SensorListModel(sensors);
@@ -510,6 +523,11 @@ public class Sensor extends javax.swing.JFrame {
         if (databaseCon.canAdd(locCode, locName)) {
             databaseCon.addLoc(locCode, locName);
             MessageDialogs.confirm("Location Added Successfully");
+            try {
+                databaseCon.con.commit();
+            } catch (SQLException ex) {
+                Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
+            }
             // Update the arrayList
             locations = Filter.getLocations();
             newCode.setText("");
@@ -561,6 +579,11 @@ public class Sensor extends javax.swing.JFrame {
                 if (n == 0) {
                     databaseCon.removeLoc(locCode, locName);
                     MessageDialogs.confirm("Location Deleted Successfully");
+                    try {
+                        databaseCon.con.commit();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 locations = Filter.getLocations();
                 newCode.setText("");
@@ -603,6 +626,11 @@ public class Sensor extends javax.swing.JFrame {
             if (n == 0) {
                 databaseCon.removeSerial(serial_num);
                 MessageDialogs.confirm("Serial Deleted Successfully");
+                try {
+                    databaseCon.con.commit();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Sensor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             sensors = Filter.getSensors();
             newSerial.setText("");
