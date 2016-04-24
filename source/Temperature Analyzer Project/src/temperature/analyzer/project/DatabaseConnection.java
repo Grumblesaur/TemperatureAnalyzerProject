@@ -278,8 +278,7 @@ public class DatabaseConnection {
                         code + "' AND \"Location\" = '" + loc + "'";
                 this.stmt.executeUpdate(SQL);
                 done = true;
-
-                this.stmt.close();
+                this.con.commit();
             } else {
                 MessageDialogs.dependent();
             }

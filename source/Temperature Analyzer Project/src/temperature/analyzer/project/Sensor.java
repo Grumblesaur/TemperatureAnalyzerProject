@@ -493,9 +493,8 @@ public class Sensor extends javax.swing.JFrame {
             newLocation.setText("");
             llm = new LocationListModel(locations);
             sensorList.setModel(llm);
-        } 
-        else {
-            MessageDialogs.noConnectionError("Repeat code or location");
+        } else {
+            MessageDialogs.noConnectionError("Cannot add location.");
         }
         
     }//GEN-LAST:event_addLocButtonActionPerformed
@@ -525,7 +524,7 @@ public class Sensor extends javax.swing.JFrame {
         
         if (databaseCon.exists(locCode, locName)) {
             if (databaseCon.checkDependency(locCode)) {
-                MessageDialogs.noConnectionError("Cannot delete, still exists in Sensor Table");
+                MessageDialogs.noConnectionError("Cannot delete: a sensor still exists at this location.");
                 newCode.setText("");
                 newLocation.setText("");
             }
@@ -551,8 +550,7 @@ public class Sensor extends javax.swing.JFrame {
                 sensorList.setModel(llm);
 
             } 
-        } 
-        else {
+        } else {
             MessageDialogs.noConnectionError("Location does not exist"); 
         }
     }//GEN-LAST:event_removeLocButtonActionPerformed
