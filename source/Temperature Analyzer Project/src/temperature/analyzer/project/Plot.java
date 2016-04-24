@@ -36,16 +36,6 @@ public class Plot extends javax.swing.JFrame {
 
         calculationType = new javax.swing.ButtonGroup();
         timeType = new javax.swing.ButtonGroup();
-        topBanner = new javax.swing.JLayeredPane();
-        menuPanel = new javax.swing.JPanel();
-        homeButton = new javax.swing.JButton();
-        uploadfileButton = new javax.swing.JButton();
-        aboutButton = new javax.swing.JButton();
-        searchdbButton = new javax.swing.JButton();
-        sensorButton = new javax.swing.JButton();
-        viewDataButton = new javax.swing.JButton();
-        taplogoLabel = new javax.swing.JLabel();
-        worldmapLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         graphedCalc = new javax.swing.JLabel();
         highCalc = new javax.swing.JRadioButton();
@@ -57,8 +47,73 @@ public class Plot extends javax.swing.JFrame {
         monthTime = new javax.swing.JRadioButton();
         dailyTime = new javax.swing.JRadioButton();
         graphButton = new javax.swing.JButton();
+        topBanner = new javax.swing.JLayeredPane();
+        worldmapLabel = new javax.swing.JLabel();
+        menuPanel = new javax.swing.JPanel();
+        homeButton = new javax.swing.JButton();
+        uploadfileButton = new javax.swing.JButton();
+        aboutButton = new javax.swing.JButton();
+        searchdbButton = new javax.swing.JButton();
+        sensorButton = new javax.swing.JButton();
+        viewDataButton = new javax.swing.JButton();
+        taplogoLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        backButton.setText("Back to Data");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        graphedCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/tap_plot.png"))); // NOI18N
+
+        calculationType.add(highCalc);
+        highCalc.setText("High");
+
+        calculationType.add(avgCalc);
+        avgCalc.setText("Average");
+
+        calculationType.add(lowCalc);
+        lowCalc.setText("Low");
+
+        jLabel2.setText("Select a Calculation Type:");
+
+        jLabel3.setText("Select a Time Frame:");
+
+        timeType.add(yrlyTime);
+        yrlyTime.setText("Yearly");
+        yrlyTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yrlyTimeActionPerformed(evt);
+            }
+        });
+
+        timeType.add(monthTime);
+        monthTime.setText("Monthly");
+        monthTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthTimeActionPerformed(evt);
+            }
+        });
+
+        timeType.add(dailyTime);
+        dailyTime.setText("Daily");
+        dailyTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dailyTimeActionPerformed(evt);
+            }
+        });
+
+        graphButton.setText("Plot");
+        graphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graphButtonActionPerformed(evt);
+            }
+        });
+
+        worldmapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/world_map.png"))); // NOI18N
 
         homeButton.setText("Home");
         homeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,148 +190,76 @@ public class Plot extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        taplogoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/small_tap_logo.png"))); // NOI18N
-        taplogoLabel.setText("jLabel2");
+        taplogoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/small_tap_logo.png"))); // NOI18N
+        taplogoLabel1.setText("jLabel2");
 
-        worldmapLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/world_map.png"))); // NOI18N
-
-        topBanner.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        topBanner.setLayer(taplogoLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         topBanner.setLayer(worldmapLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topBanner.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        topBanner.setLayer(taplogoLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout topBannerLayout = new javax.swing.GroupLayout(topBanner);
         topBanner.setLayout(topBannerLayout);
         topBannerLayout.setHorizontalGroup(
             topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topBannerLayout.createSequentialGroup()
-                .addContainerGap(349, Short.MAX_VALUE)
+            .addGroup(topBannerLayout.createSequentialGroup()
+                .addComponent(worldmapLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(taplogoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, Short.MAX_VALUE))
+            .addGroup(topBannerLayout.createSequentialGroup()
+                .addGap(182, 182, 182)
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170)
-                .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(topBannerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(worldmapLabel)
-                    .addContainerGap(42, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         topBannerLayout.setVerticalGroup(
             topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topBannerLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-            .addGroup(topBannerLayout.createSequentialGroup()
-                .addComponent(taplogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(topBannerLayout.createSequentialGroup()
-                    .addComponent(worldmapLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 7, Short.MAX_VALUE)))
+                .addGroup(topBannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(worldmapLabel)
+                    .addComponent(taplogoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        backButton.setText("Back to Data");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
-        graphedCalc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/temperature/analyzer/project/images/tap_plot.png"))); // NOI18N
-
-        calculationType.add(highCalc);
-        highCalc.setText("High");
-
-        calculationType.add(avgCalc);
-        avgCalc.setText("Average");
-
-        calculationType.add(lowCalc);
-        lowCalc.setText("Low");
-
-        jLabel2.setText("Select a Calculation Type:");
-
-        jLabel3.setText("Select a Time Frame:");
-
-        timeType.add(yrlyTime);
-        yrlyTime.setText("Yearly");
-        yrlyTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yrlyTimeActionPerformed(evt);
-            }
-        });
-
-        timeType.add(monthTime);
-        monthTime.setText("Monthly");
-        monthTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthTimeActionPerformed(evt);
-            }
-        });
-
-        timeType.add(dailyTime);
-        dailyTime.setText("Daily");
-        dailyTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dailyTimeActionPerformed(evt);
-            }
-        });
-
-        graphButton.setText("Plot");
-        graphButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                graphButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lowCalc)
-                            .addComponent(avgCalc)
-                            .addComponent(highCalc)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(yrlyTime)
-                            .addComponent(monthTime)
-                            .addComponent(dailyTime)
-                            .addComponent(graphButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(graphedCalc))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(backButton)))
+                    .addComponent(highCalc)
+                    .addComponent(avgCalc)
+                    .addComponent(jLabel2)
+                    .addComponent(lowCalc)
+                    .addComponent(jLabel3)
+                    .addComponent(yrlyTime)
+                    .addComponent(monthTime)
+                    .addComponent(dailyTime)
+                    .addComponent(graphButton)
+                    .addComponent(backButton))
+                .addGap(47, 47, 47)
+                .addComponent(graphedCalc)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(topBanner)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(graphedCalc)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(backButton)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(highCalc)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(avgCalc)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lowCalc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(yrlyTime)
@@ -284,37 +267,16 @@ public class Plot extends javax.swing.JFrame {
                         .addComponent(monthTime)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dailyTime)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addComponent(graphButton)
-                        .addGap(66, 66, 66))))
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(graphedCalc)
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-        // TODO add your handling code here:
-        new Home().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_homeButtonActionPerformed
-
-    private void uploadfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadfileButtonActionPerformed
-        // TODO add your handling code here:
-        new Upload().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_uploadfileButtonActionPerformed
-
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        // TODO add your handling code here:
-        new About().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_aboutButtonActionPerformed
-
-    private void searchdbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdbButtonActionPerformed
-        // TODO add your handling code here:
-        new Search().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_searchdbButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -341,16 +303,28 @@ public class Plot extends javax.swing.JFrame {
         graphedCalc.setVisible(true);
     }//GEN-LAST:event_graphButtonActionPerformed
 
-    private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
+    private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
-        new Sensor().setVisible(true);
-        this.setVisible(false);
+    }//GEN-LAST:event_homeButtonActionPerformed
+
+    private void uploadfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadfileButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uploadfileButtonActionPerformed
+
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutButtonActionPerformed
+
+    private void searchdbButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdbButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchdbButtonActionPerformed
+
+    private void sensorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sensorButtonActionPerformed
+
     }//GEN-LAST:event_sensorButtonActionPerformed
 
     private void viewDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDataButtonActionPerformed
         // TODO add your handling code here:
-        new SearchOutput().setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_viewDataButtonActionPerformed
 
     /**
@@ -405,7 +379,7 @@ public class Plot extends javax.swing.JFrame {
     private javax.swing.JRadioButton monthTime;
     private javax.swing.JButton searchdbButton;
     private javax.swing.JButton sensorButton;
-    private javax.swing.JLabel taplogoLabel;
+    private javax.swing.JLabel taplogoLabel1;
     private javax.swing.ButtonGroup timeType;
     private javax.swing.JLayeredPane topBanner;
     private javax.swing.JButton uploadfileButton;
