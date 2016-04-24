@@ -18,9 +18,6 @@ public class Calculate extends javax.swing.JFrame {
     private double rangeHigh;
     private double rangeLow;
     private double rangeAverage;
-    private double[] monthlyHighs;
-    private double[] monthlyLows;
-    private double[] monthlyAverages;
     private ArrayList<BigDecimal> data;
     
     /**
@@ -377,22 +374,11 @@ public class Calculate extends javax.swing.JFrame {
             rangeHigh = Calculation.recordHigh(this.data);
         }
         if (rangeLowTemp.isSelected()) {
-            rangeLow = Calculation.recordLow(dataForSession);
+            rangeLow = Calculation.recordLow(this.data);
         }
         if (rangeAverageTemp.isSelected()) {
-            rangeAverage = Calculation.average(dataForSession);
+            rangeAverage = Calculation.average(this.data);
         }
-        
-        if (monthlyHighTemps.isSelected()) {
-            monthlyHighs = Calculation.monthlyHighs(dataForSession);
-        }
-        if (monthlyLowTemps.isSelected()) {
-            monthlyLows = Calculation.monthlyLows(dataForSession);
-        }
-        if (monthlyAverageTemps.isSelected()) {
-            monthlyAverages = Calculation.monthlyLows(dataForSession);
-        }
-        
         MessageDialogs.DEBUG(Double.toString(rangeHigh), true);
     }//GEN-LAST:event_runBatchButtonActionPerformed
 

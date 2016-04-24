@@ -11,7 +11,6 @@ package temperature.analyzer.project;
  * @author rcatlett
  */
 
-import java.sql.*; // END MY LIFE
 import java.util.ArrayList;
 import java.math.BigDecimal;
 
@@ -35,7 +34,7 @@ public class Calculation {
                 high = d;
             }
         }
-        return high; // dummy value for compilation
+        return high;
     }
     
     /** Calculate record low for entire result set.
@@ -53,7 +52,7 @@ public class Calculation {
                 low = d;
             }
         }
-        return low; // dummy value for compilation
+        return low;
     }
     
     /** Calculate average for entire result set.
@@ -71,47 +70,6 @@ public class Calculation {
             total += d;
             count++;
         }
-        return total / count; // dummy value for compilation
+        return total / count;
     }
-    
-    /** Obtain an array of highs for each month.
-     * @param data THe working result set
-     * @return whatev', yo
-     */
-    public static double[] monthlyHighs(ResultSet data) {
-        int monthCount = 0;
-        double[] ret = new double[monthCount];
-        // break list into slices of months
-        // for each month slice, call recordHigh() to find the high
-        //     add each recordHigh() value to the return array
-        return ret;
-    }
-    
-    /** Obtain an array of lows for each month.
-     * @param data The working result set
-     * @return whatev', yo
-     */
-    public static double[] monthlyLows(ResultSet data) {
-        int monthCount = 0;
-        double[] ret = new double[monthCount];
-        // break list into slices of months
-        // for each month slice, call recordLow() to find the low
-        //     add each recordLow() value to the return array
-        return ret;
-    }
-    
-    /** Obtain an array of average temperatures for each month.
-     * @param data
-     * @return something
-     */
-    public static double[] monthlyAverage(ResultSet data) {
-        int monthCount = 0;
-        double[] ret = new double[monthCount];
-        // break list into slices of month
-        // for each month slice, call average() to find the average
-        //     add each average() value to the return array
-        return ret;
-    }
-    
-    // TODO create methods that will find values for each month in a result set.
 }
