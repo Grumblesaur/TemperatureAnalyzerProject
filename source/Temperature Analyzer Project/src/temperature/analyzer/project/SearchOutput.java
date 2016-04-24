@@ -1,14 +1,15 @@
 package temperature.analyzer.project;
 
 import java.sql.ResultSetMetaData;
-//import java.sql.SQLException;
+import java.sql.SQLException;
 //import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.databaseCon;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.sessionData;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.testing;
+import java.util.ArrayList;
+import java.math.BigDecimal;
 
 /**
  *
@@ -16,7 +17,8 @@ import static temperature.analyzer.project.TemperatureAnalyzerProject.testing;
  * @author rcatlett
  */
 public class SearchOutput extends javax.swing.JFrame {
-
+    /* Use kludge ArrayList to pass data over to Calculate page. */
+    private ArrayList<BigDecimal> rows;
     /**
      * Creates new form to build SQL search queries
      */
@@ -35,6 +37,7 @@ public class SearchOutput extends javax.swing.JFrame {
     // algorithm borrowed from 
     // http://stackoverflow.com/questions/930745/how-do-i-display-a-java-resultset-visually
     private DefaultTableModel setTable() {
+        rows = new ArrayList<>();
         String[] colNames;
         DefaultTableModel model = new DefaultTableModel();
         try {
@@ -51,11 +54,13 @@ public class SearchOutput extends javax.swing.JFrame {
                 for (int i = 0; i < data.length; i++) {
                     data[i] = dataForSession.getObject(i+1);
                     //JOptionPane.showMessageDialog(null, data[i], "Database Column", JOptionPane.INFORMATION_MESSAGE);
+                    
                 }
+                rows.add((BigDecimal) data[0]); // adding to an arraylist causes jTableError????!?!?!?!?!
                 model.addRow(data);
             }
             
-        } catch (Exception err) {
+        } catch (SQLException err) {
             MessageDialogs.tableError(err.getMessage());
         } 
         return model;
@@ -327,7 +332,7 @@ public class SearchOutput extends javax.swing.JFrame {
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         // TODO add your handling code here:
-        new Calculate().setVisible(true);
+        new Calculate(rows).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_calculateButtonActionPerformed
 

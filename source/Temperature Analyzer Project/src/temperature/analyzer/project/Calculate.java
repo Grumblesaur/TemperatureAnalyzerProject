@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 package temperature.analyzer.project;
-
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.math.BigDecimal;
 
 /**
  *
@@ -22,13 +21,26 @@ public class Calculate extends javax.swing.JFrame {
     private double[] monthlyHighs;
     private double[] monthlyLows;
     private double[] monthlyAverages;
+    private ArrayList<BigDecimal> data;
+    
+    /**
+     * Creates new form to build SQL search queries
+     * @param data A ResultSet passed in from SearchOutput.
+     */
+    public Calculate(ArrayList<BigDecimal> data) {
+        initComponents();
+        this.data = data;
+        if (dataForSession == null) {
+            viewDataButton.setVisible(false);
+        }
+    }
     
     /**
      * Creates new form to build SQL search queries
      */
     public Calculate() {
         initComponents();
-        if (dataForSession == null){
+        if (dataForSession == null) {
             viewDataButton.setVisible(false);
         }
     }
@@ -360,13 +372,9 @@ public class Calculate extends javax.swing.JFrame {
 
     private void runBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runBatchButtonActionPerformed
 
-        // sanity check code to be removed later
-        if (dataForSession != null) {
-            MessageDialogs.DEBUG("working dataset is populated", debug);
-        }
         
         if (rangeHighTemp.isSelected()) {
-            rangeHigh = Calculation.recordHigh(dataForSession);
+            rangeHigh = Calculation.recordHigh(this.data);
         }
         if (rangeLowTemp.isSelected()) {
             rangeLow = Calculation.recordLow(dataForSession);

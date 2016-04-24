@@ -12,8 +12,9 @@ package temperature.analyzer.project;
  */
 
 import java.sql.*; // END MY LIFE
-//import java.sql.ResultSet;
-//import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.function.Consumer;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
@@ -26,27 +27,16 @@ public class Calculation {
      * @return A double.
      * @param data an SQL ResultSet
      */
-    public static double recordHigh(ResultSet data) {
-        String[] colNames;
+    public static double recordHigh(ArrayList<BigDecimal> data) {
         double high = 0.00;
-        ResultSetMetaData meta;
-        try {
-            meta = data.getMetaData();
-            colNames = new String[meta.getColumnCount()];
-            MessageDialogs.DEBUG(String.join(", ", colNames), debug);
-            for (int i = 0; i < colNames.length; i++) {
-                colNames[i] = meta.getColumnLabel(i+1);
+        for (BigDecimal i : data) {
+            if (i == null) {
+                continue;
             }
-            while (dataForSession.next()) {
-                Object[] stuff = new Object[colNames.length];
-                for (int i = 0; i < stuff.length; i++) {
-                    stuff[i] = data.getObject(i+1);
-                    MessageDialogs.DEBUG((String) stuff[i], true);
-                }
+            double d = i.doubleValue();
+            if (d > high) {
+                high = d;
             }
-            
-        } catch (Exception e) {
-            MessageDialogs.InternalError(e.getMessage());
         }
         return high; // dummy value for compilation
     }
