@@ -5,19 +5,19 @@
  */
 package temperature.analyzer.project;
 import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
+
 import java.util.ArrayList;
 import java.math.BigDecimal;
 
 /**
  *
- * @author James
+ * @author james
  */
 public class Calculate extends javax.swing.JFrame {
     
     private double rangeHigh;
     private double rangeLow;
-    private double rangeAverage;
+    private ResultTuple rangeAverage;
     private ArrayList<BigDecimal> data;
     
     /**
@@ -65,9 +65,6 @@ public class Calculate extends javax.swing.JFrame {
         rangeHighTemp = new javax.swing.JCheckBox();
         rangeAverageTemp = new javax.swing.JCheckBox();
         rangeLowTemp = new javax.swing.JCheckBox();
-        monthlyAverageTemps = new javax.swing.JCheckBox();
-        monthlyLowTemps = new javax.swing.JCheckBox();
-        monthlyHighTemps = new javax.swing.JCheckBox();
         runBatchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -211,30 +208,6 @@ public class Calculate extends javax.swing.JFrame {
             }
         });
 
-        monthlyAverageTemps.setText("Monthly Average Temperatures");
-        monthlyAverageTemps.setToolTipText("The average temperatures for each month in the entire date range.");
-        monthlyAverageTemps.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthlyAverageTempsActionPerformed(evt);
-            }
-        });
-
-        monthlyLowTemps.setText("Monthly Low Temperatures");
-        monthlyLowTemps.setToolTipText("The lowest temperatures for each month in the entire date range.");
-        monthlyLowTemps.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthlyLowTempsActionPerformed(evt);
-            }
-        });
-
-        monthlyHighTemps.setToolTipText("The highest temperatures for each month in the entire date range.");
-        monthlyHighTemps.setLabel("Monthly High Temperatures");
-        monthlyHighTemps.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                monthlyHighTempsActionPerformed(evt);
-            }
-        });
-
         runBatchButton.setText("Run Batch");
         runBatchButton.setToolTipText("");
         runBatchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -249,24 +222,18 @@ public class Calculate extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(rangeHighTemp)
-                            .addGap(156, 156, 156)
-                            .addComponent(monthlyHighTemps))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(77, 77, 77)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rangeAverageTemp)
-                            .addComponent(rangeLowTemp))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(monthlyLowTemps)
-                            .addComponent(monthlyAverageTemps))))
-                .addGap(439, 439, 439))
+                            .addComponent(rangeLowTemp)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rangeHighTemp, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -283,17 +250,11 @@ public class Calculate extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(topBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rangeHighTemp)
-                    .addComponent(monthlyHighTemps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(rangeHighTemp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rangeAverageTemp)
-                    .addComponent(monthlyAverageTemps))
+                .addComponent(rangeAverageTemp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(monthlyLowTemps, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rangeLowTemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(rangeLowTemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(80, 80, 80)
                 .addComponent(runBatchButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -302,7 +263,6 @@ public class Calculate extends javax.swing.JFrame {
         );
 
         rangeAverageTemp.getAccessibleContext().setAccessibleDescription("");
-        monthlyHighTemps.getAccessibleContext().setAccessibleName("Monthly High Temps");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -355,31 +315,24 @@ public class Calculate extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rangeLowTempActionPerformed
 
-    private void monthlyAverageTempsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyAverageTempsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_monthlyAverageTempsActionPerformed
-
-    private void monthlyLowTempsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyLowTempsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_monthlyLowTempsActionPerformed
-
-    private void monthlyHighTempsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyHighTempsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_monthlyHighTempsActionPerformed
-
     private void runBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runBatchButtonActionPerformed
-
-        
+        String output = "";
         if (rangeHighTemp.isSelected()) {
             rangeHigh = Calculation.recordHigh(this.data);
+            output += String.format("High = %.2f°C\n", rangeHigh);
         }
         if (rangeLowTemp.isSelected()) {
             rangeLow = Calculation.recordLow(this.data);
+            output += String.format("Low = %.2f°C\n", rangeLow);
         }
         if (rangeAverageTemp.isSelected()) {
             rangeAverage = Calculation.average(this.data);
+            output += String.format("Average = %.2f°C\nn = %s\nsd = %.4f",
+                rangeAverage.mean(), rangeAverage.n(), rangeAverage.sd());
         }
-        MessageDialogs.DEBUG(Double.toString(rangeHigh), true);
+        
+        MessageDialogs.CalcOutput(output);
+        
     }//GEN-LAST:event_runBatchButtonActionPerformed
 
     /**
@@ -448,9 +401,6 @@ public class Calculate extends javax.swing.JFrame {
     private javax.swing.JButton homeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JCheckBox monthlyAverageTemps;
-    private javax.swing.JCheckBox monthlyHighTemps;
-    private javax.swing.JCheckBox monthlyLowTemps;
     private javax.swing.JCheckBox rangeAverageTemp;
     private javax.swing.JCheckBox rangeHighTemp;
     private javax.swing.JCheckBox rangeLowTemp;

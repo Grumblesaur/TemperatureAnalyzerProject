@@ -25,31 +25,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="rangeHighTemp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="monthlyHighTemps" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="367" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="rangeAverageTemp" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rangeLowTemp" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="monthlyLowTemps" max="-2" attributes="0"/>
-                          <Component id="monthlyAverageTemps" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="rangeHighTemp" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="367" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="439" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -72,20 +65,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="topBanner" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rangeHighTemp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="monthlyHighTemps" alignment="3" max="32767" attributes="0"/>
-              </Group>
+              <Component id="rangeHighTemp" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rangeAverageTemp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="monthlyAverageTemps" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="rangeAverageTemp" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="monthlyLowTemps" alignment="3" max="32767" attributes="0"/>
-                  <Component id="rangeLowTemp" alignment="3" max="32767" attributes="0"/>
-              </Group>
+              <Component id="rangeLowTemp" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
               <Component id="runBatchButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -275,36 +259,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rangeLowTempActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="monthlyAverageTemps">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Monthly Average Temperatures"/>
-        <Property name="toolTipText" type="java.lang.String" value="The average temperatures for each month in the entire date range."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthlyAverageTempsActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="monthlyLowTemps">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Monthly Low Temperatures"/>
-        <Property name="toolTipText" type="java.lang.String" value="The lowest temperatures for each month in the entire date range."/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthlyLowTempsActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="monthlyHighTemps">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="The highest temperatures for each month in the entire date range."/>
-        <Property name="label" type="java.lang.String" value="Monthly High Temperatures"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Monthly High Temps"/>
-      </AccessibilityProperties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthlyHighTempsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="runBatchButton">

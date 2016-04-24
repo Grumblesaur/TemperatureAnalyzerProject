@@ -24,7 +24,7 @@ public class Calculation {
      * @param data an SQL ResultSet
      */
     public static double recordHigh(ArrayList<BigDecimal> data) {
-        double high = 0.00;
+        double high = data.get(0).doubleValue();
         for (BigDecimal i : data) {
             if (i == null) {
                 continue;
@@ -42,7 +42,7 @@ public class Calculation {
      * @return whatever
      */
     public static double recordLow(ArrayList<BigDecimal> data) {
-        double low = 0.00;
+        double low = data.get(0).doubleValue();
         for (BigDecimal i : data) {
             if (i == null) {
                 continue;
@@ -59,9 +59,13 @@ public class Calculation {
      * @param data The working result set.
      * @return I'm only using this tag because NetBeans is yelling at me.
      */
-    public static double average(ArrayList<BigDecimal> data) {
+    public static ResultTuple average(ArrayList<BigDecimal> data) {
         double total = 0.00;
+        double squareTotal = 0.00;
+        double sd;
+        double mean;
         int count = 0;
+        // first pass to calculate mean
         for (BigDecimal i : data) {
             if (i == null) {
                 continue;
@@ -70,6 +74,23 @@ public class Calculation {
             total += d;
             count++;
         }
-        return total / count;
+        try {
+            // second pass to calculate standard deviation
+            mean = total / count;
+            for (BigDecimal i : data) {
+                if (i == null) {
+                    continue;
+                }
+                double d = i.doubleValue();
+                squareTotal += (mean - d) * (mean - d);
+            }
+            sd = Math.sqrt(squareTotal / count);
+        } catch (ArithmeticException e) {
+            // divided by zero!
+            mean = 0.0;
+            sd = 0.0;
+        }
+        
+        return new ResultTuple(mean, sd, count);
     }
 }

@@ -83,4 +83,8 @@ public class MessageDialogs {
         JOptionPane.showMessageDialog(null, msg, "Edit Error", JOptionPane.INFORMATION_MESSAGE);
     }
     
+    public static void CalcOutput(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Calculation Output", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
 }
