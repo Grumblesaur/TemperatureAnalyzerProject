@@ -14,9 +14,6 @@ package temperature.analyzer.project;
 import java.sql.*; // END MY LIFE
 import java.util.ArrayList;
 import java.math.BigDecimal;
-import java.util.function.Consumer;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.dataForSession;
-import static temperature.analyzer.project.TemperatureAnalyzerProject.debug;
 
 public class Calculation {
     
@@ -45,16 +42,36 @@ public class Calculation {
      * @param data The working result set.
      * @return whatever
      */
-    public static double recordLow(ResultSet data) {
-        return 0.00; // dummy value for compilation
+    public static double recordLow(ArrayList<BigDecimal> data) {
+        double low = 0.00;
+        for (BigDecimal i : data) {
+            if (i == null) {
+                continue;
+            }
+            double d = i.doubleValue();
+            if (d < low) {
+                low = d;
+            }
+        }
+        return low; // dummy value for compilation
     }
     
     /** Calculate average for entire result set.
      * @param data The working result set.
      * @return I'm only using this tag because NetBeans is yelling at me.
      */
-    public static double average(ResultSet data) {
-        return 0.00; // dummy value for compilation
+    public static double average(ArrayList<BigDecimal> data) {
+        double total = 0.00;
+        int count = 0;
+        for (BigDecimal i : data) {
+            if (i == null) {
+                continue;
+            }
+            double d = i.doubleValue();
+            total += d;
+            count++;
+        }
+        return total / count; // dummy value for compilation
     }
     
     /** Obtain an array of highs for each month.
