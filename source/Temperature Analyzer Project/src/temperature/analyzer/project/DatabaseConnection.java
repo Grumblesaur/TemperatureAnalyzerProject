@@ -261,8 +261,8 @@ public class DatabaseConnection {
         try {
             String SQL = "INSERT INTO Location VALUES ('" + code + "', '" + loc + "')";
             this.stmt.executeUpdate(SQL);
-          
-            this.stmt.close();
+                               MessageDialogs.confirm("Location Deleted Successfully");
+
             
         } catch (SQLException err) {
             MessageDialogs.noConnectionError(err.getMessage());
@@ -276,9 +276,10 @@ public class DatabaseConnection {
             if (!this.checkDependency(code)) {
                 String SQL = "DELETE FROM Location WHERE \"Symbol\" = '" +
                         code + "' AND \"Location\" = '" + loc + "'";
+                this.stmt = con.createStatement();
                 this.stmt.executeUpdate(SQL);
                 done = true;
-                this.con.commit();
+                
             } else {
                 MessageDialogs.dependent();
             }

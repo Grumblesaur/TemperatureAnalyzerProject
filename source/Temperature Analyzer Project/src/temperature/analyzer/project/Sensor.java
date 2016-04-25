@@ -475,7 +475,7 @@ public class Sensor extends javax.swing.JFrame {
         
         // Guard against accidental SQL injections by escaping quotes
         // (replace with call to mogrify() ?)
-        locName = locName.replace("'", "\\'");
+        locName = locName.replace("'", "''");
         locName = locName.replace("\"", "\\\"");
         
         // Update location table
@@ -518,7 +518,7 @@ public class Sensor extends javax.swing.JFrame {
         
         // Guard against accidental SQL injections by escaping quotes
         // (replace with call to mogrify() ?)
-        locName = locName.replace("'", "\\'");
+        locName = locName.replace("'", "''");
         locName = locName.replace("\"", "\\\"");
         
         
